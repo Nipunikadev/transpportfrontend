@@ -1,0 +1,4080 @@
+*{
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+input {
+    appearance: none;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.App{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #53565a;
+}
+
+.Home{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #53565a;
+}
+
+form{
+    display: block;
+    position:absolute;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 100px;
+    margin-left: 600px;
+}
+
+form::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+/* Register page */
+
+.registerForm{
+    display: block;
+    position:absolute;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    margin-right: 100px;
+    margin-left: 400px;
+}
+
+.registerForm::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+.registerForm .form-register{
+    position:relative;
+    display: block;
+    background-color: #fff;
+    padding: 50px;
+    z-index: 2;
+}
+
+.registerForm .form-register .registerImage {
+    background-image: url(./registerImage.jpg);
+    position: absolute;
+    top: 0;
+    right: 50px;
+    width: 150px;
+    height: 150px;
+    z-index: 0; /* Set the image behind the fieldset */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.registerForm .form-register .fieldSet{
+    position:relative;
+    display:grid;
+    background-color: rgba(255, 255, 255, 0.277);
+    width: 650px;
+    z-index: 2;
+}
+
+.registerForm .form-register h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.registerForm .form-register .form-group{
+    display:flex;
+    width: 600px;
+    margin-bottom: 15px;
+    justify-content: center;
+}
+
+.form-register .form-group label{
+    display: flex;
+    color: #666;
+    font-size: 14px;
+    width: 100px;
+    margin-bottom: 5px;
+    transition: 0.4s;
+}
+
+.form-register .form-group .text-danger{
+    display: block;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.form-register .form-group:focus-within label{
+    color: #fe4880;
+}
+
+.registerForm .form-register .form-group input{
+    display:flex;
+    padding: 10px 35px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+}
+
+.registerForm .form-register .form-radio{
+    display: flex;
+    flex-direction: row; /* Adjust based on layout */
+    width: 300px;
+    margin-bottom: 15px;
+}
+
+.registerForm .form-register .form-radio input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+.form-register .form-radio label{
+    position: relative;
+    padding-left: 40px;
+    cursor: pointer;
+    display: inline-block;
+    color: #666;
+    font-size: 18px;
+    line-height: 25px;
+    margin-right: 30px; /* Space between options */
+    transition: color 0.4s;
+
+}
+
+.form-register .form-radio label::before {
+    content: '';
+    position: absolute;
+    left: 97px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    background-color: #c7aeae;
+    border-radius: 50%;
+    transition: background-color 0.3s, box-shadow 0.2s;
+}
+
+.form-register .form-radio input[type="radio"]:checked + label::before {
+    background-color: #fe4880;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.form-register .form-radio input[type="radio"]:checked + label {
+    color: #fe4880; /* Change label color when selected */
+}
+
+.form-register .form-radio label:hover::before {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+
+.registerForm .form-register .form-group button{
+    display: flex;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.registerForm .form-register .button-submit{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 70px;
+}
+
+.registerForm .form-register .button-reset{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 110px;
+}
+
+.registerForm .form-register .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 140px;
+}
+
+.registerForm .form-register .button-update{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-right: 70%;
+}
+
+.registerForm .form-register .fieldSet{
+    max-height: 400px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* update Driver */
+
+.hidden-form{
+    display: block;
+    position:absolute;
+    width: 400px;
+    margin-top: 50px;
+    margin-left: 300px;
+}
+
+.hidden-form .edit-driver-form.open  {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 30px;
+    z-index: 2;
+  }
+
+.hidden-form::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+.hidden-form .edit-driver-form  {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 30px;
+    z-index: 2;
+  }
+
+.edit-driver-form h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.edit-driver-form.open h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+  
+  /* Hide the form when it has the "closed" class */
+.hidden-form .edit-driver-form.closed {
+    display: none;
+  }
+
+  .hidden-form .edit-driver-form .fieldSet{
+    max-width: 600px;
+  }
+  .edit-driver-form .label fieldSet{
+    max-height: 400px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.edit-driver-form label{
+    display: flex;
+    color: #666;
+    font-size: 16px;
+    margin-left: 20px;
+    transition: 0.4s;
+    padding: 10px 20px;
+}
+
+.edit-driver-form input{
+    flex: 1;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 60px;
+}
+
+.edit-driver-form image{
+    flex: 2;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 60px;
+}
+
+.edit-driver-form.open .label .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.edit-driver-form .label:focus-within label{
+    color: #fe4880;
+}
+
+.edit-driver-form .label input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.edit-driver-form .label input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.hidden-form .edit-driver-form .driver-dropdown{
+    display: flex;
+    width: 600px;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.hidden-form .driver-dropdown label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 5px;
+    transition: 0.4s;
+}
+
+.hidden-form .driver-dropdown select{
+    flex: 2;
+    padding: 10px 88px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 60px;
+}
+
+.hidden-form .driver-dropdown input{
+    flex: 3;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 60px;
+}
+
+.hidden-form .driver-dropdown .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.hidden-form .driver-dropdown:focus-within label{
+    color: #fe4880;
+}
+
+.hidden-form .driver-dropdown input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.hidden-form .driver-dropdown input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.edit-driver-form .button-submit{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 60px;
+}
+
+.edit-driver-form .button-reset{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 110px;
+}
+
+.edit-driver-form .button-cancel{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 110px;
+}
+
+.blur-background {
+    backdrop-filter: blur(10px); /* Adjust the blur intensity as needed */
+    filter: blur(10px); /* Fallback for older browsers */
+  }
+
+.hidden-form .edit-driver-form {
+    max-height: 600px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+
+/* dashboard - driver */
+
+.driver-welcome{
+    display: block;
+    position:absolute;
+    margin-left: 400px;
+    width: 800px;
+}
+
+.driver-welcome .form-inner .logo {
+    background-image: url(./HunasLogo.jpeg);
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 150px;
+    height: 130px;
+    z-index: 0; /* Set the image behind the fieldset */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* AdminLogin Page */
+/* DriverLogin Page */
+form .form-inner{
+    position: relative;
+    display: block;
+    background-color: #fff;
+    padding: 20px;
+    z-index: 2;
+}
+
+form .form-inner h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+form .form-inner .form-group{
+    display: block;
+    width: 300px;
+    margin-bottom: 15px;
+}
+
+.form-inner .form-group label{
+    display: block;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 5px;
+    transition: 0.4s;
+}
+
+.form-inner .form-group .text-danger{
+    display: block;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.form-inner .form-group:focus-within label{
+    color: #fe4880;
+}
+
+form .form-inner .form-group input{
+    display:flex;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+}
+
+form .form-inner .form-group input:focus{
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+form .form-inner .attendance{
+    display: flex;
+    padding: 50px 40px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+form .form-inner .journey{
+    display: grid;
+    padding: 50px 40px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 30%;
+    margin-top: -117px;
+}
+
+form .form-inner .userhistory{
+    display: grid;
+    padding: 50px 40px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 65%;
+    margin-top: -117px;
+}
+
+form .form-inner .button-logout{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+}
+
+form .form-inner input[type="submit"], .registerForm .form-register input[type="submit"], .journey-form .journey-inner input[type="submit"], .attendance-form .attendance-inner input[type="submit"],
+.welcome .logout{
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 0%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+}
+
+form .form-inner .button-submit{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+}
+
+form .form-inner .button-cancel{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 30px;
+}
+
+form .form-inner .button-password{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 30px;
+}
+
+/* Admin Home Page */
+.admin-form{
+    display: block;
+    position:absolute;
+    margin-left: 400px;
+    width: 850px;
+}
+
+.admin-form .form-admin{
+    position: relative;
+    display: block;
+    background-color: #fff;
+    padding: 30px;
+    z-index: 2;
+}
+
+.admin-form .form-admin .logo {
+    background-image: url(./HunasLogo.jpeg);
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 130px;
+    height: 120px;
+    z-index: 0; /* Set the image behind the fieldset */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.admin-form .admin-welcome .register{
+    display: flex;
+    padding: 50px 40px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.admin-form .admin-welcome .vehicleHome{
+    display: grid;
+    padding: 50px 40px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 30%;
+    margin-top: -117px;
+}
+
+.admin-form .admin-welcome .history{
+    display: grid;
+    padding: 50px 40px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 70%;
+    margin-top: -117px;
+}
+
+.admin-form .form-admin input[type="submit"]:hover,
+.admin-welcome button:hover {
+    background-position: 100% 0%;
+}
+
+.admin-form .admin-welcome{
+    display: block;
+    width: 800px;
+}
+
+.admin-form .admin-welcome h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.admin-form .admin-welcome h3{
+    color: #888;
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    margin: auto;
+    padding-left: 100px;
+}
+
+.admin-form .admin-welcome h2 span{
+    color: #fe4880;
+    font-weight: 700;
+}
+
+.admin-form .form-admin .button-logout{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+}
+
+
+/* Start Page */
+
+.welcome-form{
+    display: block;
+    position:absolute;
+    margin-left: 400px;
+    width: 800px;
+}
+
+.welcome .button-admin{
+    display: flex;
+    padding: 60px 50px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 50px;
+    margin-left: 10%;
+}
+
+.welcome .button-user{
+    display: flex;
+    padding: 60px 50px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: -140px;
+    margin-left: 38%;
+}
+
+.welcome .button-driver{
+    display:grid;
+    padding: 60px 50px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 65%;
+    margin-top: -140px;
+}
+
+form .form-inner input[type="submit"]:hover,
+.welcome button:hover, .historyRecord button:hover {
+    background-position: 100% 0%;
+}
+
+.welcome{
+    display: block;
+    width: 800px;
+}
+
+.welcome-form .welcome h2{
+    color: #888;
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    margin-left: 90px;
+}
+
+.welcome h2 span{
+    color: #fe4880;
+    font-weight: 700;
+}
+
+
+.forgot-password{
+    padding-left: 62px;
+    margin-top: 14px;
+    color: #797979;
+    font-size: 12px;
+}
+
+.bg{
+    background-image: url(./Road\ and\ Vehicles.jpg);
+    height: 685px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* journey page */
+
+.journey-form{
+    display: block;
+    position:absolute;
+    margin-left: 400px;
+    width: 700px;
+    margin-top: 20px;
+} 
+
+.journey-form .journey-inner .journey-driver{
+    display: block;
+    width: 700px;
+}
+
+.journey-form .journey-inner{
+    position: relative;
+    display: block;
+    background-color: #fff;
+    padding: 30px;
+    z-index: 2;
+}
+
+.journey-form .journey-inner h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+
+.journey-form .journey-inner .welcome-journey{
+    display: flex;
+    width: 500px;
+    align-items: center;
+    margin-left: 40px;
+    margin-top: 15px;
+}
+
+.journey-form .welcome-journey label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 5px;
+    transition: 0.4s;
+}
+
+.journey-form .welcome-journey input{
+    flex: 2;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 15px;
+}
+
+.journey-inner .welcome-journey .text-danger{
+    display: block;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.journey-inner .welcome-journey:focus-within label{
+    color: #fe4880;
+}
+
+
+.journey-form .journey-inner .journey-radio{
+    display: flex;
+    flex-direction: row; /* Adjust based on layout */
+    width: 300px;
+    margin-bottom: 15px;
+}
+
+.journey-form .journey-inner .journey-radio input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+.journey-inner .journey-radio label{
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    display: inline-block;
+    color: #666;
+    font-size: 18px;
+    line-height: 25px;
+    margin-right: 20px; /* Space between options */
+    transition: color 0.4s;
+}
+
+.journey-inner .journey-radio label::before {
+    content: '';
+    position: absolute;
+    left: 120px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    background-color: #c7aeae;
+    border-radius: 50%;
+    transition: background-color 0.3s, box-shadow 0.2s;
+}
+
+.journey-inner .journey-radio input[type="radio"]:checked + label::before {
+    background-color: #fe4880;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.journey-inner .journey-radio input[type="radio"]:checked + label {
+    color: #fe4880; /* Change label color when selected */
+}
+
+.journey-inner .journey-radio label:hover::before {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.journey-form .journey-inner .journey-dropdown{
+    display: flex;
+    width: 500px;
+    margin-left: 40px;
+    margin-top: 15px;
+}
+
+.journey-form .journey-dropdown label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 5px;
+    transition: 0.4s;
+}
+
+.journey-form .journey-dropdown select{
+    flex: 2;
+    padding: 10px 88px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 95px;
+}
+
+.journey-form .journey-dropdown input{
+    flex: 3;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 40px;
+}
+
+.journey-form .journey-dropdown .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.journey-form .journey-dropdown:focus-within label{
+    color: #fe4880;
+}
+
+.journey-form .journey-dropdown input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.journey-form .journey-dropdown input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.journey-form .journey-inner .button-submit{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 110px;
+}
+
+.journey-form .journey-inner .button-reset{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 110px;
+}
+
+.journey-form .journey-inner .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 140px;
+}
+
+/* attendance page */
+
+
+.attendance-form{
+    display: block;
+    position:absolute;
+    margin-left: 400px;
+    width: 700px;
+    margin-top: 20px;
+} 
+
+.attendance-form .attendance-inner .attendance-driver{
+    display: block;
+    width: 600px;
+}
+
+.attendance-form .attendance-inner{
+    position: relative;
+    display: block;
+    background-color: #fff;
+    padding: 30px;
+    z-index: 2;
+}
+
+.attendance-form .attendance-inner h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+
+.attendance-form .attendance-inner .welcome-attendance{
+    display: flex;
+    width: 500px;
+    align-items: center;
+    margin-left: 40px;
+    margin-top: 15px;
+}
+
+.attendance-form .welcome-attendance label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 5px;
+    transition: 0.4s;
+}
+
+.attendance-form .welcome-attendance input{
+    flex: 2;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 15px;
+}
+
+.attendance-inner .welcome-attendance .text-danger{
+    display: block;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.attendance-inner .welcome-attendance:focus-within label{
+    color: #fe4880;
+}
+
+
+.attendance-form .attendance-inner .attendance-radio{
+    display: flex;
+    flex-direction: row; /* Adjust based on layout */
+    width: 400px;
+    margin-bottom: 15px;
+}
+
+.attendance-form .attendance-inner .attendance-radio input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+.attendance-inner .attendance-radio label{
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    display: inline-block;
+    color: #666;
+    font-size: 18px;
+    line-height: 25px;
+    margin-right: 20px; /* Space between options */
+    transition: color 0.4s;
+}
+
+.attendance-inner .attendance-radio label::before {
+    content: '';
+    position: absolute;
+    left: 120px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    background-color: #c7aeae;
+    border-radius: 50%;
+    transition: background-color 0.3s, box-shadow 0.2s;
+}
+
+.attendance-inner .attendance-radio input[type="radio"]:checked + label::before {
+    background-color: #fe4880;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.attendance-inner .attendance-radio input[type="radio"]:checked + label {
+    color: #fe4880; /* Change label color when selected */
+}
+
+.attendance-inner .attendance-radio label:hover::before {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.attendance-form .attendance-inner .button-submit{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 110px;
+}
+
+.attendance-form .attendance-inner .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 140px;
+}
+
+
+/* vehicle Details Page */
+
+.vehicle-form{
+    display: block;
+    position:absolute;
+    margin-left: 400px;
+    margin-top: 20px;
+    width: 850px;
+}
+
+
+.vehicle-form .form-inner h2, p{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-left: 20px;
+
+}
+
+.vehicle-form .form-inner .table-container{
+    max-height: 400px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.vehicle-form .form-inner .table {
+    width: 700px;
+    border-collapse: collapse; 
+    margin-left: 20px;
+    margin-top: 20px;
+}
+  
+.form-inner .table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border: 2px solid black;
+    background-color: #bda028 ;
+    color: #fff;
+    font-weight: 700;
+    padding: 8px 25px;
+    white-space: nowrap;
+}
+  
+.form-inner .table td {
+    text-align: center;
+    border: 2px solid black;
+    transition: 0.4s;
+    padding: 8px 20px;
+    white-space: nowrap;
+}
+
+.vehicle-form .form-inner .table .button-view, .button-edit{
+    display: inline-block;
+    padding: 3px 3px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.vehicle-form .form-inner .table .button-delete{
+    display: inline-block;
+    padding: 3px 3px;
+    background-image: linear-gradient(to right, #fe4880, #ffce00 50%, #ffce00 50%);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.vehicle-form .form-inner .add{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 100px;
+}
+
+.vehicle-form .form-inner .delete{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 400px;
+}
+
+.vehicle-form .form-inner .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 400px;
+}
+
+.vehicle-form .form-inner .button-logout{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 200px;
+}
+
+.vehicle-form .form-inner .buttonBack{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 50px;
+}
+
+/* Add vehicle form */
+.hidden-form{
+    display: block;
+    position:absolute;
+    width: 800px;
+    margin-top: 50px;
+    margin-left: 400px;
+}
+
+
+.hidden-form .add-vehicle-form.open  {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 30px;
+    z-index: 2;
+  }
+
+.hidden-form::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+.hidden-form .add-vehicle-form  {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 30px;
+    z-index: 2;
+  }
+
+.add-vehicle-form h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.add-vehicle-form.open h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+  
+  /* Hide the form when it has the "closed" class */
+.hidden-form .add-vehicle-form.closed {
+    display: none;
+  }
+
+  .hidden-form .add-vehicle-form .fieldSet{
+    max-width: 900px;
+  }
+  .hidden-form .add-vehicle-form .fieldSet{
+    max-height: 400px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.hidden-form .add-vehicle-form .form-radio {
+    display: flex;
+    flex-direction: row; /* Adjust based on layout */
+    width: 300px;
+    margin-bottom: 15px;
+}
+
+.hidden-form .add-vehicle-form .form-radio input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+.add-vehicle-form .form-radio label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    display: inline-block;
+    color: #666;
+    font-size: 18px;
+    line-height: 25px;
+    margin-right: 20px; /* Space between options */
+    transition: color 0.4s;
+}
+
+.add-vehicle-form .form-radio label::before {
+    content: '';
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    background-color: #c7aeae;
+    border-radius: 50%;
+    transition: background-color 0.3s, box-shadow 0.2s;
+}
+
+.add-vehicle-form .form-radio input[type="radio"]:checked + label::before {
+    background-color: #fe4880;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.add-vehicle-form .form-radio input[type="radio"]:checked + label {
+    color: #fe4880; /* Change label color when selected */
+}
+
+.add-vehicle-form .form-radio label:hover::before {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.add-vehicle-form.open label{
+    display: flex;
+    color: #666;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: 0.4s;
+    padding: 10px;
+}
+
+.add-vehicle-form label{
+    display: flex;
+    color: #666;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: 0.4s;
+    padding: 10px;
+}
+
+.add-vehicle-form input{
+    flex: 1;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 40px;
+}
+
+.add-vehicle-form image{
+    flex: 2;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 40px;
+}
+
+.add-vehicle-form.open .label .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.add-vehicle-form .label:focus-within label{
+    color: #fe4880;
+}
+
+.add-vehicle-form .label input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.add-vehicle-form .label input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.add-vehicle-form .followup-vehicle-form .fuel-dropdown{
+    display: flex;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.add-vehicle-form .fuel-dropdown label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: 0.4s;
+    padding: 10px;
+}
+
+.add-vehicle-form .fuel-dropdown select{
+    flex: 2;
+    padding: 10px 20px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 170px;
+    margin-right: 10px;
+}
+
+.add-vehicle-form .fuel-dropdown input{
+    flex: 3;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 40px;
+}
+
+.add-vehicle-form .fuel-dropdown .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.add-vehicle-form .fuel-dropdown:focus-within label{
+    color: #fe4880;
+}
+
+.add-vehicle-form .fuel-dropdown input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.add-vehicle-form .fuel-dropdown input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+.add-vehicle-form .button-submit{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 60px;
+}
+
+.add-vehicle-form .button-reset{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 90px;
+}
+
+.add-vehicle-form .button-close{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 110px;
+}
+
+.blur-background {
+    backdrop-filter: blur(10px); /* Adjust the blur intensity as needed */
+    filter: blur(10px); /* Fallback for older browsers */
+  }
+
+.add-vehicle-form .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 110px;
+}
+
+/* Edit Vehicle Form */
+.editVehicles .button-submit{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 60px;
+}
+
+.editVehicles .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 100px;
+}
+
+.editVehicles .button-remove{
+    display: inline-block;
+    padding: 5px 7px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 60px;
+}
+
+.hidden-form .add-vehicle-form .viewVehicles, .editVehicles{
+    max-height: 400px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+ .pdf{
+     display: flex;
+     margin-left: 30px;
+}
+
+/* SideBar Form */
+
+.navBar a{
+    font-size: 16px;
+    padding: 50px;
+    text-decoration: none;
+    color: white;
+}
+
+.header a:hover{
+    background-color: #555;
+    cursor: pointer;
+}
+
+.header{
+    width: 250px;
+    height: 1000px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    color: white;
+    background-color: #9d7f07 ;
+}
+
+.navBar{
+    flex-direction: column;
+    display: flex;  
+
+}
+
+.active-link {
+    font-size: 16px;
+    padding: 50px;
+    text-decoration: none;
+    color: white;
+    box-shadow: 5px 3px 8px rgba(0.1, 0.1, 0.1, 0.2);
+}
+
+.navLinkWithSubMenu {
+    position: relative;
+    flex-direction: column;
+    display: flex; 
+    
+  }
+  
+  .submenu {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    background-color:  #dab624;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    z-index: 1;
+  }
+  
+  .navLinkWithSubMenu:hover .submenu {
+    display: block;
+  }
+  
+  .submenu a {
+    color: white;
+    text-decoration: none;
+    padding: 20px 60px;
+    margin: 4px;
+    border-bottom: 1px solid #ddd;
+    display: block;
+  }
+  
+  .submenu a:last-child {
+    border-bottom: none;
+  }
+
+  /* Add Document form */
+.hidden-form{
+    display: block;
+    position:absolute;
+    width: 800px;
+    margin-top: 50px;
+    margin-left: 400px;
+}
+
+
+.hidden-form .add-Document-form.open  {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 30px;
+    z-index: 2;
+  }
+
+.hidden-form::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+.hidden-form .add-Document-form  {
+    display: flex;
+    position: relative;
+    background-color: #fff;
+    padding: 30px;
+    z-index: 2;
+  }
+
+.add-Document-form h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.add-Document-form.open h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+  
+  /* Hide the form when it has the "closed" class */
+.hidden-form .add-Document-form.closed {
+    display: none;
+  }
+
+  .hidden-form .add-Document-form .fieldSet{
+    max-width: 700px;
+  }
+  .hidden-form .add-Document-form .fieldSet{
+    max-height: 400px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+
+/* .add-Document-form.open label{
+    display: flex;
+    color: #666;
+    font-size: 16px;
+    margin-left: 50px;
+    transition: 0.4s;
+    padding: 10px;
+} */
+
+.add-Document-form .label{
+    display: flex;
+    width: 700px;
+    margin-left: 10px;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.add-Document-form .label label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    transition: 0.4s;
+    padding: 10px 30px;
+    margin-left: 10px;
+    margin-right: 50px;
+}
+
+.add-Document-form .label input{
+    flex: 2;
+    padding: 10px 70px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 100px;
+}
+
+.add-Document-form.open .label .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.add-Document-form .label:focus-within label{
+    color: #fe4880;
+}
+
+.add-Document-form .label input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.add-Document-form .label input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.add-Document-form .button-submit{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 60px;
+}
+
+.add-Document-form .button-reset{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 90px;
+}
+
+.add-Document-form .button-close{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 110px;
+}
+
+.blur-background {
+    backdrop-filter: blur(10px); /* Adjust the blur intensity as needed */
+    filter: blur(10px); /* Fallback for older browsers */
+  }
+
+
+
+.add-Document-form .fieldSet .journey-dropdown{
+    display: flex;
+    width: 550px;
+    margin-left: 50px;
+    margin-top: 15px;
+}
+
+.add-Document-form .journey-dropdown label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 5px;
+    transition: 0.4s;
+    
+}
+
+.add-Document-form .journey-dropdown select{
+    flex: 2;
+    padding: 10px 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 90px;
+}
+
+.add-Document-form .journey-dropdown input{
+    flex: 3;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 100px;
+}
+
+.add-Document-form .journey-dropdown .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.add-Document-form .journey-dropdown:focus-within label{
+    color: #fe4880;
+}
+
+.add-Document-form .journey-dropdown input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.add-Document-form .journey-dropdown input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* edit document form */
+
+.hidden-form{
+    display: block;
+    position:absolute;
+    width: 800px;
+    margin-top: 50px;
+    margin-left: 400px;
+}
+
+.hidden-form::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+.hidden-form .edit-Document-form  {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 30px;
+    z-index: 2;
+  }
+
+.edit-Document-form h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+  .hidden-form .edit-Document-form .fieldSet{
+    max-width: 700px;
+  }
+  .hidden-form .edit-Document-form .fieldSet{
+    max-height: 400px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.edit-Document-form .label{
+    display: flex;
+    width: 700px;
+    margin-left: 10px;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.edit-Document-form .label label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    transition: 0.4s;
+    padding: 10px 30px;
+    margin-left: 10px;
+    margin-right: 50px;
+}
+
+.edit-Document-form .label input{
+    flex: 2;
+    padding: 10px 70px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 100px;
+}
+
+.edit-Document-form.open .label .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.edit-Document-form .label:focus-within label{
+    color: #fe4880;
+}
+
+.edit-Document-form .label input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.edit-Document-form .label input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.edit-Document-form .button-submit{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 60px;
+}
+
+.edit-Document-form .button-cancel{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 110px;
+}
+
+
+  /* vehicle Security Page */
+
+
+.security-form{
+    display: block;
+    position:absolute;
+    width: 800px;
+    margin-top: 50px;
+    margin-left: 400px;
+}
+.security-form::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+.security-form .security-vehicle-form  {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 50px;
+    z-index: 2;
+  }
+
+.security-vehicle-form h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.security-vehicle-form label{
+    display: flex;
+    color: #666;
+    font-size: 16px;
+    margin-right: -40px;
+    transition: 0.4s;
+    padding: 20px 20px;
+}
+
+.security-vehicle-form input{
+    flex: 1;
+    padding: 10px 20px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 60px;
+    margin-right: 20px;
+}
+
+.security-vehicle-form .date{
+    flex: 1;
+    padding: 10px 140px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 60px;
+    margin-right: 10px;
+}
+
+.security-vehicle-form .file{
+    flex: 1;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 70px;
+    margin-right: 20px;
+}
+
+.security-form .security-vehicle-form .journey-dropdown{
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.security-form .journey-dropdown label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    transition: 0.4s;
+    padding: 10px 10px;
+}
+
+.security-form .journey-dropdown select{
+    flex: 2;
+    padding: 5px 20px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 70px;
+    margin-right: 25px;
+}
+
+.security-form .journey-dropdown input{
+    flex: 3;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 40px;
+}
+
+.security-form .journey-dropdown .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.security-form .journey-dropdown:focus-within label{
+    color: #fe4880;
+}
+
+.security-form .journey-dropdown input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.security-form .journey-dropdown input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+.security-form .security-vehicle-form .key-dropdown{
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.security-form .key-dropdown label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    transition: 0.4s;
+    padding: 10px 10px;
+}
+
+.security-form .key-dropdown select{
+    flex: 2;
+    padding: 10px 20px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 70px;
+    margin-right: 25px;
+}
+
+.security-form .key-dropdown input{
+    flex: 3;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 40px;
+}
+
+.security-form .key-dropdown .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.security-form .key-dropdown:focus-within label{
+    color: #fe4880;
+}
+
+.security-form .key-dropdown input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.security-form .key-dropdown input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.security-vehicle-form .label .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.security-vehicle-form .label:focus-within label{
+    color: #fe4880;
+}
+
+.security-vehicle-form .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 90px;
+}
+
+.security-vehicle-form .submit{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 400px;
+}
+
+.security-vehicle-form .button-submit{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 60px;
+}
+
+.security-vehicle-form .button-reset{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 90px;
+}
+
+.security-vehicle-form .form-section.blur {
+    filter: blur(5px);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* original documents records */
+
+
+.security-form-records{
+    display: block;
+    position:absolute;
+    width: 1000px;
+    margin-top: 50px;
+    margin-left: 300px;
+}
+
+.security-form-records::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+
+.security-form-records .security-documents-form  {
+    display: block;
+    position: relative;
+    width: 1000px;
+    background-color: #fff;
+    padding: 50px;
+    z-index: 2;
+  }
+
+.security-documents-form h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.security-form-records .security-documents-form .journey-dropdown{
+    display: flex;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.security-form-records .journey-dropdown label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: 0.4s;
+    padding: 10px 30px;
+}
+
+.security-form-records .journey-dropdown select{
+    flex: 2;
+    padding: 5px 50px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.security-form-records .journey-dropdown input{
+    flex: 3;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 40px;
+}
+
+.security-form-records .journey-dropdown .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.security-form-records .journey-dropdown:focus-within label{
+    color: #fe4880;
+}
+
+.security-form-records .journey-dropdown input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.security-form-records .journey-dropdown input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.security-form-records .security-documents-form .table-container{
+    max-height: 400px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.security-form-records .security-documents-form .table {
+    width: 700px;
+    border-collapse: collapse; 
+    margin-left: 20px;
+    margin-top: 20px;
+}
+  
+.security-documents-form .table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border: 2px solid black;
+    background-color: #bda028 ;
+    color: #fff;
+    font-weight: 700;
+    padding: 8px 25px;
+    white-space: nowrap;
+}
+  
+.security-documents-form .table td {
+    text-align: center;
+    border: 2px solid black;
+    transition: 0.4s;
+    padding: 8px 20px;
+    white-space: nowrap;
+}
+
+.security-form-records .security-documents-form .table .button-view, .button-edit{
+    display: inline-block;
+    padding: 3px 3px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.security-form-records .security-documents-form .table .button-delete{
+    display: inline-block;
+    padding: 3px 3px;
+    background-image: linear-gradient(to right, #fe4880, #ffce00 50%, #ffce00 50%);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.security-form-records .security-documents-form .add{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 50px;
+}
+
+.security-documents-form .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 90px;
+}
+/* vehicle-followUp Page */
+
+
+.followup-form{
+    display: block;
+    position:absolute;
+    width: 800px;
+    margin-top: 50px;
+    margin-left: 400px;
+}
+.followup-form::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+.followup-form .followup-vehicle-form  {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 50px;
+    z-index: 2;
+  }
+
+.followup-vehicle-form h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.followup-vehicle-form label{
+    display: flex;
+    color: #666;
+    font-size: 16px;
+    margin-right: -40px;
+    transition: 0.4s;
+    padding: 20px 50px;
+}
+
+.followup-vehicle-form input{
+    flex: 1;
+    padding: 10px 20px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 60px;
+    margin-right: 10px;
+}
+
+.followup-form .followup-vehicle-form .journey-dropdown{
+    display: flex;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.followup-form .journey-dropdown label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: 0.4s;
+    padding: 10px 30px;
+}
+
+.followup-form .journey-dropdown select{
+    flex: 2;
+    padding: 10px 50px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.followup-form .journey-dropdown input{
+    flex: 3;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 40px;
+}
+
+.followup-form .journey-dropdown .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.followup-form .journey-dropdown:focus-within label{
+    color: #fe4880;
+}
+
+.followup-form .journey-dropdown input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.followup-form .journey-dropdown input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.followup-vehicle-form .label .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.followup-vehicle-form .label:focus-within label{
+    color: #fe4880;
+}
+
+.followup-vehicle-form .button-submit{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 60px;
+}
+
+.followup-vehicle-form .button-reset{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 90px;
+}
+
+.followup-vehicle-form .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 90px;
+}
+
+.followup-vehicle-form .form-section.blur {
+    filter: blur(5px);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* FuelUsage */
+
+
+.fuel-form{
+    display: block;
+    position:absolute;
+    width: 800px;
+    margin-top: 50px;
+    margin-left: 400px;
+}
+.fuel-form::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+.fuel-form .fuel-vehicle-form  {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 50px;
+    z-index: 2;
+  }
+
+.fuel-vehicle-form h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.fuel-vehicle-form label{
+    display: flex;
+    color: #666;
+    font-size: 16px;
+    transition: 0.4s;
+    padding: 20px 40px;
+}
+
+.fuel-vehicle-form input{
+    flex: 1;
+    padding: 10px 20px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 70px;
+}
+
+.fuel-vehicle-form .date{
+    flex: 1;
+    padding: 10px 155px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 90px;
+}
+
+.fuel-form .fuel-vehicle-form .journey-dropdown{
+    display: flex;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.fuel-form .journey-dropdown label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: 0.4s;
+    padding: 10px 30px;
+}
+
+.fuel-form .journey-dropdown select{
+    flex: 2;
+    padding: 10px 50px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.fuel-form .journey-dropdown input{
+    flex: 3;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 40px;
+}
+
+.fuel-form .journey-dropdown .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.fuel-form .journey-dropdown:focus-within label{
+    color: #fe4880;
+}
+
+.fuel-form .journey-dropdown input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.fuel-form .journey-dropdown input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.fuel-vehicle-form .label .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.fuel-vehicle-form .label:focus-within label{
+    color: #fe4880;
+}
+
+.fuel-vehicle-form .button-submit{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 60px;
+}
+
+.fuel-vehicle-form .button-reset{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 90px;
+}
+
+.fuel-vehicle-form .back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 120px;
+}
+
+.fuel-vehicle-form .form-section.blur {
+    filter: blur(5px);
+    pointer-events: none;
+    user-select: none;
+}
+
+
+/* HistoryRecords page */
+.historyRecord-form{
+    display: block;
+    position:absolute;
+    margin-left: 25%;
+    margin-top: 50px;
+    width: 850px;
+}
+
+.historyRecord-form::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+.historyRecord-form .form-inner{
+    position: relative;
+    display: block;
+    background-color: #fff;
+    padding: 30px;
+    z-index: 2;
+}
+
+.historyRecord-form .form-inner h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.hidden-form .historyRecord{
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 50px;
+    z-index: 2;
+}
+
+
+.historyRecord .vehicleRecords{
+    display: flex;
+    padding: 50px 30px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px; 
+    margin-left: 10px;
+}
+
+.historyRecord .tripRecords{
+    display: grid;
+    padding: 50px 30px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 27%;
+    margin-top: -120px;
+}
+
+.historyRecord .attendanceRecords{
+    display: grid;
+    padding: 50px 30px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 50%;
+    margin-top: -120px;
+}
+
+
+.historyRecord .fuelRecords{
+    display: grid;
+    padding: 50px 30px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 79%;
+    margin-top: -120px;
+}
+
+.form-inner .historyRecord .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+.form-inner .historyRecord .button-logout{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 50px;
+    margin-left: 90px;
+}
+
+/* Fuel Records Page */
+
+.fuel-form{
+    display: block;
+    position:absolute;
+    width: 900px;
+    margin-top: 50px;
+    margin-left: 400px;
+}
+.fuel-form::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+.fuel-form .fuel-vehicle-form  {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 50px;
+    z-index: 2;
+  }
+
+.fuel-vehicle-form h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.fuel-form .fuel-vehicle-form .journey-dropdown{
+    display: flex;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.fuel-form .journey-dropdown label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: 0.4s;
+    padding: 10px 30px;
+}
+
+.fuel-form .journey-dropdown select{
+    flex: 2;
+    padding: 5px 50px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.fuel-form .journey-dropdown input{
+    flex: 3;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 40px;
+}
+
+.fuel-form .journey-dropdown .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.fuel-form .journey-dropdown:focus-within label{
+    color: #fe4880;
+}
+
+.fuel-form .journey-dropdown input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.fuel-form .journey-dropdown input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.fuel-form .fuel-vehicle-form .date-range{
+    display: flex;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.fuel-form .date-range label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: 0.4s;
+    padding: 10px 20px;
+}
+
+.fuel-form .date-range input{
+    flex: 2;
+    padding: 5px 20px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.fuel-form .date-range .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.fuel-form .date-range:focus-within label{
+    color: #fe4880;
+}
+
+.fuel-form .date-range input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.fuel-form .date-range input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+.fuel-form .fuel-vehicle-form .table-container{
+    max-height: 400px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.fuel-form .fuel-vehicle-form .table {
+    width: 600px;
+    border-collapse: collapse; 
+    margin-left: 40px;
+    margin-top: 20px;
+}
+  
+.fuel-form .fuel-vehicle-form .table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border: 2px solid black;
+    background-color: #bda028 ;
+    color: #fff;
+    font-weight: 700;
+    padding: 8px 25px;
+    white-space: nowrap;
+}
+  
+.fuel-form .fuel-vehicle-form .table td {
+    text-align: center;
+    border: 2px solid black;
+    transition: 0.4s;
+    padding: 8px 20px;
+    white-space: nowrap;
+}
+
+.fuel-form .fuel-vehicle-form .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+.fuel-form .fuel-vehicle-form .button-print{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-left: 150px;
+}
+
+/* Trips Records Page */
+
+.trips-form{
+    display: block;
+    position:absolute;
+    width: 1000px;
+    margin-top: 15px;
+    margin-left: 300px;
+}
+.trips-form::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+.trips-form .tripsRecord-form  {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 45px;
+    z-index: 2;
+  }
+
+.tripsRecord-form h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.trips-form .tripsRecord-form .journey-dropdown{
+    display: flex;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.trips-form .tripsRecord-form .journey-dropdown label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: 0.4s;
+    padding: 10px 30px;
+}
+
+.trips-form .tripsRecord-form .journey-dropdown select{
+    flex: 2;
+    padding: 5px 50px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.trips-form .tripsRecord-form .journey-dropdown input{
+    flex: 3;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 40px;
+}
+
+.trips-form .tripsRecord-form .journey-dropdown .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.trips-form .tripsRecord-form .journey-dropdown:focus-within label{
+    color: #fe4880;
+}
+
+.trips-form .tripsRecord-form .journey-dropdown input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.trips-form .tripsRecord-form .journey-dropdown input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.trips-form .tripsRecord-form .date-range{
+    display: flex;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.trips-form .tripsRecord-form .date-range label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: 0.4s;
+    padding: 10px 20px;
+}
+
+.trips-form .tripsRecord-form .date-range input{
+    flex: 2;
+    padding: 5px 20px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.trips-form .tripsRecord-form .date-range .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.trips-form .tripsRecord-form .date-range:focus-within label{
+    color: #fe4880;
+}
+
+.trips-form .tripsRecord-form .date-range input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.trips-form .tripsRecord-form .date-range input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+.trips-form .tripsRecord-form .table-container{
+    max-height: 350px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.trips-form .tripsRecord-form .table {
+    width: 600px;
+    border-collapse: collapse; 
+    margin-left: 40px;
+    margin-top: 20px;
+}
+  
+.trips-form .tripsRecord-form .table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border: 2px solid black;
+    background-color: #bda028 ;
+    color: #fff;
+    font-weight: 700;
+    padding: 8px 25px;
+    white-space: nowrap;
+}
+  
+.trips-form .tripsRecord-form .table td {
+    text-align: center;
+    border: 2px solid black;
+    transition: 0.4s;
+    padding: 8px 20px;
+    white-space: nowrap;
+}
+
+.trips-form .tripsRecord-form .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.trips-form .tripsRecord-form .button-print{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-left: 150px;
+}
+
+/* Attendance Records Page */
+
+.attendanceHistory-form{
+    display: block;
+    position:absolute;
+    width: 1000px;
+    margin-top: 40px;
+    margin-left: 300px;
+}
+.attendanceHistory-form::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+.attendanceHistory-form .attendanceRecord-form  {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 45px;
+    z-index: 2;
+  }
+
+.attendanceRecord-form h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.attendanceHistory-form .attendanceRecord-form .journey-dropdown{
+    display: flex;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.attendanceHistory-form .attendanceRecord-form .journey-dropdown label{
+    flex: 1;
+    color: #666;
+    font-size: 18px;
+    margin-left: 10px;
+    transition: 0.4s;
+    padding: 10px 30px;
+}
+
+.attendanceHistory-form .attendanceRecord-form .journey-dropdown select{
+    flex: 2;
+    padding: 5px 50px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.attendanceHistory-form .attendanceRecord-form .journey-dropdown input{
+    flex: 3;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 40px;
+}
+
+.attendanceHistory-form .attendanceRecord-form .journey-dropdown .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.attendanceHistory-form .attendanceRecord-form .journey-dropdown:focus-within label{
+    color: #fe4880;
+}
+
+.attendanceHistory-form .attendanceRecord-form .journey-dropdown input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.attendanceHistory-form .attendanceRecord-form .journey-dropdown input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.attendanceHistory-form .attendanceRecord-form .date-range{
+    display: flex;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.attendanceHistory-form .attendanceRecord-form .date-range label{
+    flex: 1;
+    color: #666;
+    font-size: 18px;
+    margin-left: 10px;
+    transition: 0.4s;
+    padding: 10px 20px;
+}
+
+.attendanceHistory-form .attendanceRecord-form .date-range input{
+    flex: 2;
+    padding: 5px 20px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.attendanceHistory-form .attendanceRecord-form .date-range .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.attendanceHistory-form .attendanceRecord-form .date-range:focus-within label{
+    color: #fe4880;
+}
+
+.attendanceHistory-form .attendanceRecord-form .date-range input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.attendanceHistory-form .attendanceRecord-form .date-range input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+.attendanceHistory-form .attendanceRecord-form .table-container{
+    max-height: 350px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.attendanceHistory-form .attendanceRecord-form .table {
+    width: 600px;
+    border-collapse: collapse; 
+    margin-left: 40px;
+    margin-top: 20px;
+}
+  
+.attendanceHistory-form .attendanceRecord-form .table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border: 2px solid black;
+    background-color: #bda028 ;
+    color: #fff;
+    font-weight: 700;
+    padding: 8px 25px;
+    white-space: nowrap;
+}
+  
+.attendanceHistory-form .attendanceRecord-form .table td {
+    text-align: center;
+    border: 2px solid black;
+    transition: 0.4s;
+    padding: 8px 20px;
+    white-space: nowrap;
+}
+
+.attendanceHistory-form .attendanceRecord-form .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.attendanceHistory-form .attendanceRecord-form .button-print{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-left: 150px;
+}
+
+/* Vehicles Records Page */
+
+.vehicles-form{
+    display: block;
+    position:absolute;
+    width: 1485px;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.vehicles-form::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+.vehicles-form .vehiclesRecord-form  {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 45px;
+    z-index: 2;
+  }
+
+.vehiclesRecord-form h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.vehicles-form .vehiclesRecord-form .journey-dropdown{
+    display: flex;
+    margin-left: 65px;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.vehicles-form .vehiclesRecord-form .journey-dropdown label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 300px;
+    transition: 0.4s;
+    padding: 10px 30px;
+}
+
+.vehicles-form .vehiclesRecord-form .journey-dropdown select{
+    flex: 2;
+    padding: 5px 50px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 55px;
+    margin-right: 350px;
+}
+
+.vehicles-form .vehiclesRecord-form .journey-dropdown .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.vehicles-form .vehiclesRecord-form .journey-dropdown:focus-within label{
+    color: #fe4880;
+}
+
+.vehicles-form .vehiclesRecord-form .journey-dropdown input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.vehicles-form .vehiclesRecord-form .journey-dropdown input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.vehicles-form .vehiclesRecord-form .date-range{
+    display: flex;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.vehicles-form .vehiclesRecord-form .date-range label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: 0.4s;
+    padding: 10px 20px;
+}
+
+.vehicles-form .vehiclesRecord-form .date-range input{
+    flex: 2;
+    padding: 5px 20px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.vehicles-form .vehiclesRecord-form .date-range .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.vehicles-form .vehiclesRecord-form .date-range:focus-within label{
+    color: #fe4880;
+}
+
+.vehicles-form .vehiclesRecord-form .date-range input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.vehicles-form .vehiclesRecord-form .date-range input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+.vehicles-form .vehiclesRecord-form .table-container{
+    max-height: 400px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.vehicles-form .vehiclesRecord-form .table {
+    width: 600px;
+    border-collapse: collapse; 
+    margin-left: 40px;
+    margin-top: 20px;
+}
+  
+.vehicles-form .vehiclesRecord-form .table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border: 2px solid black;
+    background-color: #bda028 ;
+    color: #fff;
+    font-weight: 700;
+    padding: 8px 25px;
+    white-space: nowrap;
+}
+  
+.vehicles-form .vehiclesRecord-form .table td {
+    text-align: center;
+    border: 2px solid black;
+    transition: 0.4s;
+    padding: 8px 20px;
+    white-space: nowrap;
+}
+
+.vehicles-form .vehiclesRecord-form .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.vehicles-form .vehiclesRecord-form .button-print{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-left: 150px;
+}
+
+@media print {
+    body {
+        font-size: 12pt; /* Adjust font size for printing */
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 10px; /* Add some space between tables for better readability */
+    }
+
+    th, td {
+        border: 2px solid black; /* Explicitly set border for cells */
+        padding: 8px 25px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #bda028 ;
+        color: #fff;
+        z-index: 1;
+    }
+
+    /* Add more styles as needed for printing */
+}
+
+/* User Home Page */
+
+.welcomeUser-form{
+    display: block;
+    position:absolute;
+    margin-left: 400px;
+    width: 700px;
+}
+
+.form-inner .welcome{
+    display: block;
+    width: 800px;
+}
+
+.form-inner .welcome h2{
+    color: #888;
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.form-inner .welcome h3{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    margin: auto;
+    padding-left: 100px;
+}
+
+.form-inner .welcome h2 span{
+    color: #fe4880;
+    font-weight: 700;
+}
+
+.form-inner .welcome .welcome-journey{
+    display: flex;
+    width: 500px;
+    align-items: center;
+    margin-left: 40px;
+    margin-top: 15px;
+}
+
+.welcome .welcome-journey label{
+    flex: 1;
+    color: #666;
+    font-size: 16px;
+    margin-left: 5px;
+    transition: 0.4s;
+}
+
+.welcome .welcome-journey input{
+    flex: 2;
+    padding: 10px;
+    background-color: #c7aeae;
+    border-radius: 8px;
+    transition: 0.4s;
+    margin-left: 15px;
+}
+
+.welcome .welcome-journey .text-danger{
+    display: block;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.welcome .welcome-journey:focus-within label{
+    color: #fe4880;
+}
+
+.welcome .welcome-journey .journey-radio{
+    display: flex;
+    flex-direction: row; /* Adjust based on layout */
+    width: 300px;
+    margin-bottom: 15px;
+}
+
+.welcome .welcome-journey .journey-radio input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+.welcome .welcome-journey .journey-radio label{
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    display: inline-block;
+    color: #666;
+    font-size: 18px;
+    line-height: 25px;
+    margin-right: 20px; /* Space between options */
+    transition: color 0.4s;
+}
+
+.welcome .welcome-journey .journey-radio label::before {
+    content: '';
+    position: absolute;
+    left: 120px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    background-color: #c7aeae;
+    border-radius: 50%;
+    transition: background-color 0.3s, box-shadow 0.2s;
+}
+
+.welcome .welcome-journey .journey-radio input[type="radio"]:checked + label::before {
+    background-color: #fe4880;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.welcome .welcome-journey .journey-radio input[type="radio"]:checked + label {
+    color: #fe4880; /* Change label color when selected */
+}
+
+.welcome .welcome-journey .journey-radio label:hover::before {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.form-inner .welcome .button-submit{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 110px;
+}
+
+.form-inner .welcome .button-reset{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 110px;
+}
+
+.form-inner .welcome .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 140px;
+}
+
+
