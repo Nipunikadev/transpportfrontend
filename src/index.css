@@ -4077,4 +4077,504 @@ form .form-inner input[type="submit"]:hover,
     margin-left: 140px;
 }
 
+/* for phone devices */
 
+@media only screen and (max-width: 600px) {
+    form {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    
+    .registerForm {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    .hidden-form {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    .admin-form {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    .welcome-form {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    .journey-form {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    /* Adjust padding for smaller screens */
+    .form-inner {
+        padding: 10px;
+    }
+    
+    .registerForm .form-register {
+        padding: 20px;
+    }
+    
+    .hidden-form .edit-driver-form {
+        padding: 20px;
+    }
+    
+    .admin-form .form-admin {
+        padding: 20px;
+    }
+    
+    .welcome-form .welcome {
+        padding: 20px;
+    }
+    
+    .journey-form .journey-inner {
+        padding: 20px;
+    }
+    
+    /* Adjust font size for smaller screens */
+    .form-inner h2,
+    .registerForm .form-register h2,
+    .hidden-form .edit-driver-form h2,
+    .admin-form .form-admin h2,
+    .welcome-form .welcome h2,
+    .journey-form .journey-inner h2 {
+        font-size: 24px;
+    }
+    
+    /* Adjust button padding for smaller screens */
+    .form-inner input[type="submit"],
+    .registerForm .form-register input[type="submit"],
+    .journey-form .journey-inner input[type="submit"] {
+        padding: 8px 10px;
+    }
+    
+    /* Adjust button margin for smaller screens */
+    .form-inner .button-submit,
+    .registerForm .form-register .button-submit,
+    .journey-form .journey-inner .button-submit {
+        margin-top: 10px;
+    }
+    
+    .form-inner .button-cancel,
+    .registerForm .form-register .button-cancel,
+    .hidden-form .edit-driver-form .button-cancel,
+    .journey-form .journey-inner .button-cancel {
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+    
+    .form-inner .button-password {
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .attendance-form {
+        margin-left: 20px;
+        width: auto;
+    }
+
+    .attendance-form .attendance-inner {
+        padding: 20px;
+    }
+
+    .attendance-form .attendance-inner h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .attendance-form .attendance-inner .welcome-attendance {
+        flex-direction: column;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .attendance-form .attendance-inner .welcome-attendance label {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .attendance-form .attendance-inner .welcome-attendance input {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .attendance-form .attendance-inner .button-submit,
+    .attendance-form .attendance-inner .button-back {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .attendance-form .attendance-inner .attendance-radio {
+        width: auto;
+    }
+
+    .attendance-form .attendance-inner .attendance-radio label {
+        margin-right: 10px;
+    }
+}
+
+/* Add vehicle form */
+@media only screen and (max-width: 600px) {
+    .vehicle-form {
+        margin-left: 20px;
+        width: auto;
+    }
+
+    .vehicle-form .form-inner h2,
+    .vehicle-form .form-inner p {
+        font-size: 24px;
+        margin-left: 10px;
+    }
+
+    .vehicle-form .form-inner .table-container,
+    .vehicle-form .form-inner .table,
+    .vehicle-form .form-inner .table th,
+    .vehicle-form .form-inner .table td {
+        width: auto;
+        font-size: 14px;
+    }
+
+    .vehicle-form .form-inner .button-view,
+    .vehicle-form .form-inner .button-edit,
+    .vehicle-form .form-inner .button-delete,
+    .vehicle-form .form-inner .add,
+    .vehicle-form .form-inner .delete,
+    .vehicle-form .form-inner .button-back,
+    .vehicle-form .form-inner .button-logout,
+    .vehicle-form .form-inner .buttonBack {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
+/* Add Document form */
+@media only screen and (max-width: 600px) {
+    .hidden-form {
+        margin-left: 20px;
+        width: auto;
+    }
+
+    .hidden-form .add-Document-form h2 {
+        font-size: 24px;
+        margin-top: 5px;
+    }
+
+    .hidden-form .add-Document-form .label {
+        flex-direction: column;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .hidden-form .add-Document-form .label label {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .hidden-form .add-Document-form .label input {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .hidden-form .add-Document-form .button-submit,
+    .hidden-form .add-Document-form .button-reset,
+    .hidden-form .add-Document-form .button-close {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .hidden-form .add-Document-form .journey-dropdown {
+        flex-direction: column;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+
+    .hidden-form .add-Document-form .journey-dropdown label {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .hidden-form .add-Document-form .journey-dropdown select,
+    .hidden-form .add-Document-form .journey-dropdown input {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .hidden-form .add-Document-form .journey-dropdown .text-danger {
+        margin-bottom: 15px;
+    }
+}
+
+/* Sidebar Form */
+@media only screen and (max-width: 600px) {
+    .header {
+        width: 100%;
+        height: auto;
+        position: static;
+        padding-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .navBar a {
+        padding: 20px;
+    }
+
+    .navLinkWithSubMenu {
+        position: static;
+    }
+
+    .submenu {
+        position: static;
+        display: block;
+        background-color: transparent;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .submenu a {
+        padding: 10px 40px;
+        margin: 2px 0;
+        border-bottom: 1px solid #ddd;
+    }
+}
+
+/* edit document form */
+@media only screen and (max-width: 600px) {
+    .hidden-form,
+    .security-form,
+    .security-form-records,
+    .followup-form,
+    .fuel-form {
+      width: 100%;
+      margin-left: 0;
+      padding: 20px;
+    }
+  
+    .hidden-form::after,
+    .security-form::after,
+    .security-form-records::after,
+    .followup-form::after,
+    .fuel-form::after {
+      display: none;
+    }
+  
+    .edit-Document-form,
+    .security-vehicle-form,
+    .security-documents-form,
+    .followup-vehicle-form,
+    .fuel-vehicle-form {
+      padding: 20px;
+    }
+  
+    .edit-Document-form .fieldSet,
+    .security-form .security-vehicle-form .journey-dropdown,
+    .security-form .key-dropdown,
+    .security-form-records .security-documents-form .journey-dropdown,
+    .followup-form .followup-vehicle-form .journey-dropdown,
+    .fuel-form .fuel-vehicle-form .journey-dropdown {
+      max-width: none;
+    }
+  
+    .edit-Document-form .label,
+    .security-vehicle-form label,
+    .security-form-records .journey-dropdown label,
+    .followup-vehicle-form label,
+    .fuel-vehicle-form label {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      justify-content: flex-start;
+    }
+  
+    .edit-Document-form .label input,
+    .security-vehicle-form input,
+    .security-form-records .journey-dropdown input,
+    .followup-vehicle-form input,
+    .fuel-vehicle-form input {
+      width: 100%;
+      margin-left: 0;
+    }
+  
+    .security-documents-form .table {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+
+  /* Add media query for phone devices */
+@media only screen and (max-width: 768px) {
+    .historyRecord-form {
+        margin-left: 5%;
+        margin-top: 20px;
+        width: 90%;
+    }
+}
+
+/* Fuel Records Page */
+.fuel-form {
+    display: block;
+    position: absolute;
+    width: 900px;
+    margin-top: 50px;
+    margin-left: 400px;
+}
+
+/* Add media query for phone devices */
+@media only screen and (max-width: 768px) {
+    .fuel-form {
+        margin-left: 5%;
+        margin-top: 20px;
+        width: 90%;
+    }
+}
+
+/* Trips Records Page */
+.trips-form {
+    display: block;
+    position: absolute;
+    width: 1000px;
+    margin-top: 15px;
+    margin-left: 300px;
+}
+
+/* Add media query for phone devices */
+@media only screen and (max-width: 768px) {
+    .trips-form {
+        margin-left: 5%;
+        margin-top: 20px;
+        width: 90%;
+    }
+}
+
+/* Attendance Records Page */
+.attendanceHistory-form {
+    display: block;
+    position: absolute;
+    width: 1000px;
+    margin-top: 40px;
+    margin-left: 300px;
+}
+
+/* Add media query for phone devices */
+@media only screen and (max-width: 768px) {
+    .attendanceHistory-form {
+        margin-left: 5%;
+        margin-top: 20px;
+        width: 90%;
+    }
+}
+
+/* Vehicles Records Page - Phone Devices */
+
+@media only screen and (max-width: 768px) {
+    .vehicles-form {
+      width: auto;
+      margin: 15px;
+      padding: 0;
+    }
+  
+    .vehicles-form::after {
+      display: none;
+    }
+  
+    .vehicles-form .vehiclesRecord-form {
+      padding: 20px;
+    }
+  
+    .vehiclesRecord-form h2 {
+      font-size: 24px;
+    }
+  
+    .vehicles-form .vehiclesRecord-form .journey-dropdown,
+    .vehicles-form .vehiclesRecord-form .date-range {
+      flex-direction: column;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  
+    .vehicles-form .vehiclesRecord-form .journey-dropdown label,
+    .vehicles-form .vehiclesRecord-form .date-range label {
+      margin-left: 0;
+      margin-bottom: 5px;
+    }
+  
+    .vehicles-form .vehiclesRecord-form .journey-dropdown select,
+    .vehicles-form .vehiclesRecord-form .date-range input {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  
+    .vehicles-form .vehiclesRecord-form .table-container {
+      max-height: 300px;
+    }
+  
+    .vehicles-form .vehiclesRecord-form .table {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  
+    .vehicles-form .vehiclesRecord-form .table th,
+    .vehicles-form .vehiclesRecord-form .table td {
+      padding: 8px 10px;
+    }
+  
+    .vehicles-form .vehiclesRecord-form .button-back,
+    .vehicles-form .vehiclesRecord-form .button-print {
+      margin-left: 0;
+      margin-top: 20px;
+    }
+  }
+  
+  /* User Home Page - Phone Devices */
+  
+  @media only screen and (max-width: 768px) {
+    .welcomeUser-form {
+      width: auto;
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+  
+    .form-inner .welcome {
+      width: auto;
+      padding: 0 10px;
+    }
+  
+    .form-inner .welcome h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+  
+    .form-inner .welcome h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      padding-left: 0;
+    }
+  
+    .form-inner .welcome .welcome-journey {
+      width: auto;
+      margin-left: 0;
+    }
+  
+    .welcome .welcome-journey label {
+      margin-left: 0;
+    }
+  
+    .welcome .welcome-journey input {
+      width: calc(100% - 30px);
+      margin-left: 0;
+    }
+  
+    .welcome .welcome-journey .button-submit,
+    .form-inner .welcome .button-reset,
+    .form-inner .welcome .button-back {
+      margin-left: 0;
+      margin-top: 20px;
+    }
+  }
