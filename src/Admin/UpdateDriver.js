@@ -253,7 +253,7 @@ function UpdateDriver() {
 
               <button className="button-reset" onClick={reset}>RESET</button>
               
-              <button className="button-cancel" onClick={() => {Navigate("/admin/home/register");}}>Cancel</button>
+              <button className="button-cancel" onClick={() => {Navigate("/admin/home/register", { state: { username } })}}>Cancel</button>
           </div>
       </form>
   );

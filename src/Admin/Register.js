@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import RegisterValidations from "./RegisterValidations";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 // import DatePicker from "react-datepicker";
 // import 'react-datepicker/dist/react-datepicker.css'
 
@@ -16,6 +16,8 @@ function Register(){
 
     const [errors, setErrors] = useState({})
     const Navigate = useNavigate(); 
+    const location = useLocation();
+    const { username } = location.state || { username: undefined };
 
     const [selectedOption, setSelectedOption] = useState("Admin")  
 
@@ -283,7 +285,7 @@ function Register(){
 
                 <button className="button-reset" onClick={reset}>RESET</button>
 
-                <button className="button-back" onClick={() => {Navigate('/admin/home')}}>BACK</button>
+                <button className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button>
             </div>
         </form>
     );

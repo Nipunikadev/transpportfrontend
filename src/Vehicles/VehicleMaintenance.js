@@ -4,12 +4,14 @@ import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import SideBar from "./SideBar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 function VehicleMaintenance() {
 
     const Navigate = useNavigate();
+    const location = useLocation();
+    const { username } = location.state || { username: undefined };
     const [selectedDate, setSelectedDate] = useState(null);
     const formattedDate = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
     const [selectedVehicle, setSelectedVehicle] = useState('');
@@ -167,7 +169,7 @@ const handleImageChange = (e) => {
             
             <button className="button-submit" type="submit">Add Vehicle Maintenance Details</button>
             <button className="button-reset" onClick={reset}>RESET</button>
-            <button className="button-back" onClick={() => {Navigate('/admin/home')}}>BACK</button>
+            <button className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button>
           </div>
         </form>
       </div>

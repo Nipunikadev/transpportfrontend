@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
-import {  useNavigate } from "react-router-dom";
+import {  useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 function DeleteVehicles() {
 
     //const location = useLocation();
     const Navigate = useNavigate(); 
-    //const { state } = location;
+    const location = useLocation();
+    const { username } = location.state || { username: undefined };
     const [deletedVehicleDetails, setDeletedVehicleDetails] = useState([]);
     const rowLimit = deletedVehicleDetails.length;
 
@@ -99,7 +100,7 @@ function DeleteVehicles() {
               ))}
             </tbody>
             </table>
-            <button className="buttonBack" onClick={() => { Navigate("/vehicles/vehicleDetails"); }}>BACK</button>
+            <button className="buttonBack" onClick={() => { Navigate("/vehicles/vehicleDetails", { state: { username } })}}>BACK</button>
             </div>
           </div>
     </form>

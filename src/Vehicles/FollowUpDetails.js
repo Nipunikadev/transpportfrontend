@@ -4,7 +4,7 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 function FollowUpDetails() {
@@ -26,6 +26,8 @@ function FollowUpDetails() {
   const formattedTaxStartDate = taxStartDate ? format(taxStartDate, 'yyyy-MM-dd') : '';
   const formattedTaxEndDate = taxEndDate ? format(taxEndDate, 'yyyy-MM-dd') : '';
   const [taxPayer, setTaxPayer] = useState('');
+  const location = useLocation();
+    const { username } = location.state || { username: undefined };
 
     
   const handleVehicleChange = async (event) => {
@@ -167,7 +169,7 @@ function FollowUpDetails() {
 
           <button className="button-reset" onClick={reset}>RESET</button>
 
-          <button className="button-back" onClick={() => {Navigate('/admin/home')}}>BACK</button> 
+          <button className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button> 
         
           </div>
         </form>

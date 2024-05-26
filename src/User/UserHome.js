@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import DateTimePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
@@ -12,7 +12,8 @@ function UserHome() {
 
     const Navigate = useNavigate(); 
     const [auth, setAuth] = useState (false)
-    const [username, setName] = useState('')
+    const location = useLocation();
+    const { username } = location.state || { username: undefined };
     const [message, setMessage]  = useState('')
 
     const [selectedDate, setSelectedDate] = useState(moment());
@@ -30,7 +31,6 @@ function UserHome() {
         .then(res =>{
             if(res.data.Status === "Success"){
                 setAuth(true);
-                setName(res.data.username);
             }else{
                 setAuth(false);
                 setMessage(res.data.Message);

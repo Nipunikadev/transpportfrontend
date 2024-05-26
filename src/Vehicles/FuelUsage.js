@@ -4,7 +4,7 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 function FuelUsage() {
@@ -18,6 +18,8 @@ function FuelUsage() {
     const [fuelType, setFuelType] = useState('');
     const [fuelPumped, setFuelPumped] = useState(0);
     const [cost, setCost] = useState(0);
+    const location = useLocation();
+    const { username } = location.state || { username: undefined };
 
     const handleVehicleChange = async (event) => {
         const value = event.target.value;
@@ -153,7 +155,7 @@ function FuelUsage() {
 
                 <button className="button-reset" onClick={reset}>RESET</button>
 
-                <button className="back" onClick={() => {Navigate('/admin/home')}}>BACK</button>
+                <button className="back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button>
             </div>
         </form>
     </div>

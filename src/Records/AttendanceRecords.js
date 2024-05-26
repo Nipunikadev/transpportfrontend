@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 function AttendanceRecords() {
 
+    const location = useLocation();
+    const { username } = location.state || { username: undefined };
     const [selectedDriver, setSelectedDriver] = useState('');
     const [drivername, setDriverName] = useState([])
     const Navigate = useNavigate(); 
@@ -121,7 +123,7 @@ function AttendanceRecords() {
                         </tbody>
                     </table>
                 </div>
-                <button className="button-back" onClick={() => {Navigate('/records/historyRecords')}}>BACK</button>  
+                <button className="button-back" onClick={() => {Navigate('/records/historyRecords', { state: { username } })}}>BACK</button>  
 
                 <button className="button-print" onClick={(event) => handlePrint(event)}>PRINT</button>
 

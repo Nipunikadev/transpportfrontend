@@ -154,7 +154,7 @@ function AdminLogin(){
                 console.log('Response:', response.data);
                 if(response.data.loginStatus === true){
                     console.log('Login Success');
-                    Navigate('/admin/home');
+                    Navigate('/admin/home', { state: { username: details.username } });
                 }
                 else{
                     alert(response.data.loginStatus);

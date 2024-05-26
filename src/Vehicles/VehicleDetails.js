@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import SideBar from "./SideBar";
 
 
@@ -18,6 +18,7 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
     const [insuranceCardImage, setInsuranceCardImage] = useState([]);
     const [taxReceipts, setTaxReceipts] = useState([]);
     const [selectedOption, setSelectedOption] = useState('Yes'); 
+   
 
     const onSelect = ({target: {value} }) => {
       setSelectedOption(value);
@@ -235,6 +236,8 @@ function VehicleDetails(){
     const [vehicles, setVehicles] = useState([]);
     const [isAddFormOpen, setIsAddFormOpen] = useState(false);
     const rowLimit = vehicles.id; 
+    const location = useLocation();
+    const { username } = location.state || { username: undefined };
     
     
     useEffect(() => {
@@ -279,7 +282,7 @@ function VehicleDetails(){
           setVehicles((prevVehicles) =>
             prevVehicles.filter((vehicle) => vehicle.id !== deleteVehicle.id)
           );
-          Navigate('/vehicles/vehicleDetails/deletedVehicles', {  state: { deletedVehicleDetails: [deleteVehicle] } });
+          Navigate('/vehicles/vehicleDetails/deletedVehicles', {  state: { deletedVehicleDetails: [deleteVehicle] , username} });
         } else {
           console.error('Failed to delete the vehicle. Server response:', response.data);
         }
@@ -301,7 +304,7 @@ function VehicleDetails(){
 
   const handleDeletedVehiclesClick = () => {
     console.log("Navigating to deleted vehicles");
-    Navigate('/vehicles/vehicleDetails/deletedVehicles');
+    Navigate('/vehicles/vehicleDetails/deletedVehicles', {state: {username}});
   };
 
   
@@ -329,13 +332,13 @@ function VehicleDetails(){
                     <td>{vehicle.vehicleno}</td>
                     <td>{vehicle.vehicletype}</td>
                     <td>
-                    <button className="button-edit" onClick={() => {Navigate('/vehicles/vehicleDetails/editVehicles', { state: { id: vehicle.id } })}}>EDIT</button>
+                    <button className="button-edit" onClick={() => {Navigate('/vehicles/vehicleDetails/editVehicles', { state: { id: vehicle.id , username} })}}>EDIT</button>
                     </td>
                     <td>
-                    <button className="button-delete" onClick={() => handleDeleteClick(vehicle.id)}>DELETE</button>
+                    <button className="button-delete" onClick={() => handleDeleteClick(vehicle.id, username)}>DELETE</button>
                     </td>
                     <td>
-                    <button className="button-view"onClick={() => {Navigate('/vehicles/vehicleDetails/viewVehicles', { state: { id: vehicle.id } })}}>VIEW MORE</button>
+                    <button className="button-view"onClick={() => {Navigate('/vehicles/vehicleDetails/viewVehicles', { state: { id: vehicle.id, username } })}}>VIEW MORE</button>
                     </td>
                 </tr>
                 ))}
@@ -343,7 +346,7 @@ function VehicleDetails(){
             </table>
             </div>
 
-            <button className="button-back" onClick={() => {Navigate('/admin/home')}}>BACK</button>  
+            <button className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button>  
 
             <button className="button-logout" onClick={() => {Navigate('/admin')}}>LOGOUT</button>
             </div>

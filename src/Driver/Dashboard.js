@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
 
     const Navigate = useNavigate(); 
     const [auth, setAuth] = useState (false)
-    const [username, setName] = useState('')
+    const location = useLocation();
+    const { username } = location.state || { username: undefined };
     const [message, setMessage]  = useState('')
 
     axios.defaults.withCredentials = true;
@@ -17,7 +18,6 @@ function Dashboard() {
         .then(res =>{
             if(res.data.Status === "Success"){
                 setAuth(true);
-                setName(res.data.username);
             }else{
                 setAuth(false);
                 setMessage(res.data.Message);

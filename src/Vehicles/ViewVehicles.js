@@ -6,6 +6,8 @@ import SideBar from "./SideBar";
 
 function ViewVehicles() {
   const Navigate = useNavigate();
+  const location1 = useLocation();
+    const { username } = location1.state || { username: undefined }; 
   const location = useLocation();
   const vehicleId = location.state?.id;
   const [vehicleType, setVehicleType] = useState('');
@@ -302,7 +304,7 @@ function ViewVehicles() {
        
 
         <br/>
-        <button className="button-back" onClick={() => {Navigate("/vehicles/vehicleDetails");}}>
+        <button className="button-back" onClick={() => {Navigate("/vehicles/vehicleDetails", { state: { username } })}}>
           BACK
         </button>
         </div>

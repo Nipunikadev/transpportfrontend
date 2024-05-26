@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 function FuelRecords() {
    
     const Navigate = useNavigate(); 
+    const location = useLocation();
+    const { username } = location.state || { username: undefined };
     const [selectedVehicle, setSelectedVehicle] = useState('');
     const [vehicleno, setVehicle] = useState([]);
     const [fuel, setFuel] = useState([]);
@@ -117,7 +119,7 @@ function FuelRecords() {
                         </tbody>
                     </table>
                 </div>
-                <button className="button-back" onClick={() => {Navigate("/records/historyRecords");}}>BACK</button>
+                <button className="button-back" onClick={() => {Navigate("/records/historyRecords", { state: { username } }) }}>BACK</button>
 
                 <button className="button-print" onClick={(event) => handlePrint(event)}>PRINT</button>
             </div>

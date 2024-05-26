@@ -7,6 +7,8 @@ import SideBar from "./SideBar";
 
 function EditVehicles() {
   const Navigate = useNavigate();
+  const location1 = useLocation();
+  const { username } = location1.state || { username: undefined };
   const location = useLocation();
   const vehicleId = location.state?.id;
 
@@ -387,7 +389,7 @@ function EditVehicles() {
         </label>
          )}
         <button className="button-submit">UPDATE VEHICLE DETAILS</button>
-        <button className="button-back" onClick={() => {Navigate("/vehicles/vehicleDetails");}}>
+        <button className="button-back" onClick={() => {Navigate("/vehicles/vehicleDetails", { state: { username } })}}>
           BACK
         </button>
         </div>

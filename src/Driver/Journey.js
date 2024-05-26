@@ -301,7 +301,7 @@ function Journey() {
 
             <button className="button-reset" onClick={reset}>RESET</button>
              
-            <button className="button-back" onClick={() => {Navigate('/driver/dashboard')}}>BACK</button>  
+            <button className="button-back" onClick={() => {Navigate('/driver/dashboard', { state: { username } })}}>BACK</button>  
             </div>  
             :
             <div>

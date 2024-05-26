@@ -4,12 +4,14 @@ import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import SideBar from "./SideBar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 function VehicleSecurity() {
 
-    const Navigate = useNavigate();   
+    const Navigate = useNavigate();  
+    const location = useLocation();
+    const { username } = location.state || { username: undefined }; 
     const [registrationDate, setRegistrationDate] = useState(null);
     const formattedDate = registrationDate ? format(registrationDate, 'yyyy-MM-dd') : '';
     const [selectedVehicle, setSelectedVehicle] = useState('');
@@ -200,7 +202,7 @@ function VehicleSecurity() {
 
             <button className="button-reset" onClick={reset}>RESET</button>
 
-            <button className="button-back" onClick={() => {Navigate('/admin/home')}}>BACK</button>
+            <button className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button>
         
           </div>
         </form>

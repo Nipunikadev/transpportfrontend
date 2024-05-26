@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
@@ -188,6 +188,7 @@ function EditOriginalDocumentsRecords({ onClose, onSubmit, documentDetails }) {
     const [receivedDate, setReceivedDate] = useState(null);
     // const formattedDate = updatedReceivedDate ? format(updatedReceivedDate, 'yyyy-MM-dd') : '';
     const [errors, setErrors] = useState({});
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -316,6 +317,8 @@ function EditOriginalDocumentsRecords({ onClose, onSubmit, documentDetails }) {
 function OriginalDocumentsRecords() {
 
 
+    const location = useLocation();
+    const { username } = location.state || { username: undefined };
     const Navigate = useNavigate(); 
     const [selectedVehicle, setSelectedVehicle] = useState('');
     const [selectedDocument, setSelectedDocument] = useState(null);
@@ -464,7 +467,7 @@ function OriginalDocumentsRecords() {
                         </table>
                     </div>
 
-                    <button className="button-back" onClick={() => {Navigate('/vehicles/vehicleSecurity')}}>BACK</button>
+                    <button className="button-back" onClick={() => {Navigate('/vehicles/vehicleSecurity', { state: { username } })}}>BACK</button>
 
                 </div>
             </form>

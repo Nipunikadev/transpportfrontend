@@ -126,7 +126,7 @@ function UserLogin(){
                 console.log('Response:', response.data);
                 if(response.data.loginStatus1 === true){
                     console.log('Login Success');
-                    Navigate('/driver/dashboard');
+                    Navigate('/driver/dashboard',{ state: { username: values.username } });
                 }
                 else{
                     alert(response.data.loginStatus1);

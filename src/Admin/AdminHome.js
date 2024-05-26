@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 function AdminHome() {
 
     const Navigate = useNavigate(); 
     const [auth, setAuth] = useState (false)
-    const [username, setName] = useState('')
+    const location = useLocation();
+    const { username } = location.state || { username: undefined };
     const [message, setMessage]  = useState('')
 
     axios.defaults.withCredentials = true;
@@ -17,7 +18,6 @@ function AdminHome() {
         .then(res =>{
             if(res.data.Status === "Success"){
                 setAuth(true);
-                setName(res.data.username);
             }else{
                 setAuth(false);
                 setMessage(res.data.Message);
@@ -46,10 +46,10 @@ function AdminHome() {
              auth?
              <div className='admin-welcome'>
              <h2> Welcome,{username}</h2>
-             <button className='register' onClick={() => {Navigate('/admin/home/register')}}>Register</button>
-             <button className='vehicleHome' onClick={() => {Navigate('/vehicles/vehicleDetails')}}>Vehicles Management</button>
-             <button className='history' onClick={() => {Navigate('/records/historyRecords')}}>History Records</button>
-            <button className="button-logout" onClick={() => {Navigate('/admin')}}>Logout</button>  
+             <button className='register' onClick={() => {Navigate('/admin/home/register', { state: { username } }) }}>Register</button>
+             <button className='vehicleHome' onClick={() => {Navigate('/vehicles/vehicleDetails', { state: { username } }) }}>Vehicles Management</button>
+             <button className='history' onClick={() => {Navigate('/records/historyRecords', { state: { username } }) }}>History Records</button>
+            <button className="button-logout" onClick={() => {Navigate('/admin', { state: { username } }) }}>Logout</button>  
             </div>  
             :
             <div>

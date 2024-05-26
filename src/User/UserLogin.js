@@ -135,7 +135,7 @@ function UserLogin(){
                 console.log('Response:', response.data);
                 if(response.data.loginStatus === true){
                     console.log('Login Success');
-                    Navigate('/user/home');
+                    Navigate('/user/home', { state: { username: details.username } });
                 }
                 else{
                     alert(response.data.loginStatus);
