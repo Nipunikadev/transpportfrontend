@@ -12,6 +12,13 @@ function DeleteVehicles() {
     const rowLimit = deletedVehicleDetails.length;
 
     useEffect(() => {
+      // Check if the user is logged in, if not, redirect to the login page
+      if (!username) {
+          Navigate('/admin');
+      }
+  }, [username, Navigate]);
+
+    useEffect(() => {
       const fetchDeletedVehicleDetails = async () => {
           try {
               const response = await axios.post("http://localhost:8081/vehicles/vehicleDetails/deletedVehicles");

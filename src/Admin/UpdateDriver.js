@@ -26,6 +26,12 @@ function UpdateDriver() {
   const [error, setError] = useState('');
   const [removedFiles, setRemovedFiles] = useState({ drivingLicense: [] });
 
+  useEffect(() => {
+    // Check if the user is logged in, if not, redirect to the login page
+    if (!username) {
+        Navigate('/admin');
+    }
+}, [username, Navigate]);
 
   const handleVehicleChange = (event) => {
     const value = event.target.value;

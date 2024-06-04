@@ -33,6 +33,13 @@ function Journey() {
         vehicleno: '',
         location: '',
       });
+
+      useEffect(() => {
+        // Check if the user is logged in, if not, redirect to the login page
+        if (!username) {
+            Navigate('/driver');
+        }
+    }, [username, Navigate]);
     
     const handleVehicleChange = (event) => {
         const value = event.target.value;

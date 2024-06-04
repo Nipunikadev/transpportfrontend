@@ -7,6 +7,7 @@ function Dashboard() {
 
     const Navigate = useNavigate(); 
     const [auth, setAuth] = useState (false)
+    const [authChecked, setAuthChecked] = useState(false);
     const location = useLocation();
     const { username } = location.state || { username: undefined };
     const [message, setMessage]  = useState('')
@@ -22,9 +23,34 @@ function Dashboard() {
                 setAuth(false);
                 setMessage(res.data.Message);
             }
-        })
-        .then(err => console.log(err))
+            setAuthChecked(true); // Mark auth check as complete
+            })
+            .catch(err => {
+                console.log(err);
+                setAuth(false);
+                setMessage('Error during authentication');
+                setAuthChecked(true); // Mark auth check as complete
+            });
     }, [])
+
+    useEffect(() => {
+        if (authChecked && (!auth || !username)) {
+            Navigate('/driver'); // Redirect if auth check is complete and not authenticated or username is missing
+        }
+    }, [auth, authChecked, username, Navigate]);
+
+    const handleLogout = (event) => {
+        event.preventDefault(); // Prevent the default form submission behavior
+        axios.post('http://localhost:8081/logout')
+            .then(res => {
+                if (res.data.Status === "Success") {
+                    Navigate('/driver');
+                } else {
+                    alert("Error during logout");
+                }
+            })
+            .catch(err => console.log(err));
+    };
 
     return(
         <form className='driver-welcome'>
@@ -37,7 +63,7 @@ function Dashboard() {
              <button className='attendance' onClick={() => {Navigate('/driver/dashboard/attendance', { state: { username } })}}>Attendance</button>
              <button className='journey' onClick={() => {Navigate('/driver/dashboard/journey', { state: { username } })}}>Journey Module</button>
              <button className='userhistory' onClick={() => {Navigate('/driver/dashboard/history', { state: { username } })}}>View My History</button>
-            <button className="button-logout" onClick={() => {Navigate('/driver')}}>Logout</button>  
+            <button className="button-logout" onClick={handleLogout}>Logout</button>  
             </div>  
             :
             <div>

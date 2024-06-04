@@ -18,6 +18,7 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
     const [insuranceCardImage, setInsuranceCardImage] = useState([]);
     const [taxReceipts, setTaxReceipts] = useState([]);
     const [selectedOption, setSelectedOption] = useState('Yes'); 
+    const [dragging, setDragging] = useState(false);
    
 
     const onSelect = ({target: {value} }) => {
@@ -25,16 +26,36 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
   }
 
   const isChecked = (value) => value === selectedOption;
+
+  // Function to handle file drop
+  const handleDrop = (e, imageType) => {
+    e.preventDefault();
+    setDragging(false);
+    const files = Array.from(e.dataTransfer.files);
+    handleImageChange({ target: { files } }, imageType);
+  };
+
+  // Function to handle file drag over
+  const handleDragOver = (e) => {
+      e.preventDefault();
+      setDragging(true);
+  };
+
+  // Function to handle file drag leave
+  const handleDragLeave = () => {
+      setDragging(false);
+  };
     
     const handleImageChange = (e, imageType) => {
+      const files = Array.from(e.target.files);
       if (imageType === 'license') {
-        setLicenseImage(e.target.files);
+        setLicenseImage(files);
       } else if (imageType === 'registrationImage') {
-        setRegistrationImage(e.target.files);
-      }else if(imageType === 'insuranceCard'){
-        setInsuranceCardImage(e.target.files);
-      }else if(imageType === 'taxReceipts'){
-        setTaxReceipts(e.target.files);
+        setRegistrationImage(files);
+      } else if (imageType === 'insuranceCard') {
+        setInsuranceCardImage(files);
+      } else if (imageType === 'taxReceipts') {
+        setTaxReceipts(files);
       }
     };
   
@@ -49,26 +70,10 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
       formData.append('cylinderCapacity', cylinderCapacity);
       formData.append('insuranceCompany', insuranceCompany);
       formData.append('taxPayer', selectedOption === 'Yes' ? 1 : 0);
-      if (licenseImage) {
-        for (let i = 0; i < licenseImage.length; i++) {
-            formData.append('license', licenseImage[i]);
-        }
-      }
-      if (RegistrationImage) {
-        for (let i = 0; i < RegistrationImage.length; i++) {
-            formData.append('registrationImage', RegistrationImage[i]);
-        }
-      }
-      if (insuranceCardImage) {
-        for (let i = 0; i < insuranceCardImage.length; i++) {
-            formData.append('insuranceCard', insuranceCardImage[i]);
-        }
-      }
-      if (taxReceipts) {
-        for (let i = 0; i < taxReceipts.length; i++) {
-            formData.append('taxReceipts', taxReceipts[i]);
-        }
-      }
+      licenseImage.forEach(file => formData.append('license', file));
+      RegistrationImage.forEach(file => formData.append('registrationImage', file));
+      insuranceCardImage.forEach(file => formData.append('insuranceCard', file));
+      taxReceipts.forEach(file => formData.append('taxReceipts', file));
     
       axios.post('http://localhost:8081/vehicles/vehicleDetails/add-vehicle', formData,{
         headers: {
@@ -77,11 +82,17 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
       })
       .then((res) => {
         if (res.data.success) {
-          console.log('Vehicle Details uploaded successfully');
-          alert('Successfully Added Vehicle Details');
-          addVehicle(res.data.vehicle);
-          onClose();
-          reset();
+          const newVehicle = res.data.vehicle;
+          if (newVehicle && newVehicle.vehicleno) {
+            console.log('Vehicle Details uploaded successfully');
+            alert('Successfully Added Vehicle Details');
+            addVehicle(newVehicle);
+            onClose();
+            reset();
+          } else {
+            console.error('Failed to add the vehicle: Vehicle details are missing');
+            alert('Failed to add the vehicle: Vehicle details are missing');
+          }
         } else {
           console.error('Failed to add the vehicle:', res.data.error);
           alert(res.data.error);
@@ -135,6 +146,12 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
       setSelectedOption('Yes');
     }
   
+    const renderFileNames = (files) => {
+      return Array.isArray(files) && files.length > 0
+        ? files.map((file, index) => <div key={index}>{file.name}</div>)
+        : <p>Drop files here or click to upload</p>;
+    };
+
     return (
         <form className="hidden-form" onSubmit={handleSubmit} encType="multipart/form-data">
         <div className={`add-vehicle-form ${isOpen ? 'open' : 'closed'}`}>
@@ -152,7 +169,10 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
           </div>
           <div className="label">
           <label>Revenue License:
-            <input type="file" onChange={(e) => handleImageChange(e, 'license')} multiple />
+          <div className={`drop-zone ${dragging ? 'dragging' : ''}`} onDrop={(e) => handleDrop(e, 'license')} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
+                {renderFileNames(licenseImage)}
+                <input type="file" onChange={(e) => handleImageChange(e, 'license')} multiple />
+              </div>
           </label>
           </div>
           <div className="label">
@@ -164,9 +184,12 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
           </label>
           </div>
           <div className="label">
-          <label>Registration Certificate:
-            <input type="file" onChange={(e) => handleImageChange(e, 'registrationImage')} multiple />
-          </label>
+            <label>Registration Image:
+              <div className={`drop-zone ${dragging ? 'dragging' : ''}`} onDrop={(e) => handleDrop(e, 'registrationImage')} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
+                {renderFileNames(RegistrationImage)}
+                <input type="file" onChange={(e) => handleImageChange(e, 'registrationImage')} multiple />
+              </div>
+            </label>
           </div>
           <div className="fuel-dropdown">
             <label>Fuel Type:
@@ -174,6 +197,7 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
                 <option value="">Select Fuel Type</option>
                 <option value="Petrol">Petrol</option>
                 <option value="Diesel">Diesel</option>
+                <option value="Electric">Electric</option>
               </select>
             </label>
           </div>
@@ -194,9 +218,12 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
           </label>
           </div>
           <div className="label">
-          <label>Insurance card:
-            <input type="file" onChange={(e) => handleImageChange(e, 'insuranceCard')} multiple />
-          </label>
+            <label>Insurance card:
+              <div className={`drop-zone ${dragging ? 'dragging' : ''}`} onDrop={(e) => handleDrop(e, 'insuranceCard')} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
+                {renderFileNames(insuranceCardImage)}
+                <input type="file" onChange={(e) => handleImageChange(e, 'insuranceCard')} multiple />
+              </div>
+            </label>
           </div>
           <div className="label">
           <label htmlFor="taxPayer"><span className="chekmark">Tax Payer?</span>
@@ -214,7 +241,10 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
           <div className="label">
           <label>
             Tax Receipts (if any):
-            <input type="file" onChange={(e) => handleImageChange(e, 'taxReceipts')} multiple  />
+              <div className={`drop-zone ${dragging ? 'dragging' : ''}`} onDrop={(e) => handleDrop(e, 'taxReceipts')} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
+                {renderFileNames(taxReceipts)}
+                <input type="file" onChange={(e) => handleImageChange(e, 'taxReceipts')} multiple />
+              </div>
           </label>
           </div>
            )}
@@ -235,13 +265,17 @@ function VehicleDetails(){
     const Navigate = useNavigate(); 
     const [vehicles, setVehicles] = useState([]);
     const [isAddFormOpen, setIsAddFormOpen] = useState(false);
-    const rowLimit = vehicles.id; 
     const location = useLocation();
     const { username } = location.state || { username: undefined };
     
-    
     useEffect(() => {
-      console.log(vehicles);
+      // Check if the user is logged in, if not, redirect to the login page
+      if (!username) {
+          Navigate('/admin');
+      }
+  }, [username, Navigate]);
+  
+    useEffect(() => {
         axios.post('http://localhost:8081/vehicles/vehicleDetails', {})
         .then(res => {
             if (res.data.success) {
@@ -254,7 +288,7 @@ function VehicleDetails(){
         .catch(err => {
             console.log(err);
         });                
-    }, [vehicles]);
+    }, []);
 
      const openAddForm = (e) => {
         e.preventDefault();
@@ -310,7 +344,7 @@ function VehicleDetails(){
   
     return(
         <div>
-          <SideBar/>
+          <SideBar username={username} />
         <form className='vehicle-form' onSubmit={handleSubmit}>
             <div className={`form-inner ${isAddFormOpen ? 'blur-background' : ''}`}>
             <h2>Vehicle Details</h2>
@@ -326,8 +360,8 @@ function VehicleDetails(){
                     </tr>
                 </thead>
                 <tbody>
-                {vehicles.slice(0, rowLimit).map((vehicle, index) => (
-                 <tr key={vehicle.id ? vehicle.id : index}>
+                {vehicles.map((vehicle, index) => (
+                  <tr key={vehicle.id}>
                     <td>{index + 1}</td>
                     <td>{vehicle.vehicleno}</td>
                     <td>{vehicle.vehicletype}</td>

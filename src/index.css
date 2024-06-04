@@ -143,6 +143,33 @@ form::after{
     transition: 0.4s;
 }
 
+.registerForm .form-register input[type="file"] {
+    display: none;
+  }
+  
+  .button-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .registerForm .form-register .drop-zone {
+    border: 2px dashed #ccc;
+    padding: 10px 5px;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 40px;
+}
+  
+.drop-zone .dragging {
+    border-color: #000;
+    background-color: #f0f0f0;
+}
+
 .registerForm .form-register .form-radio{
     display: flex;
     flex-direction: row; /* Adjust based on layout */
@@ -1489,78 +1516,106 @@ form .form-inner input[type="submit"]:hover,
 }
 
 .add-vehicle-form .form-radio label {
-    position: relative;
-    padding-left: 35px;
-    cursor: pointer;
-    display: inline-block;
-    color: #666;
-    font-size: 18px;
-    line-height: 25px;
-    margin-right: 20px; /* Space between options */
-    transition: color 0.4s;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  display: inline-block;
+  color: #666;
+  font-size: 18px;
+  line-height: 25px;
+  margin-right: 20px; /* Space between options */
+  transition: color 0.4s;
 }
 
 .add-vehicle-form .form-radio label::before {
-    content: '';
-    position: absolute;
-    left: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 20px;
-    width: 20px;
-    background-color: #c7aeae;
-    border-radius: 50%;
-    transition: background-color 0.3s, box-shadow 0.2s;
+  content: '';
+  position: absolute;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 20px;
+  background-color: #c7aeae;
+  border-radius: 50%;
+  transition: background-color 0.3s, box-shadow 0.2s;
 }
 
 .add-vehicle-form .form-radio input[type="radio"]:checked + label::before {
-    background-color: #fe4880;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  background-color: #fe4880;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 }
 
 .add-vehicle-form .form-radio input[type="radio"]:checked + label {
-    color: #fe4880; /* Change label color when selected */
+  color: #fe4880; /* Change label color when selected */
 }
 
 .add-vehicle-form .form-radio label:hover::before {
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 }
 
 .add-vehicle-form.open label{
-    display: flex;
-    color: #666;
-    font-size: 16px;
-    margin-left: 10px;
-    transition: 0.4s;
-    padding: 10px;
+  display: flex;
+  color: #666;
+  font-size: 16px;
+  margin-left: 10px;
+  transition: 0.4s;
+  padding: 10px;
 }
 
 .add-vehicle-form label{
-    display: flex;
-    color: #666;
-    font-size: 16px;
-    margin-left: 10px;
-    transition: 0.4s;
-    padding: 10px;
+  display: flex;
+  color: #666;
+  font-size: 16px;
+  margin-left: 10px;
+  transition: 0.4s;
+  padding: 10px 40px;
 }
 
 .add-vehicle-form input{
-    flex: 1;
-    padding: 10px;
-    background-color: #c7aeae;
-    border-radius: 8px;
-    transition: 0.4s;
-    margin-left: 40px;
+  flex: 1;
+  padding: 10px;
+  background-color: #c7aeae;
+  border-radius: 8px;
+  transition: 0.4s;
+  margin-left: 40px;
 }
 
 .add-vehicle-form image{
-    flex: 2;
-    padding: 10px;
-    background-color: #c7aeae;
-    border-radius: 8px;
-    transition: 0.4s;
-    margin-left: 40px;
+  flex: 2;
+  padding: 10px;
+  background-color: #c7aeae;
+  border-radius: 8px;
+  transition: 0.4s;
+  margin-left: 40px;
 }
+
+.hidden-form .add-vehicle-form input[type="file"] {
+    display: none;
+  }
+  
+  .button-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .drop-zone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 60px;
+}
+  
+.drop-zone .dragging {
+    border-color: #000;
+    background-color: #f0f0f0;
+}
+
 
 .add-vehicle-form.open .label .text-danger{
     display: flex;
@@ -1702,6 +1757,102 @@ form .form-inner input[type="submit"]:hover,
 }
 
 /* Edit Vehicle Form */
+
+.hidden-form{
+    display: block;
+    position:absolute;
+    width: 800px;
+    margin-top: 50px;
+    margin-left: 400px;
+}
+
+.hidden-form::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 1;
+    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+}
+
+.hidden-form .edit-vehicle-form  {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    padding: 30px;
+    z-index: 2;
+  }
+
+.edit-vehicle-form h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+  
+  /* Hide the form when it has the "closed" class */
+.hidden-form .edit-vehicle-form.closed {
+    display: none;
+  }
+
+  .hidden-form .edit-vehicle-form .fieldSet{
+    max-width: 900px;
+  }
+  .hidden-form .edit-vehicle-form .fieldSet{
+    max-height: 400px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+
+.edit-vehicle-form label{
+  display: flex;
+  color: #666;
+  font-size: 16px;
+  margin-left: 10px;
+  transition: 0.4s;
+  padding: 10px 40px;
+}
+
+.edit-vehicle-form input{
+  flex: 1;
+  padding: 10px;
+  background-color: #c7aeae;
+  border-radius: 8px;
+  transition: 0.4s;
+  margin-left: 40px;
+}
+
+.edit-vehicle-form image{
+  flex: 2;
+  padding: 10px;
+  background-color: #c7aeae;
+  border-radius: 8px;
+  transition: 0.4s;
+  margin-left: 40px;
+}
+
+.edit-vehicle-form .label .text-danger{
+    display: flex;
+    width: 300px;
+    margin-bottom: 15px;
+    color: #fe4880;
+}
+
+.edit-vehicle-form .label:focus-within label{
+    color: #fe4880;
+}
+
+.edit-vehicle-form .label input:checked{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.edit-vehicle-form .label input:hover{
+    box-shadow:  0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
 .editVehicles .button-submit{
     display: inline-block;
     padding: 10px 12px;
@@ -1747,7 +1898,7 @@ form .form-inner input[type="submit"]:hover,
     margin-left: 60px;
 }
 
-.hidden-form .add-vehicle-form .viewVehicles, .editVehicles{
+.hidden-form .add-vehicle-form .edit-vehicle-form .viewVehicles, .editVehicles{
     max-height: 400px; /* Set the maximum height for the scrollable area */
     overflow-y: auto; /* Enable vertical scrolling */
 }
@@ -2245,14 +2396,31 @@ form .form-inner input[type="submit"]:hover,
     margin-right: 10px;
 }
 
-.security-vehicle-form .file{
-    flex: 1;
-    padding: 10px;
-    background-color: #c7aeae;
-    border-radius: 8px;
-    transition: 0.4s;
-    margin-left: 70px;
-    margin-right: 20px;
+.security-form .security-vehicle-form input[type="file"] {
+    display: none;
+  }
+  
+  .button-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .drop-zone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 60px;
+}
+  
+.drop-zone .dragging {
+    border-color: #000;
+    background-color: #f0f0f0;
 }
 
 .security-form .security-vehicle-form .journey-dropdown{
@@ -4062,7 +4230,7 @@ form .form-inner input[type="submit"]:hover,
     margin-left: 110px;
 }
 
-.form-inner .welcome .button-back{
+.form-inner .welcome .button-logout{
     display: inline-block;
     padding: 10px 12px;
     border-radius: 8px;

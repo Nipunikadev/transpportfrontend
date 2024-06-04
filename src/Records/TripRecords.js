@@ -15,6 +15,13 @@ function TripRecords() {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
+    useEffect(() => {
+        // Check if the user is logged in, if not, redirect to the login page
+        if (!username) {
+            Navigate('/admin');
+        }
+    }, [username, Navigate]);
+
     const handlePrint = (event) => {
         event.preventDefault(); // Prevents the default behavior of the click event
     

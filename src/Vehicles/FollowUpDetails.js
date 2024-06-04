@@ -19,17 +19,17 @@ function FollowUpDetails() {
   const [insuranceEndDate, setInsuranceEndDate] = useState(null);
   const [taxStartDate, setTaxStartDate] = useState(null);
   const [taxEndDate, setTaxEndDate] = useState(null);
-  const formattedRevenueStartDate = revenueStartDate ? format(revenueStartDate, 'yyyy-MM-dd') : '';
-  const formattedRevenueEndDate = revenueEndDate ? format(revenueEndDate, 'yyyy-MM-dd') : '';
-  const formattedInsuranceStartDate = insuranceStartDate ? format(insuranceStartDate, 'yyyy-MM-dd') : '';
-  const formattedInsuranceEndDate = insuranceEndDate ? format(insuranceEndDate, 'yyyy-MM-dd') : '';
-  const formattedTaxStartDate = taxStartDate ? format(taxStartDate, 'yyyy-MM-dd') : '';
-  const formattedTaxEndDate = taxEndDate ? format(taxEndDate, 'yyyy-MM-dd') : '';
   const [taxPayer, setTaxPayer] = useState('');
   const location = useLocation();
     const { username } = location.state || { username: undefined };
 
-    
+    useEffect(() => {
+      // Check if the user is logged in, if not, redirect to the login page
+      if (!username) {
+          Navigate('/admin');
+      }
+  }, [username, Navigate]);
+
   const handleVehicleChange = async (event) => {
     const value = event.target.value;
     setSelectedVehicle(value);
@@ -70,6 +70,13 @@ function FollowUpDetails() {
         alert("Please select a vehicle number.");
         return; // Stop the form submission
       }
+
+      const formattedRevenueStartDate = revenueStartDate ? format(revenueStartDate, 'yyyy-MM-dd') : '';
+      const formattedRevenueEndDate = revenueEndDate ? format(revenueEndDate, 'yyyy-MM-dd') : '';
+      const formattedInsuranceStartDate = insuranceStartDate ? format(insuranceStartDate, 'yyyy-MM-dd') : '';
+      const formattedInsuranceEndDate = insuranceEndDate ? format(insuranceEndDate, 'yyyy-MM-dd') : '';
+      const formattedTaxStartDate = taxStartDate ? format(taxStartDate, 'yyyy-MM-dd') : '';
+      const formattedTaxEndDate = taxEndDate ? format(taxEndDate, 'yyyy-MM-dd') : '';
       
       const vehicleData = {
         vehicleno: selectedVehicle === 'other' ? otherVehicle : selectedVehicle,
@@ -112,7 +119,7 @@ function FollowUpDetails() {
   
     return(
       <div>
-          <SideBar/>
+          <SideBar username={username} />
         <form className='followup-form' onSubmit={submitHandler}>
           <div className='followup-vehicle-form'>
             <h2>Vehicle Follow Up Details</h2>

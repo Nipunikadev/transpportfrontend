@@ -1,117 +1,71 @@
 function RegisterValidations(admins,users, drivers){
 
-    let error = {}
+    let errors = {}
 
-    const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/
-    const username_Pattern = /^\S*$/
-
-    if(admins){
-        if(admins.email === ""){
-            error.email = "Email should not empty"
-        }
-        else if(!email_pattern.test(admins.email)){
-            error.email = "Email didn't match"
-        }else{
-            error.email = ""
-        }
-
-
-        if(admins.password === ""){
-            error.password = "Password should not empty"
-        }
-        else if(!password_pattern.test(admins.password)){
-            error.password = "Password didn't match"
-        }if(admins.password.length <6){
-            error.password = "Password should be at least 6 characters long.";
-        }else{
-            error.password = ""
-        }
-
-        if(admins.username === ""){
-            error.username = "Name should not empty"
-        }
-        else if(!username_Pattern.test(admins.username)){
-            error.username = "Please enter valid username.";
-        }else{
-            error.username = ""
-        }
-    
-        if (!admins.confirmpassword) {
-            error.confirmpassword = "Please enter your confirm password.";
-        }
-
-        if (typeof admins.password !== "undefined" && typeof admins.confirmpassword !== "undefined") {
-            
-            if (admins.password !== admins.confirmpassword) {
-            error.confirmpassword = "Please Confirm Your Password again.";
-            }
-        }
-    }else if(users){
-        if(users.password === ""){
-            error.password = "Password should not empty"
-        }
-        else if(!password_pattern.test(users.password)){
-            error.password = "Password didn't match"
-        }if(users.password.length <6){
-            error.password = "Password should be at least 6 characters long.";
-        }else{
-            error.password = ""
-        }
-
-        if(users.username === ""){
-            error.username = "Name should not empty"
-        }
-        else if(!username_Pattern.test(users.username)){
-            error.username = "Please enter valid username.";
-        }else{
-            error.username = ""
-        }
-    
-        if (!users.confirmpassword) {
-            error.confirmpassword = "Please enter your confirm password.";
-        }
-
-        if (typeof users.password !== "undefined" && typeof users.confirmpassword !== "undefined") {
-            
-            if (users.password !== users.confirmpassword) {
-            error.confirmpassword = "Please Confirm Your Password again.";
-            }
-        }
-    } else if(drivers){
-        if(drivers.password === ""){
-            error.password = "Password should not empty"
-        }
-        else if(!password_pattern.test(drivers.password)){
-            error.password = "Password didn't match"
-        }if(admins.password.length <6){
-            error.password = "Password should be at least 6 characters long.";
-        }else{
-            error.password = ""
-        }
-
-        if(drivers.username === ""){
-            error.username = "Name should not empty"
-        }
-        else if(!username_Pattern.test(drivers.username)){
-            error.username = "Please enter valid username.";
-        }else{
-            error.username = ""
-        }
-    
-        if (!drivers.confirmpassword) {
-            error.confirmpassword = "Please enter your confirm password.";
-        }
-
-        if (typeof drivers.password !== "undefined" && typeof drivers.confirmpassword !== "undefined") {
-            
-            if (drivers.password !== drivers.confirmpassword) {
-            error.confirmpassword = "Please Confirm Your Password again.";
-            }
-        }
+    const validateNIC = (nic) => {
+        const nicPattern = /^([0-9]{9}[x|X|v|V]|[0-9]{12})$/;
+        return nicPattern.test(nic);
     }
 
-    return error;
-}
+    const validateEmail = (email) => {
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        return emailPattern.test(email);
+    };
+
+    const validateContact = (contact) => {
+        const contactPattern = /^\d{10}$/;
+        return contactPattern.test(contact);
+    };
+
+    const validateUsername = (username) => {
+        const usernamePattern = /^[a-zA-Z0-9]{3,}$/;
+        return usernamePattern.test(username);
+    };
+
+    const validatePassword = (password) => {
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
+        return passwordPattern.test(password);
+    };
+
+    const validateConfirmPassword = (password, confirmPassword) => {
+        return password === confirmPassword;
+    };
+
+    const checkValidations = (data) => {
+        if (data.nic && !validateNIC(data.nic)) {
+            errors.nic = "Invalid NIC format";
+        }
+        if (data.email && !validateEmail(data.email)) {
+            errors.email = "Invalid email format";
+        }
+        if (data.contact && !validateContact(data.contact)) {
+            errors.contact = "Contact number should be 10 digits";
+        }
+        if (data.username && !validateUsername(data.username)) {
+            errors.username = "Username should be alphanumeric and at least 3 characters long";
+        }
+        if (data.password && !validatePassword(data.password)) {
+            errors.password = "Password should be at least 6 characters long and include uppercase, lowercase and digits";
+        }
+        if (data.password && data.confirmpassword && !validateConfirmPassword(data.password, data.confirmpassword)) {
+            errors.confirmpassword = "Passwords do not match";
+        }
+    };
+
+    if (admins.nic || admins.email || admins.username || admins.password || admins.confirmpassword) {
+        checkValidations(admins);
+    }
+
+    if (users.email || users.username || users.password || users.confirmpassword) {
+        checkValidations(users);
+    }
+
+    if (drivers.nic || drivers.email || drivers.username || drivers.password || drivers.confirmpassword) {
+        checkValidations(drivers);
+    }
+
+    return errors;
+};
+
 
 export default RegisterValidations;

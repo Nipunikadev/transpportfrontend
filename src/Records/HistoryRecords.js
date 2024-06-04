@@ -8,6 +8,13 @@ function HistoryRecords (){
     const { username } = location.state || { username: undefined };
     const Navigate = useNavigate(); 
 
+    useEffect(() => {
+        // Check if the user is logged in, if not, redirect to the login page
+        if (!username) {
+            Navigate('/admin');
+        }
+    }, [username, Navigate]);
+
     axios.defaults.withCredentials = true;
     useEffect(() => {
 

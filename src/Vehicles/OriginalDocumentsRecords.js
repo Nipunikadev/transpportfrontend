@@ -333,6 +333,13 @@ function OriginalDocumentsRecords() {
         return date.toLocaleDateString('en-CA'); // 'en-CA' uses the yyyy-mm-dd format
     };
 
+    useEffect(() => {
+        // Check if the user is logged in, if not, redirect to the login page
+        if (!username) {
+            Navigate('/admin');
+        }
+    }, [username, Navigate]);
+
     const handleVehicleChange = (event) => {
         const value = event.target.value;
         setSelectedVehicle(value);

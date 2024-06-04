@@ -26,6 +26,13 @@ function ViewVehicles() {
   // const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
+    // Check if the user is logged in, if not, redirect to the login page
+    if (!username) {
+        Navigate('/admin');
+    }
+}, [username, Navigate]);
+
+  useEffect(() => {
     if (vehicleId) {
       axios.post("http://localhost:8081/vehicles/vehicleDetails/viewVehicles", {id: vehicleId, types: ['license', 'registrationImage', 'insuranceCard', 'taxReceipts']})
         .then((res) => {
@@ -244,7 +251,7 @@ function ViewVehicles() {
 
   return (
     <div>
-      <SideBar/>
+      <SideBar username={username} />
     <form className="hidden-form">
       <div className="add-vehicle-form">
         <h2>View Vehicle Details</h2>

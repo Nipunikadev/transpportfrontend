@@ -37,7 +37,7 @@ function App() {
      <Routes>
      <Route path='/' element={<Start />}></Route>
       <Route path='/admin' element={<AdminLogin />}></Route>
-      <Route path='/admin/home' element={<AdminHome/>}> </Route>
+      <Route path='/admin/home/*' element={<AdminHome/>}> </Route>
       <Route path='/admin/home/register' element={<Register/>}> </Route>
       <Route path='/admin/home/register/driver' element={<Register/>}> </Route>
       <Route path='/admin/home/register/user' element={<Register/>}> </Route>

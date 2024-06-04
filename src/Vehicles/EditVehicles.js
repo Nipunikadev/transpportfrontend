@@ -46,6 +46,12 @@ function EditVehicles() {
     taxReceipts: [],
   });
 
+  useEffect(() => {
+    // Check if the user is logged in, if not, redirect to the login page
+    if (!username) {
+        Navigate('/admin');
+    }
+}, [username, Navigate]);
   
   useEffect(() => {
     if (vehicleId) {
@@ -244,55 +250,12 @@ function EditVehicles() {
       </div>
     );
   };
-
-  // const renderRegistrationImage = (registrationImage) => {
-  //   if (vehicleData[registrationImage]) {
-  //     const fileExtension = vehicleData[registrationImage].split(".").pop().toLowerCase();
-
-  //     if (fileExtension === "pdf") {
-  //       return (
-  //         <div>
-  //         <a
-  //           href={`http://localhost:8081/image/registrationImage/${vehicleData[registrationImage]}`}
-  //           target="_blank"
-  //           rel="noopener noreferrer"
-  //         >
-  //           View PDF
-  //         </a>
-  //         </div>
-  //       );
-  //     } else {
-  //       return (
-  //         <div>
-  //         <img
-  //           src={`http://localhost:8081/image/registrationImage/${vehicleData[registrationImage]}`}
-  //           alt={registrationImage}
-  //           style={{ width: "500px", height: "500px" }}
-  //         />
-  //         </div>
-  //       );
-  //     }
-  //   } else {
-  //     return (
-  //       <div>
-  //         <span>New {registrationImage}</span>
-  //         <input type="file" onChange={(e) => handleRegistrationFileChange(registrationImage, e)} />
-  //       </div>
-  //     );
-  //   }
-  // };
-
-  // const handleNewRegistrationImageChange = (e) => {
-  //   console.log('New Registration Image Changed:', e.target.files[0]);
-  //   setNewRegistrationImage(e.target.files[0]);
-  // };
-
   
   return (
     <div>
-      <SideBar/>
+      <SideBar username={username} />
     <form className="hidden-form" onSubmit={handleEditVehicle}>
-      <div className="add-vehicle-form">
+      <div className="edit-vehicle-form">
         <h2>Edit Vehicle Details</h2>
         <div className="editVehicles">
         <label>

@@ -12,6 +12,7 @@ function UserHome() {
 
     const Navigate = useNavigate(); 
     const [auth, setAuth] = useState (false)
+    const [authChecked, setAuthChecked] = useState(false);
     const location = useLocation();
     const { username } = location.state || { username: undefined };
     const [message, setMessage]  = useState('')
@@ -35,8 +36,14 @@ function UserHome() {
                 setAuth(false);
                 setMessage(res.data.Message);
             }
+            setAuthChecked(true); // Mark auth check as complete
         })
-        .then(err => console.log(err))
+        .catch(err => {
+            console.log(err);
+            setAuth(false);
+            setMessage('Error during authentication');
+            setAuthChecked(true); // Mark auth check as complete
+        });
 
             axios.get(`http://localhost:8081/user/home/latest-start-trip/${username}`)
             .then(response => {
@@ -51,6 +58,26 @@ function UserHome() {
                 console.log("Error fetching start trip details", err);
             });
     }, [username])
+
+    useEffect(() => {
+        if (authChecked && (!auth || !username)) {
+            Navigate('/user'); // Redirect if auth check is complete and not authenticated or username is missing
+        }
+    }, [auth, authChecked, username, Navigate]);
+
+    const handleLogout = (event) => {
+        event.preventDefault(); // Prevent the default form submission behavior
+        axios.post('http://localhost:8081/logout')
+            .then(res => {
+                if (res.data.Status === "Success") {
+                    Navigate('/user');
+                } else {
+                    alert("Error during logout");
+                }
+            })
+            .catch(err => console.log(err));
+    };
+
 
     const onSelect = ({ target: { value } }) => {
         setSelectedOption(value);
@@ -203,7 +230,7 @@ function UserHome() {
 
             <button className="button-reset" onClick={reset}>RESET</button>
              
-            <button className="button-back" onClick={() => {Navigate('/user')}}>BACK</button> 
+            <button className="button-logout" onClick={handleLogout}>LOGOUT</button> 
 
             </div>  
             :

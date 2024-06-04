@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import RegisterValidations from "./RegisterValidations";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate, useLocation } from "react-router-dom";
 // import DatePicker from "react-datepicker";
 // import 'react-datepicker/dist/react-datepicker.css'
 
@@ -12,62 +12,106 @@ function Register(){
     const [ admins, setAdmins] = useState({firstname: "", lastname: "",  nic: "", contact: "",  email:"", username: "", password: "", confirmpassword: ""});
     const [ users, setUsers] = useState({firstname: "", lastname: "", contact: "",  email:"", username: "", password: "", confirmpassword: ""});
     const [ drivers, setDrivers] = useState({ firstname: "", lastname: "",  nic: "", contact: "", drivingLicense:drivingLicense, username: "", password: "", confirmpassword: ""});
-    const [error, setError] = useState('');
 
     const [errors, setErrors] = useState({})
-    const Navigate = useNavigate(); 
+    const navigate = useNavigate(); 
     const location = useLocation();
     const { username } = location.state || { username: undefined };
+    const [dragging, setDragging] = useState(false);
 
-    const [selectedOption, setSelectedOption] = useState("Admin")  
+    const [selectedOption, setSelectedOption] = useState("Admin") 
+    
+    useEffect(() => {
+        // Check if the user is logged in, if not, redirect to the login page
+        if (!username) {
+            navigate('/admin');
+        }
+    }, [username, navigate]);
+
+
+    // Function to handle file drop
+    const handleDrop = (e) => {
+        e.preventDefault();
+        setDragging(false);
+        const file = e.dataTransfer.files[0]; // Only allow one file
+        setDrivingLicense(file);
+    };
+
+  // Function to handle file drag over
+  const handleDragOver = (e) => {
+      e.preventDefault();
+      setDragging(true);
+  };
+
+  // Function to handle file drag leave
+  const handleDragLeave = () => {
+      setDragging(false);
+  };
 
     const onSelect = ({target: {value} }) => {
         setSelectedOption(value);
     }
-    
-    // function onValueChange(event){
-    //     setSelectedOption(event.target.value)
-    //     const { name } = event.target.value
-    //     console.log('clicked', name)
-    // }
 
     const isChecked = (value) => value === selectedOption;
     
-    const submitHandler = e => {
-        e.preventDefault();
+    const reset =  () => {
+        setErrors("");
+        if(selectedOption === 'Admin'){ 
+            setAdmins({firstname: "", lastname: "",  nic: "", contact: "", email:"", username: "", password: "", confirmpassword: ""});
+        }else if(selectedOption === 'User'){ 
+            setUsers({firstname: "", lastname: "", contact: "", email:"", username: "", password: "", confirmpassword: ""});
+        }else{
+            setDrivers({ firstname: "", lastname: "",  nic: "", contact: "", drivingLicense:"",  username: "" , password: "", confirmpassword: ""});
+        }
+        setDrivingLicense(null);
+
+    }
+
+    const submitHandler = (event) => {
+        event.preventDefault();
         const validationErrors = RegisterValidations(admins,users, drivers);
         console.log(selectedOption);
-        if(selectedOption === 'Admin'){
-            setErrors(validationErrors);
-            if(!validationErrors.email && !validationErrors.username && !validationErrors.password && !validationErrors.confirmpassword){
+        setErrors(validationErrors);
+
+        if(selectedOption === 'Admin' && Object.keys(validationErrors).length === 0){
                 const adminData = { ...admins};
                 console.log("Values:", adminData);
                 axios.post('http://localhost:8081/admin/home/register', adminData)
                 .then(response => {
-                    console.log("Admin Registered Successfully", response);
+                    console.log("Response:", response.data);
+                    if (response.data.Message === "Username or Password already taken") {
+                        alert("Username and Password already taken. Please choose a different username or password.");
+                    } else if (response.data.Message === "Admin Registered Successfully") {
+                        alert("Admin Registered Successfully");
+                        reset();
+                    } else {
+                        alert("Error Registering Admin: " + response.data.Message);
+                    }
                 })
                 .catch(err => {
-                    console.error("Error Registering Admin", err);
-                    setError('Failed to Registering Admin. Please try again.');
+                    console.log("Error Registering Admin", err);
+                    alert("Error Registering Admin: " + err);
                 });
-            }
-        }else if(selectedOption === 'User'){
-            setErrors(validationErrors);
-            if(!validationErrors.email && !validationErrors.username && !validationErrors.password && !validationErrors.confirmpassword){
+        }else if(selectedOption === 'User' && Object.keys(validationErrors).length === 0){
                 const userData = { ...users};
                 console.log("Values:", userData);
-                axios.post('http://localhost:8081/admin/home/register', userData)
+                axios.post('http://localhost:8081/admin/home/register/user', userData)
                 .then(response => {
-                    console.log("User Registered Successfully", response);
+                    console.log("Response:", response.data);
+                if (response.data.Message === "Username or Password already taken") {
+                    alert("Username and Password already taken. Please choose a different username or password.");
+                } else if (response.data.Message === "User Registered Successfully") {
+                    alert("User Registered Successfully");
+                    reset();
+                } else {
+                    alert("Error Registering User: " + response.data.Message);
+                }
                 })
                 .catch(err => {
-                    console.error("Error Registering User", err);
-                    setError('Failed to Registering User. Please try again.');
+                    console.log("Error Registering User", err);
+                    alert("Error Registering User: " + err);
                 });
-            }
-        }else if(selectedOption === 'Driver') {
-            setErrors(validationErrors);
-            if( !validationErrors.username && !validationErrors.password && !validationErrors.confirmpassword){
+        }else if(selectedOption === 'Driver'  && Object.keys(validationErrors).length === 0) {
             const driverData = new FormData(); // Use FormData for file upload
             driverData.append('firstname', drivers.firstname);
             driverData.append('lastname', drivers.lastname);
@@ -84,16 +128,22 @@ function Register(){
                 }
             })
             .then(response => {
-                console.log("Driver Registered Successfully", response);
+                console.log("Response:", response.data);
+                if (response.data.Message === "Username or Password already taken") {
+                    alert("Username and Password already taken. Please choose a different username or password.");
+                } else if (response.data.Message === "Driver Registered Successfully") {
+                    alert("Driver Registered Successfully");
+                    reset();
+                } else {
+                    alert("Error Registering Driver: " + response.data.Message);
+                }
             })
             .catch(err => {
-                console.error("Error Registering Driver", err);
-                setError('Failed to Registering Driver. Please try again.');
+                console.log("Error Registering Driver", err);
+                alert("Error Registering Driver: " + err);
             });
         }
 
-        }
-        // Handling for other roles...
     };
 
     const handleInput = (event) => {
@@ -109,22 +159,9 @@ function Register(){
     }
 
     const handleImageChange = (e) => {
-        setDrivingLicense(e.target.files[0]);
+        const file = e.target.files[0]; // Only allow one file
+        setDrivingLicense(file);
     };
-
-    const reset =  (e) => {
-        setErrors("");
-        e.preventDefault();
-        if(selectedOption === 'Admin'){ 
-            setAdmins({firstname: "", lastname: "",  nic: "", contact: "", email:"", username: "", password: "", confirmpassword: ""});
-        }else if(selectedOption === 'User'){ 
-            setUsers({firstname: "", lastname: "", contact: "", email:"", username: "", password: "", confirmpassword: ""});
-        }else{
-            setDrivers({ firstname: "", lastname: "",  nic: "", contact: "", drivingLicense:"",  username: "" , password: "", confirmpassword: ""});
-        }
-        setDrivingLicense(null);
-
-    }
 
     return(
         <form className="registerForm" onSubmit={submitHandler}>
@@ -148,23 +185,25 @@ function Register(){
                     <fieldset ><h3>Admin Registration Details</h3>
                     <div className="form-group">
                         <label htmlFor="firstname" name="firstname" >First Name</label>
-                        <input type="text" name="firstname" onChange={handleInput} value={admins.firstname} required="required"/>
+                        <input type="text" name="firstname" onChange={handleInput} value={admins.firstname} required="required" autoComplete="off"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="lastname" name="lastname" >Last Name</label>
-                        <input type="text" name="lastname" onChange={handleInput} value={admins.lastname} required="required"/>
+                        <input type="text" name="lastname" onChange={handleInput} value={admins.lastname} required="required" autoComplete="off"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="nic">NIC</label>
-                        <input type="text" name="nic"  onChange={handleInput} value={admins.nic} required="required"/>
+                        <input type="text" name="nic"  onChange={handleInput} value={admins.nic} required="required" autoComplete="off"/>
+                        {errors.nic && <span className="text-danger">{errors.nic}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="contact">Mobile Number</label>
-                        <input type="text" name="contact"  onChange={handleInput} value={admins.contact} required="required"/>
+                        <input type="text" name="contact"  onChange={handleInput} value={admins.contact} required="required" autoComplete="off"/>
+                        {errors.contact && <span className="text-danger">{errors.contact}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
-                        <input type="text" name="email"  onChange={handleInput} value={admins.email}/>
+                        <input type="text" name="email"  onChange={handleInput} value={admins.email} required="required" autoComplete="off"/>
                         {errors.email && <span className="text-danger">{errors.email}</span>}
                     </div>
                     </fieldset>
@@ -172,17 +211,17 @@ function Register(){
                     <fieldset><h3>Create Admin Account Details</h3>
                     <div className="form-group">
                         <label htmlFor="name" name="username" >User Name</label>
-                        <input type="text" name="username" onChange={handleInput} value={admins.username}/>
+                        <input type="text" name="username" onChange={handleInput} value={admins.username} required="required" autoComplete="off"/>
                         {errors.username && <span className="text-danger">{errors.username}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password"  onChange={handleInput} value={admins.password}/>
+                        <input type="password" name="password"  onChange={handleInput} required="required" value={admins.password}/>
                         {errors.password && <span className="text-danger">{errors.password}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="confirmpassword">Confirm Password</label>
-                        <input type="password" name="confirmpassword"  onChange={handleInput} value={admins.confirmpassword}/>
+                        <input type="password" name="confirmpassword"  onChange={handleInput} required="required" value={admins.confirmpassword}/>
                         {errors.confirmpassword && <span className="text-danger">{errors.confirmpassword}</span>}
                     </div>
                     </fieldset>
@@ -196,19 +235,20 @@ function Register(){
                     <fieldset ><h3>User Registration Details</h3>
                     <div className="form-group">
                         <label htmlFor="firstname" name="firstname" >First Name</label>
-                        <input type="text" name="firstname" onChange={handleInput2} value={users.firstname} required="required"/>
+                        <input type="text" name="firstname" onChange={handleInput2} value={users.firstname} required="required" autoComplete="off"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="lastname" name="lastname" >Last Name</label>
-                        <input type="text" name="lastname" onChange={handleInput2} value={users.lastname} required="required"/>
+                        <input type="text" name="lastname" onChange={handleInput2} value={users.lastname} required="required" autoComplete="off"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="contact">Mobile Number</label>
-                        <input type="text" name="contact"  onChange={handleInput2} value={users.contact} required="required"/>
+                        <input type="text" name="contact"  onChange={handleInput2} value={users.contact} required="required" autoComplete="off"/>
+                        {errors.contact && <span className="text-danger">{errors.contact}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
-                        <input type="text" name="email"  onChange={handleInput2} value={users.email}/>
+                        <input type="text" name="email"  onChange={handleInput2} value={users.email} required="required" autoComplete="off"/>
                         {errors.email && <span className="text-danger">{errors.email}</span>}
                     </div>
                     </fieldset>
@@ -216,17 +256,17 @@ function Register(){
                     <fieldset><h3>Create User Account Details</h3>
                     <div className="form-group">
                         <label htmlFor="name" name="username" >User Name</label>
-                        <input type="text" name="username" onChange={handleInput2} value={users.username}/>
+                        <input type="text" name="username" onChange={handleInput2} value={users.username} required="required" autoComplete="off"/>
                         {errors.username && <span className="text-danger">{errors.username}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password"  onChange={handleInput2} value={users.password}/>
+                        <input type="password" name="password"  onChange={handleInput2} value={users.password} required="required" autoComplete="off"/>
                         {errors.password && <span className="text-danger">{errors.password}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="confirmpassword">Confirm Password</label>
-                        <input type="password" name="confirmpassword"  onChange={handleInput2} value={users.confirmpassword}/>
+                        <input type="password" name="confirmpassword"  onChange={handleInput2} value={users.confirmpassword} required="required" autoComplete="off"/>
                         {errors.confirmpassword && <span className="text-danger">{errors.confirmpassword}</span>}
                     </div>
                     </fieldset>
@@ -236,56 +276,64 @@ function Register(){
                 selectedOption === 'Driver' && ( 
                 <div className="fieldSet">
                     <h2>Driver Registration</h2>
-                    <button className="button-update" onClick={() => {Navigate('/admin/home/register/driver/updateDriver')}}>Update Driver Details</button>
+                    <button className="button-update" onClick={() => {navigate('/admin/home/register/driver/updateDriver', { state: { username } })}}>Update Driver Details</button>
                     <br/>
                     <fieldset><h3>Driver Registration Details</h3>
                     <div className="form-group">
                         <label htmlFor="firstname" >First Name</label>
-                        <input type="text" name="firstname" onChange={handleInput1} value={drivers.firstname} required="required"/>
+                        <input type="text" name="firstname" onChange={handleInput1} value={drivers.firstname} required="required" autoComplete="off"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="lastname" >Last Name</label>
-                        <input type="text" name="lastname" onChange={handleInput1} value={drivers.lastname} required="required"/>
+                        <input type="text" name="lastname" onChange={handleInput1} value={drivers.lastname} required="required" autoComplete="off"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="nic">NIC</label>
-                        <input type="text" name="nic"  onChange={handleInput1} value={drivers.nic} required="required"/>
+                        <input type="text" name="nic"  onChange={handleInput1} value={drivers.nic} required="required" autoComplete="off"/>
+                        {errors.nic && <span className="text-danger">{errors.nic}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="contact">Mobile Number</label>
-                        <input type="text" name="contact"  onChange={handleInput1} value={drivers.contact} required="required"/>
+                        <input type="text" name="contact"  onChange={handleInput1} value={drivers.contact} required="required" autoComplete="off"/>
+                        {errors.contact && <span className="text-danger">{errors.contact}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="image">Driving License Image:</label>
-                        <input type="file" onChange={(e) => handleImageChange(e, 'drivingLicense')} />
+                        <div className={`drop-zone ${dragging ? 'dragging' : ''}`} onDrop={handleDrop} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
+                            <input className="file" type="file" onChange={handleImageChange} />
+                            <p onClick={() => document.querySelector('.file').click()}>Drop file here or click to upload</p>
+                            {/* Display file name */}
+                            {drivingLicense && (
+                                <p>{drivingLicense.name}</p>
+                            )}
+                        </div>
                     </div>
                     </fieldset>
                     <fieldset><h3>Create Driver Account Details</h3>
                     <div className="form-group">
                         <label htmlFor="name" name="username" >User Name</label>
-                        <input type="text" name="username" onChange={handleInput1} value={drivers.username}/>
+                        <input type="text" name="username" onChange={handleInput1} value={drivers.username} required="required" autoComplete="off"/>
                         {errors.username && <span className="text-danger">{errors.username}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password"  onChange={handleInput1} value={drivers.password}/>
+                        <input type="password" name="password"  onChange={handleInput1} value={drivers.password} required="required" autoComplete="off"/>
                         {errors.password && <span className="text-danger">{errors.password}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="confirmpassword">Confirm Password</label>
-                        <input type="password" name="confirmpassword"  onChange={handleInput1} value={drivers.confirmpassword}/>
+                        <input type="password" name="confirmpassword"  onChange={handleInput1} value={drivers.confirmpassword} required="required" autoComplete="off"/>
                         {errors.confirmpassword && <span className="text-danger">{errors.confirmpassword}</span>}
                     </div>
                     </fieldset>
                 </div>
                 )
                 }
-                {error && <p className="error-message">{error}</p>}
                 <button type="submit" className="button-submit">REGISTER</button>
 
                 <button className="button-reset" onClick={reset}>RESET</button>
 
-                <button className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button>
+                <button className="button-back" onClick={() => {navigate('/admin/home', { state: { username } })}}>BACK</button>
             </div>
         </form>
     );

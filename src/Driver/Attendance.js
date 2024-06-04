@@ -19,6 +19,13 @@ function Attendance() {
     const [checkInLocation, setCheckInLocation] = useState('');
     const [checkOutLocation, setCheckOutLocation] = useState('');
 
+    useEffect(() => {
+        // Check if the user is logged in, if not, redirect to the login page
+        if (!username) {
+            Navigate('/driver');
+        }
+    }, [username, Navigate]);
+
     const getLocation = useCallback(() => {
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(

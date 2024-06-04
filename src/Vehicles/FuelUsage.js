@@ -21,6 +21,13 @@ function FuelUsage() {
     const location = useLocation();
     const { username } = location.state || { username: undefined };
 
+    useEffect(() => {
+        // Check if the user is logged in, if not, redirect to the login page
+        if (!username) {
+            Navigate('/admin');
+        }
+    }, [username, Navigate]);
+
     const handleVehicleChange = async (event) => {
         const value = event.target.value;
         setSelectedVehicle(value);
@@ -93,7 +100,7 @@ function FuelUsage() {
     
     return(
     <div>
-        <SideBar/>
+        <SideBar username={username} />
         <form className='fuel-form' onSubmit={submitHandler}>
             <div className='fuel-vehicle-form'>
                 <h2>Fuel Usage</h2>

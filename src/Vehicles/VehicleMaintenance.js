@@ -22,6 +22,33 @@ function VehicleMaintenance() {
     const [serviceMilage, setServiceMilage] = useState('');
     const [reason, setReason] = useState('');
     const [maintenanceBill, setMaintenanceBill] = useState([]);
+    const [dragging, setDragging] = useState(false);
+
+    useEffect(() => {
+      // Check if the user is logged in, if not, redirect to the login page
+      if (!username) {
+          Navigate('/admin');
+      }
+  }, [username, Navigate]);
+  
+  // Function to handle file drop
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragging(false);
+    const files = Array.from(e.dataTransfer.files);
+    handleImageChange({ target: { files } }, 'maintenanceBill');
+  };
+
+  // Function to handle file drag over
+  const handleDragOver = (e) => {
+      e.preventDefault();
+      setDragging(true);
+  };
+
+  // Function to handle file drag leave
+  const handleDragLeave = () => {
+      setDragging(false);
+  };
 
     const handleVehicleChange = (event) => {
         const value = event.target.value;
@@ -46,7 +73,7 @@ function VehicleMaintenance() {
   };
 
 const handleImageChange = (e) => {
-  setMaintenanceBill(e.target.files); // This allows storing multiple files
+  setMaintenanceBill(Array.from(e.target.files)); // This allows storing multiple files
 };
 
     useEffect(() => {
@@ -70,12 +97,7 @@ const handleImageChange = (e) => {
       formData.append('maintenanceType', vehicleMaintenance);
       formData.append('serviceMilage', serviceMilage);
       formData.append('reason', reason);
-      formData.append('otherVehicleMaintenance', otherVehicleMaintenance);
-      if (maintenanceBill) {
-        for (let i = 0; i < maintenanceBill.length; i++) {
-            formData.append('maintenanceBill', maintenanceBill[i]);
-        }
-      }
+      maintenanceBill.forEach(file => formData.append('maintenanceBill', file));
   
       axios.post('http://localhost:8081/vehicles/historyDetails/vehicleMaintenance', formData, {
         headers: {
@@ -84,8 +106,9 @@ const handleImageChange = (e) => {
       })
           .then(response => {
               if (response.data.loginStatus) {
+                console.log("Form submitted successfully");
                   alert('Vehicle Maintenance Details Added Successfully');
-                  // Handle any further actions after successful upload
+                  reset();
               } else {
                   alert('Failed to add the vehicle:', response.data.error);
               }
@@ -111,7 +134,7 @@ const handleImageChange = (e) => {
       
     return(
       <div>
-        <SideBar/>
+        <SideBar username={username} />
         <form className='security-form' onSubmit={submitHandler}>
           <div className='security-vehicle-form'>
             <h2>Vehicle Maintenance</h2>
@@ -162,7 +185,18 @@ const handleImageChange = (e) => {
             </div>
             <div className="label">
               <label htmlFor="image">Bills for Maintenance:
-              <input className="file" type="file" onChange={(e) => handleImageChange(e, 'maintenanceBill')} multiple />
+              <div className={`drop-zone ${dragging ? 'dragging' : ''}`} onDrop={handleDrop} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
+                <input className="file" type="file" onChange={(e) => handleImageChange(e, 'maintenanceBill')} multiple />
+                <p onClick={() => document.querySelector('.file').click()}>Drop files here or click to upload</p>
+                {/* Display file names */}
+                {maintenanceBill.length > 0 && (
+                  <ul>
+                    {maintenanceBill.map((file, index) => (
+                      <li key={index}>{file.name}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
               </label>
             </div>
             </div>

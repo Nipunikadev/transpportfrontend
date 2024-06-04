@@ -22,6 +22,13 @@ function VehicleSecurity() {
 
     const [ securities, setSecurities] = useState({vehicleno: "", registrationDate: formattedDate, originalOwner: "", taxNo: "", key: ""});
 
+    useEffect(() => {
+      // Check if the user is logged in, if not, redirect to the login page
+      if (!username) {
+          Navigate('/admin');
+      }
+  }, [username, Navigate]);
+  
     const handleVehicleChange = async(event) => {
         const value = event.target.value;
         setSelectedVehicle(value);
@@ -126,7 +133,7 @@ function VehicleSecurity() {
       
     return(
       <div>
-          <SideBar/>
+          <SideBar username={username} />
         <form className='security-form' onSubmit={submitHandler}>
           <div className='security-vehicle-form'>
             <h2>Vehicle Security Details</h2>

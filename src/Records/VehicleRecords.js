@@ -18,6 +18,13 @@ function VehicleRecords() {
         return date.toLocaleDateString('en-CA'); // 'en-CA' uses the yyyy-mm-dd format
     };
     
+    useEffect(() => {
+        // Check if the user is logged in, if not, redirect to the login page
+        if (!username) {
+            Navigate('/admin');
+        }
+    }, [username, Navigate]);
+
     const handlePrint = (event) => {
         event.preventDefault(); // Prevents the default behavior of the click event
     
