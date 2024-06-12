@@ -174,34 +174,33 @@ function UserHome() {
              <h3>Add Your Trip</h3>
 
              <div className="welcome-journey">
-                <label htmlFor="username" name="username" >User Name</label>
-                <input type="text" name="username" value={username} readOnly/>
+                <label htmlFor="username">User Name</label>
+                <input type="text" id="username" name="username" value={username} readOnly/>
             </div>
             <div className="welcome-journey">
-                <label htmlFor="tripmode"><span className="chekmark">Trip Mode</span>
-                    <div className='journey-radio'>
-                    <input id="startTrip" name="selectedOption" value="Start" type="radio" checked={isChecked("Start")} onChange={onSelect} className="hidden-radio"/>
+                <label><span className="chekmark">Trip Mode</span></label>
+                <div className='journey-radio'>
+                    <input id="startTrip" name="selectedOption" value="Start" type="radio" checked={isChecked("Start")} onChange={onSelect} className="hidden-radio" />
                     <label htmlFor="startTrip">Start Trip: </label>
 
-                    <input id="endTrip" name="selectedOption" value="End" type="radio" checked={isChecked("End")} onChange={onSelect} className="hidden-radio"/>
+                    <input id="endTrip" name="selectedOption" value="End" type="radio" checked={isChecked("End")} onChange={onSelect} className="hidden-radio" />
                     <label htmlFor="endTrip">End Trip: </label>
-                    </div>
-                </label>
+                </div>
             </div>
             {
             selectedOption === 'Start' && (
             <div>
             <div className="welcome-journey">
                     <label htmlFor="datetime">Trip Date and Time</label>
-                    <DateTimePicker inputProps={{ style: { width: 330 }}} selected={selectedDate}  dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)} required/>
+                    <DateTimePicker id="datetime" inputProps={{ style: { width: 330 }}} value={selectedDate}  dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)} required/>
                 </div>
             <div className="welcome-journey">
-                <label htmlFor="location" name="location" >Location</label>
-                <input type="text" name="location" value={trips.location} onChange={handleInput} required/>
+                <label htmlFor="location">Location</label>
+                <input type="text" id="location" name="location" value={trips.location} onChange={handleInput} required/>
             </div>
             <div className="welcome-journey">
-                <label htmlFor="reason" name="reason" >Reason</label>
-                <input type="text" name="reason" value={trips.reason} onChange={handleInput} required/>
+                <label htmlFor="reason">Reason</label>
+                <input type="text" id="reason" name="reason" value={trips.reason} onChange={handleInput} required/>
             </div>
             </div>
              )}
@@ -209,16 +208,16 @@ function UserHome() {
              selectedOption === 'End' && (
                 <div>
                 <div className="welcome-journey">
-                <label htmlFor="datetime">Trip End Date and Time</label>
-                <DateTimePicker inputProps={{ style: { width: 330 }}} selected={selectedDate}  dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)}/>
+                <label htmlFor="enddatetime">Trip End Date and Time</label>
+                <DateTimePicker id="enddatetime" inputProps={{ style: { width: 330 }}} value={selectedDate}  dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)}/>
             </div>
             <div className="welcome-journey">
-                <label htmlFor="location" name="location" >Location</label>
-                <input type="text" name="location" value={startTripDetails.location} readOnly/>
+                <label htmlFor="endlocation">Location</label>
+                <input type="text" id="endlocation" name="location" value={startTripDetails.location} readOnly/>
             </div>
             <div className="welcome-journey">
-                <label htmlFor="reason" name="reason" >Reason</label>
-                <input type="text" name="reason" value={startTripDetails.reason} readOnly/>
+                <label htmlFor="endreason">Reason</label>
+                <input type="text" id="endreason" name="reason" value={startTripDetails.reason} readOnly/>
             </div>
         </div>
         )
@@ -228,9 +227,9 @@ function UserHome() {
             {selectedOption === 'Start' ? 'Start' : 'End'}
             </button>
 
-            <button className="button-reset" onClick={reset}>RESET</button>
+            <button type="button" className="button-reset" onClick={reset}>RESET</button>
              
-            <button className="button-logout" onClick={handleLogout}>LOGOUT</button> 
+            <button type="button" className="button-logout" onClick={handleLogout}>LOGOUT</button> 
 
             </div>  
             :

@@ -293,6 +293,22 @@ form::after{
     font-weight: 700;
     cursor: pointer;
     margin-right: 70%;
+    margin-top: 5px;
+}
+
+.registerForm .form-register .button-view{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 70%;
+    margin-top: -40px;
 }
 
 .registerForm .form-register .fieldSet{
@@ -528,17 +544,101 @@ form::after{
     width: 800px;
 }
 
-.driver-welcome .form-inner .logo {
+.driver-welcome .form-driver{
+    position: relative;
+    display: block;
+    background-color: #fff;
+    padding: 30px;
+    z-index: 2;
+}
+
+.driver-welcome .form-driver h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.driver-welcome .form-driver .logo {
     background-image: url(./HunasLogo.jpeg);
     position: absolute;
     top: 0;
     right: 20px;
-    width: 150px;
-    height: 130px;
+    width: 130px;
+    height: 120px;
     z-index: 0; /* Set the image behind the fieldset */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    
+}
+
+.driver-welcome .form-driver input[type="submit"]:hover,
+.driver-welcome button:hover {
+    background-position: 100% 0%;
+}
+
+.driver-welcome .welcome{
+    display: block;
+    width: 800px;
+}
+
+.driver-welcome .form-driver .attendance{
+    display: flex;
+    padding: 50px 40px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.driver-welcome .form-driver .journey{
+    display: grid;
+    padding: 50px 40px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 30%;
+    margin-top: -117px;
+}
+
+.driver-welcome .form-driver .userhistory{
+    display: grid;
+    padding: 50px 40px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 50%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 65%;
+    margin-top: -117px;
+}
+
+.driver-welcome .form-driver .button-logout{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
 }
 
 /* AdminLogin Page */
@@ -594,64 +694,6 @@ form .form-inner .form-group input{
 
 form .form-inner .form-group input:focus{
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
-}
-
-form .form-inner .attendance{
-    display: flex;
-    padding: 50px 40px;
-    border-radius: 8px;
-    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
-    background-size: 200%;
-    background-position: 50%;
-    transition: 0.4s;
-    color: #fff;
-    font-weight: 700;
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-form .form-inner .journey{
-    display: grid;
-    padding: 50px 40px;
-    border-radius: 8px;
-    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
-    background-size: 200%;
-    background-position: 50%;
-    transition: 0.4s;
-    color: #fff;
-    font-weight: 700;
-    cursor: pointer;
-    margin-left: 30%;
-    margin-top: -117px;
-}
-
-form .form-inner .userhistory{
-    display: grid;
-    padding: 50px 40px;
-    border-radius: 8px;
-    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
-    background-size: 200%;
-    background-position: 50%;
-    transition: 0.4s;
-    color: #fff;
-    font-weight: 700;
-    cursor: pointer;
-    margin-left: 65%;
-    margin-top: -117px;
-}
-
-form .form-inner .button-logout{
-    display: inline-block;
-    padding: 10px 12px;
-    border-radius: 8px;
-    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
-    background-size: 200%;
-    background-position: 200%;
-    transition: 0.4s;
-    color: #fff;
-    font-weight: 700;
-    cursor: pointer;
-    margin-top: 14px;
 }
 
 form .form-inner input[type="submit"], .registerForm .form-register input[type="submit"], .journey-form .journey-inner input[type="submit"], .attendance-form .attendance-inner input[type="submit"],
@@ -832,6 +874,102 @@ form .form-inner .button-password{
     margin-top: 14px;
 }
 
+/* Admin View Form */
+
+.admin-form{
+    display: block;
+    position:absolute;
+    margin-left: 400px;
+    width: 850px;
+}
+
+.admin-form .form-adminView{
+    position: relative;
+    display: block;
+    background-color: #fff;
+    padding: 30px;
+    z-index: 2;
+}
+
+.admin-form .form-adminView h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.admin-form .form-adminView .table-container{
+    max-height: 400px; /* Set the maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.admin-form .form-adminView .table {
+    width: 700px;
+    border-collapse: collapse; 
+    margin-left: 20px;
+    margin-top: 20px;
+}
+  
+.form-adminView .table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border: 2px solid black;
+    background-color: #bda028 ;
+    color: #fff;
+    font-weight: 700;
+    padding: 8px 25px;
+    white-space: nowrap;
+}
+  
+.form-adminView .table td {
+    text-align: center;
+    border: 2px solid black;
+    transition: 0.4s;
+    padding: 8px 20px;
+    white-space: nowrap;
+}
+
+.admin-form .form-adminView .table .button-delete{
+    display: inline-block;
+    padding: 3px 3px;
+    background-image: linear-gradient(to right, #fe4880, #ffce00 50%, #ffce00 50%);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.admin-form .form-adminView .button-back{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+}
+
+.admin-form .form-adminView .button-logout{
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-size: 200%;
+    background-position: 200%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 14px;
+    margin-left: 30px;
+}
 
 /* Start Page */
 
@@ -4211,7 +4349,7 @@ form .form-inner input[type="submit"]:hover,
     color: #fff;
     font-weight: 700;
     cursor: pointer;
-    margin-top: 14px;
+    margin-top: 30px;
     margin-left: 110px;
 }
 
@@ -4226,7 +4364,7 @@ form .form-inner input[type="submit"]:hover,
     color: #fff;
     font-weight: 700;
     cursor: pointer;
-    margin-top: 14px;
+    margin-top: 30px;
     margin-left: 110px;
 }
 
@@ -4241,7 +4379,7 @@ form .form-inner input[type="submit"]:hover,
     color: #fff;
     font-weight: 700;
     cursor: pointer;
-    margin-top: 14px;
+    margin-top: 30px;
     margin-left: 140px;
 }
 

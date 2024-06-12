@@ -66,10 +66,10 @@ function AdminHome() {
              auth?(
              <div className='admin-welcome'>
              <h2> Welcome,{username}</h2>
-             <button className='register' onClick={() => {Navigate('/admin/home/register', { state: { username } }) }}>Register</button>
-             <button className='vehicleHome' onClick={() => {Navigate('/vehicles/vehicleDetails', { state: { username } }) }}>Vehicles Management</button>
-             <button className='history' onClick={() => {Navigate('/records/historyRecords', { state: { username } }) }}>History Records</button>
-            <button className="button-logout" onClick={handleLogout}>Logout</button>  
+             <button type="button" className='register' onClick={() => {Navigate('/admin/home/register', { state: { username } }) }}>Register</button>
+             <button type="button" className='vehicleHome' onClick={() => {Navigate('/vehicles/vehicleDetails', { state: { username } }) }}>Vehicles Management</button>
+             <button type="button" className='history' onClick={() => {Navigate('/records/historyRecords', { state: { username } }) }}>History Records</button>
+            <button type="button" className="button-logout" onClick={handleLogout}>Logout</button>  
             </div>  
               ) : (
             <div>

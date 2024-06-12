@@ -256,62 +256,61 @@ function ViewVehicles() {
       <div className="add-vehicle-form">
         <h2>View Vehicle Details</h2>
         <div className="viewVehicles">
-        <label>
+        <label htmlFor="vehicleno">
           Vehicle Number:
-          <input type="text" value={vehicleNumber} readOnly />
+          <input id="vehicleno" name="vehicleno" type="text" value={vehicleNumber} readOnly />
         </label>
-        <label>
+        <label htmlFor="vehicleType">
           Vehicle Type:
-          <input type="text" value={vehicleType} readOnly />
+          <input id="vehicleType" name="vehicleType" type="text" value={vehicleType} readOnly />
         </label>
         <label className="image">
             <fieldset style={{width: "800px"}}>
               License: {renderLicense()}
             </fieldset>
         </label>
-        <label>
+        <label htmlFor="ownership">
           Ownership:
-          <input type="text" value={Ownership} readOnly />
+          <input id="ownership" name="ownership" type="text" value={Ownership} readOnly />
         </label>
         <label className="image">
             <fieldset style={{width: "800px"}}>
             Vehicle Registration Certificate: {renderRegistration()}
             </fieldset>
         </label>
-        <label>
+        <label htmlFor="fuelType">
           Fuel Type Vehicle:
-          <input type="text" value={FuelType} readOnly />
+          <input id="fuelType" name="fuelType" type="text" value={FuelType} readOnly />
         </label>
-        <label>
+        <label htmlFor="leased">
           Place of Leased:
-          <input type="text" value={LeasedLiability} readOnly />
+          <input id="leased" name="leased" type="text" value={LeasedLiability} readOnly />
         </label>
-        <label>
+        <label htmlFor="capacity">
           Cylinder Capasity:
-          <input type="text" value={cylinderCapacity} readOnly />
+          <input id="capacity" name="capacity" type="text" value={cylinderCapacity} readOnly />
         </label>
-        <label>
+        <label htmlFor="insuranceCompany">
           Vehicle Insurance Company:
-          <input type="text" value={insuranceCompany} readOnly />
+          <input id="insuranceCompany" name="insuranceCompany" type="text" value={insuranceCompany} readOnly />
         </label>
         <label className="image">
           <fieldset style={{width: "800px"}}>
             Insurance Card: {renderInsurance()}
           </fieldset>
         </label>
-        <label>
+        <label htmlFor="taxPayer">
           Tax Payer?:
-          <input type="text" value={taxPayer} readOnly />
+          <input id="taxPayer" name="taxPayer" type="text" value={taxPayer} readOnly />
         </label>
         <label className="image">
           <fieldset style={{width: "800px"}}>
             Tax Receipts: {renderTax()}
           </fieldset>
         </label>
-       
 
         <br/>
-        <button className="button-back" onClick={() => {Navigate("/vehicles/vehicleDetails", { state: { username } })}}>
+        <button type="button" className="button-back" onClick={() => {Navigate("/vehicles/vehicleDetails", { state: { username } })}}>
           BACK
         </button>
         </div>

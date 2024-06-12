@@ -51,7 +51,22 @@ function Attendance() {
                 },
                 (error) => {
                     console.error("Error getting location:", error);
-                    alert("Unable to retrieve location. Please enter manually.");
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            alert("User denied the request for Geolocation. Please enter location manually.");
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            alert("Location information is unavailable. Please enter location manually.");
+                            break;
+                        case error.TIMEOUT:
+                            alert("The request to get user location timed out. Please enter location manually.");
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            alert("An unknown error occurred. Please enter location manually.");
+                            break;
+                        default:
+                            alert("Unable to retrieve location. Please enter manually.");
+                    }
                 }
             );
         } else {
@@ -140,11 +155,11 @@ function Attendance() {
             <div className='attendance-driver'>
             <h2> Trip Details</h2>
             <div className="welcome-attendance">
-                <label htmlFor="username" name="username" >Driver Name</label>
-                <input type="text" name="username" value={username} readOnly/>
+                <label htmlFor="username">Driver Name</label>
+                <input type="text" id="username" name="username" value={username} readOnly/>
             </div>
             <div className="welcome-attendance">
-                <label htmlFor="attendancemode"><span className="chekmark">Attendance Mode</span>
+                <label><span className="chekmark">Attendance Mode</span>
                     <div className='attendance-radio'>
                     <input id="checkIn" name="selectedOption" value="In" type="radio" checked={isChecked("In")} onChange={onSelect} className="hidden-radio"/>
                     <label htmlFor="checkIn">Check In: </label>
@@ -155,37 +170,35 @@ function Attendance() {
                 </label>
             </div>
             {attendancemode === 'In' && (
-            <div>
-                <div className="welcome-attendance">
-                    <label htmlFor="datetime">Check In Date and Time</label>
-                    <DateTimePicker inputProps={{ style: { width: 330 }}} value={selectedDate} dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)}/>
+                <div>
+                    <div className="welcome-attendance">
+                        <label htmlFor="checkInDatetime">Check In Date and Time</label>
+                        <DateTimePicker id="checkInDatetime" inputProps={{ style: { width: 330 } }} value={selectedDate} dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)} />
+                    </div>
+                    <div className="welcome-attendance">
+                        <label htmlFor="checkInLocation">Check In Location</label>
+                        <input type="text" id="checkInLocation" name="checkInLocation" value={checkInLocation} onChange={(e) => setCheckInLocation(e.target.value)} />
+                    </div>
                 </div>
-                <div className="welcome-attendance">
-                    <label htmlFor="meter" name="meter" >Check In Location</label>
-                    <input type="text" name="meter" value={checkInLocation} onChange={(e) => setCheckInLocation(e.target.value)} />
-                </div>
-            </div>
             )}
-            {
-            attendancemode === 'Out' && ( 
-            <div>
-                <div className="welcome-attendance">
-                    <label htmlFor="datetime">Check Out Date and Time</label>
-                    <DateTimePicker inputProps={{ style: { width: 330 }}} value={selectedDate} dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)}/>
+            {attendancemode === 'Out' && (
+                <div>
+                    <div className="welcome-attendance">
+                        <label htmlFor="checkOutDatetime">Check Out Date and Time</label>
+                        <DateTimePicker id="checkOutDatetime" inputProps={{ style: { width: 330 } }} value={selectedDate} dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)} />
+                    </div>
+                    <div className="welcome-attendance">
+                        <label htmlFor="checkOutLocation">Check Out Location</label>
+                        <input type="text" id="checkOutLocation" name="checkOutLocation" value={checkOutLocation} onChange={(e) => setCheckOutLocation(e.target.value)} />
+                    </div>
                 </div>
-                <div className="welcome-attendance">
-                    <label htmlFor="location" name="location" >Check Out Location</label>
-                    <input type="text" name="location" value={checkOutLocation} onChange={(e) => setCheckOutLocation(e.target.value)}/>
-                </div>
-            </div>
-            )
-            }
+            )}
 
-        <button type="submit" className='button-submit'>
+        <button type="sumbit" className='button-submit'>
           {attendancemode === 'In' ? 'Check In' : 'Check Out'}
         </button>
              
-            <button className="button-back" onClick={() => {Navigate('/driver/dashboard', { state: { username } })}}>BACK</button>   
+            <button type="button" className="button-back" onClick={() => {Navigate('/driver/dashboard', { state: { username } })}}>BACK</button>   
             </div>  
             :
             <div>

@@ -69,6 +69,7 @@ const PasswordChangePopup = ({ onClose, onSubmit }) => {
                     <input
                         type="text"
                         id="username"
+                        name="username"
                         value={formData.username}
                         onChange={handleChange} autoComplete="off"
                     />
@@ -79,6 +80,7 @@ const PasswordChangePopup = ({ onClose, onSubmit }) => {
                     <input
                         type="password"
                         id="currentPassword"
+                        name="currentpassword"
                         value={formData.currentPassword}
                         onChange={handleChange}
                     />
@@ -89,6 +91,7 @@ const PasswordChangePopup = ({ onClose, onSubmit }) => {
                     <input
                         type="password"
                         id="newPassword"
+                        name="newPassword"
                         value={formData.newPassword}
                         onChange={handleChange}
                     />
@@ -99,13 +102,14 @@ const PasswordChangePopup = ({ onClose, onSubmit }) => {
                     <input
                         type="password"
                         id="confirmPassword"
+                        name="confirmPassword"
                         value={formData.confirmPassword}
                         onChange={handleChange}
                     />
                     {errors.confirmPassword && <span className="text-danger">{errors.confirmPassword}</span>}
                 </div>
                 <button className="button-submit" >Submit</button>
-                <button className="button-cancel" onClick={onClose}>Cancel</button>
+                <button type="button" className="button-cancel" onClick={onClose}>Cancel</button>
             </div>
         </form>
     );
@@ -144,21 +148,6 @@ function UserLogin(){
             catch(err) {
                 console.log('Error:', err);
             } 
-            // axios.post('http://localhost:8081/admin', details)
-            // //Navigate('/admin/home');
-            // .then(res => {
-            //     Navigate.push('/admin/home')
-            // })
-            // .catch(err => console.log(err));
-            // .then(res => {
-            //     if(res.data.Status === "Success"){
-            //         Navigate('/admin/home');
-            //     }else{
-            //         alert(res.data.Message)
-            //     }
-            
-            // })
-            // .catch(err => console.log(err)); 
         }  
     }
 
@@ -195,12 +184,12 @@ function UserLogin(){
                 <h2>Login</h2>
                 <div className="form-group">
                     <label htmlFor="username"><strong>User Name</strong></label>
-                    <input type="text" name="username" onChange={handleInput} value={details.username} autoComplete="off"/>
+                    <input type="text" id="username" name="username" onChange={handleInput} value={details.username} autoComplete="off"/>
                     {error.username && <span className="text-danger">{error.username}</span>}
                 </div>
                 <div className="form-group">
                     <label htmlFor="password"><strong>Password</strong></label>
-                    <input type="password" name="password" onChange={handleInput} value={details.password}/>
+                    <input type="password" id="password" name="password" onChange={handleInput} value={details.password}/>
                     {error.password && <span className="text-danger">{error.password}</span>}
                 </div>
 

@@ -124,8 +124,8 @@ function FollowUpDetails() {
           <div className='followup-vehicle-form'>
             <h2>Vehicle Follow Up Details</h2>
             <div className="journey-dropdown">
-                <label htmlFor="vehicleno" name="vehicleno" >Vehicle Number: </label>
-                    <select value={selectedVehicle} onChange={handleVehicleChange}>
+                <label htmlFor="vehicleno">Vehicle Number: </label>
+                    <select id="vehicleno" value={selectedVehicle} onChange={handleVehicleChange}>
                     <option value="">Choose Your Vehicle</option>
                     {vehicleno.length > 0 ? (
                         vehicleno.map((number, index) => (
@@ -141,42 +141,42 @@ function FollowUpDetails() {
                     <option value="other">Other</option>
                     </select>
                     {selectedVehicle === 'other' && (
-                    <input type="text" value={otherVehicle} onChange={(event) => setOtherVehicle(event.target.value)} placeholder="Enter other vehicle number" />
+                    <input type="text" id="vehicleno" name="vehicleno" value={otherVehicle} onChange={(event) => setOtherVehicle(event.target.value)} placeholder="Enter other vehicle number" />
                     )}
                 </div>
                 <div className={`form-section ${!selectedVehicle ? 'blur' : ''}`}>
                 <div className="label">
             <label>
             Revenue License Valid Period:
-            <DatePicker selected={revenueStartDate}  onChange={date => setRevenueStartDate(date)} formatDate="MM/dd/yyyy" showYearDropdown scrollableMonthYearDropdown className="date" maxDate={new Date()} required/>
-            <DatePicker selected={revenueEndDate}  onChange={date => setRevenueEndDate(date)} formatDate="MM/dd/yyyy"  showYearDropdown scrollableMonthYearDropdown className="date" minDate={revenueStartDate ? new Date(revenueStartDate.getTime() + 86400000) : null} required/>
+            <DatePicker id="revenueStartDate" selected={revenueStartDate}  onChange={date => setRevenueStartDate(date)} formatDate="MM/dd/yyyy" showYearDropdown scrollableMonthYearDropdown className="date" maxDate={new Date()} required/>
+            <DatePicker id="revenueEndDate" selected={revenueEndDate}  onChange={date => setRevenueEndDate(date)} formatDate="MM/dd/yyyy"  showYearDropdown scrollableMonthYearDropdown className="date" minDate={revenueStartDate ? new Date(revenueStartDate.getTime() + 86400000) : null} required/>
           </label>
           </div>
           <div className="label">
           <label>
             Insurance Valid Period:
-            <DatePicker selected={insuranceStartDate}  onChange={date => setInsuranceStartDate(date)} formatDate="MM/dd/yyyy"  showYearDropdown scrollableMonthYearDropdown className="date" maxDate={new Date()} required/>
-            <DatePicker selected={insuranceEndDate}  onChange={date => setInsuranceEndDate(date)} formatDate="MM/dd/yyyy" showYearDropdown scrollableMonthYearDropdown className="date"  minDate={insuranceStartDate ? new Date(insuranceStartDate.getTime() + 86400000) : null} required/>
+            <DatePicker id="insuranceStartDate" selected={insuranceStartDate}  onChange={date => setInsuranceStartDate(date)} formatDate="MM/dd/yyyy"  showYearDropdown scrollableMonthYearDropdown className="date" maxDate={new Date()} required/>
+            <DatePicker id="insuranceEndDate" selected={insuranceEndDate}  onChange={date => setInsuranceEndDate(date)} formatDate="MM/dd/yyyy" showYearDropdown scrollableMonthYearDropdown className="date"  minDate={insuranceStartDate ? new Date(insuranceStartDate.getTime() + 86400000) : null} required/>
           </label>
           </div>
-          <label>Tax Payer? 
-          <input type="text" value={taxPayer} readOnly />
+          <label htmlFor="tax">Tax Payer? 
+          <input type="text" id="tax" name="tax" value={taxPayer} readOnly />
           </label>
           {taxPayer === 'Yes' && (
           <div className="label">
           <label>
             Tax Valid Period: 
-            <DatePicker selected={taxStartDate}  onChange={date => setTaxStartDate(date)} formatDate="MM/dd/yyyy"  showYearDropdown scrollableMonthYearDropdown className="date" maxDate={new Date()} required/>
-            <DatePicker selected={taxEndDate}  onChange={date => setTaxEndDate(date)} formatDate="MM/dd/yyyy"  showYearDropdown scrollableMonthYearDropdown className="date"  minDate={revenueStartDate ? new Date(revenueStartDate.getTime() + 86400000) : null} required/>
+            <DatePicker id="taxStartDate" selected={taxStartDate}  onChange={date => setTaxStartDate(date)} formatDate="MM/dd/yyyy"  showYearDropdown scrollableMonthYearDropdown className="date" maxDate={new Date()} required/>
+            <DatePicker id="taxEndDate" selected={taxEndDate}  onChange={date => setTaxEndDate(date)} formatDate="MM/dd/yyyy"  showYearDropdown scrollableMonthYearDropdown className="date"  minDate={revenueStartDate ? new Date(revenueStartDate.getTime() + 86400000) : null} required/>
           </label>
           </div>
           )}
           </div>
           <button className="button-submit" type="submit" >Add Vehicle Follow Up Details</button>
 
-          <button className="button-reset" onClick={reset}>RESET</button>
+          <button type="button" className="button-reset" onClick={reset}>RESET</button>
 
-          <button className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button> 
+          <button type="button" className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button> 
         
           </div>
         </form>

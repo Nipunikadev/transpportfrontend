@@ -158,42 +158,44 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
         <h2>Add Vehicle</h2>
         <fieldset className="fieldSet">
         <div className="label">
-          <label>Vehicle Number:
-            <input type="text" value={vehicleNumber} onChange={(e) => setVehicleNumber(e.target.value)} required="required"/>
+          <label htmlFor="vehicleno">Vehicle Number:
+            <input id="vehicleno" name="vehicleno" type="text" value={vehicleNumber} onChange={(e) => setVehicleNumber(e.target.value)} required="required"/>
           </label>
           </div>
         <div className="label">
-          <label>Vehicle Type:
-            <input type="text" value={vehicleType} onChange={(e) => setVehicleType(e.target.value)} required="required"/>
+          <label htmlFor="vehicleType">Vehicle Type:
+            <input id="vehicleType" name="vehicleType" type="text" value={vehicleType} onChange={(e) => setVehicleType(e.target.value)} required="required"/>
           </label>
           </div>
           <div className="label">
-          <label>Revenue License:
+          <label htmlFor="license">Revenue License:
           <div className={`drop-zone ${dragging ? 'dragging' : ''}`} onDrop={(e) => handleDrop(e, 'license')} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
                 {renderFileNames(licenseImage)}
-                <input type="file" onChange={(e) => handleImageChange(e, 'license')} multiple />
+                <input id="license" name="license" type="file" onChange={(e) => handleImageChange(e, 'license')} multiple />
               </div>
           </label>
           </div>
           <div className="label">
-          <label>Ownership of Vehicle:
+          <label htmlFor="ownership">Ownership of Vehicle:
             <input
               type="text"
+              id="ownership"
+              name="ownership"
               value={Ownership}
               onChange={(e) => setOwnership(e.target.value)}/>
           </label>
           </div>
           <div className="label">
-            <label>Registration Image:
+            <label htmlFor="registrationImage">Registration Image:
               <div className={`drop-zone ${dragging ? 'dragging' : ''}`} onDrop={(e) => handleDrop(e, 'registrationImage')} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
                 {renderFileNames(RegistrationImage)}
-                <input type="file" onChange={(e) => handleImageChange(e, 'registrationImage')} multiple />
+                <input id="registrationImage" name="registrationImage" type="file" onChange={(e) => handleImageChange(e, 'registrationImage')} multiple />
               </div>
             </label>
           </div>
           <div className="fuel-dropdown">
-            <label>Fuel Type:
-              <select value={fuelType} onChange={(event) => setFuelType(event.target.value)}>
+            <label htmlFor="fuelType">Fuel Type:
+              <select id="fuelType" value={fuelType} onChange={(event) => setFuelType(event.target.value)}>
                 <option value="">Select Fuel Type</option>
                 <option value="Petrol">Petrol</option>
                 <option value="Diesel">Diesel</option>
@@ -202,31 +204,31 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
             </label>
           </div>
           <div className="label">
-          <label>Leased Company
+          <label htmlFor="lease">Leased Company
             (If no please mension 'No')
-            <input type="text" value={LeasedLiability} onChange={(e) => setLeasedLiability(e.target.value)}/>
+            <input id="lease" name="lease" type="text" value={LeasedLiability} onChange={(e) => setLeasedLiability(e.target.value)}/>
           </label>
           </div>
           <div className="label">
-          <label>Cylinder Capacity of Vehicle:
-            <input type="text" value={cylinderCapacity} onChange={(e) => setCylinderCapacity(e.target.value)}/>
+          <label htmlFor="capacity">Cylinder Capacity of Vehicle:
+            <input id="capacity" name="capacity" type="text" value={cylinderCapacity} onChange={(e) => setCylinderCapacity(e.target.value)}/>
           </label>
           </div>
           <div className="label">
-          <label>Insurance Comapany:
-            <input type="text" value={insuranceCompany} onChange={(e) => setInsuranceCompany(e.target.value)}/>
+          <label htmlFor="company">Insurance Comapany:
+            <input id="company" name="company" type="text" value={insuranceCompany} onChange={(e) => setInsuranceCompany(e.target.value)}/>
           </label>
           </div>
           <div className="label">
-            <label>Insurance card:
+            <label htmlFor="insuranceCard">Insurance card:
               <div className={`drop-zone ${dragging ? 'dragging' : ''}`} onDrop={(e) => handleDrop(e, 'insuranceCard')} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
                 {renderFileNames(insuranceCardImage)}
-                <input type="file" onChange={(e) => handleImageChange(e, 'insuranceCard')} multiple />
+                <input id="insuranceCard" name="insuranceCard" type="file" onChange={(e) => handleImageChange(e, 'insuranceCard')} multiple />
               </div>
             </label>
           </div>
           <div className="label">
-          <label htmlFor="taxPayer"><span className="chekmark">Tax Payer?</span>
+          <label><span className="chekmark">Tax Payer?</span>
           <div className="form-radio">
             <input id="taxPayerYes" name="selectedOption" value="Yes" type="radio" checked={isChecked("Yes")} onChange={onSelect} className="hidden-radio"/>
             <label htmlFor="taxPayerYes" className="Yes">Yes: </label>
@@ -239,11 +241,11 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
           {
             selectedOption === 'Yes' && (
           <div className="label">
-          <label>
+          <label htmlFor="taxReceipt">
             Tax Receipts (if any):
               <div className={`drop-zone ${dragging ? 'dragging' : ''}`} onDrop={(e) => handleDrop(e, 'taxReceipts')} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
                 {renderFileNames(taxReceipts)}
-                <input type="file" onChange={(e) => handleImageChange(e, 'taxReceipts')} multiple />
+                <input id="taxReceipt" name="taxReceipt" type="file" onChange={(e) => handleImageChange(e, 'taxReceipts')} multiple />
               </div>
           </label>
           </div>
@@ -251,9 +253,9 @@ function AddVehicleForm({ isOpen, onClose, addVehicle, vehicleId}) {
           </fieldset>
           <button className="button-submit" type="submit" onClick={handleUpload}>Add Vehicle</button>
 
-          <button className="button-reset" onClick={reset}>RESET</button>
+          <button type="button" className="button-reset" onClick={reset}>RESET</button>
         
-        <button className="button-close" onClick={onClose}>Close</button>
+        <button type="button" className="button-close" onClick={onClose}>Close</button>
         </div>
         </form>
     );
@@ -348,8 +350,8 @@ function VehicleDetails(){
         <form className='vehicle-form' onSubmit={handleSubmit}>
             <div className={`form-inner ${isAddFormOpen ? 'blur-background' : ''}`}>
             <h2>Vehicle Details</h2>
-            <button className="add" onClick={openAddForm}>ADD +</button>
-            <button className='delete' onClick={handleDeletedVehiclesClick}>DELETED VEHICLES</button>
+            <button type="button" className="add" onClick={openAddForm}>ADD +</button>
+            <button type="button" className='delete' onClick={handleDeletedVehiclesClick}>DELETED VEHICLES</button>
             <div className="table-container">
             <table className="table">
                 <thead>
@@ -366,13 +368,13 @@ function VehicleDetails(){
                     <td>{vehicle.vehicleno}</td>
                     <td>{vehicle.vehicletype}</td>
                     <td>
-                    <button className="button-edit" onClick={() => {Navigate('/vehicles/vehicleDetails/editVehicles', { state: { id: vehicle.id , username} })}}>EDIT</button>
+                    <button type="button" className="button-edit" onClick={() => {Navigate('/vehicles/vehicleDetails/editVehicles', { state: { id: vehicle.id , username} })}}>EDIT</button>
                     </td>
                     <td>
-                    <button className="button-delete" onClick={() => handleDeleteClick(vehicle.id, username)}>DELETE</button>
+                    <button type="button" className="button-delete" onClick={() => handleDeleteClick(vehicle.id, username)}>DELETE</button>
                     </td>
                     <td>
-                    <button className="button-view"onClick={() => {Navigate('/vehicles/vehicleDetails/viewVehicles', { state: { id: vehicle.id, username } })}}>VIEW MORE</button>
+                    <button type="button" className="button-view"onClick={() => {Navigate('/vehicles/vehicleDetails/viewVehicles', { state: { id: vehicle.id, username } })}}>VIEW MORE</button>
                     </td>
                 </tr>
                 ))}
@@ -380,9 +382,9 @@ function VehicleDetails(){
             </table>
             </div>
 
-            <button className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button>  
+            <button type="button" className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button>  
 
-            <button className="button-logout" onClick={() => {Navigate('/admin')}}>LOGOUT</button>
+            <button type="button" className="button-logout" onClick={() => {Navigate('/admin')}}>LOGOUT</button>
             </div>
             
         </form>

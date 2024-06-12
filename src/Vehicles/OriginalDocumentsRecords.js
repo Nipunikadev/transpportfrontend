@@ -97,8 +97,8 @@ function AddDocumentForm({ isOpen, onClose, Id}) {
         <h2>Add Vehicle</h2>
         <fieldset className="fieldSet">
         <div className="journey-dropdown">
-            <label htmlFor="vehicleno" name="vehicleno" >Vehicle Number:</label>
-                <select value={selectedVehicle} onChange={handleVehicleChange}>
+            <label htmlFor="vehicleno">Vehicle Number:</label>
+                <select id="vehicleno" value={selectedVehicle} onChange={handleVehicleChange}>
                     <option value="">Choose Your Vehicle</option>
                     {vehicleno.length > 0 ? (
                         vehicleno.map(number => (
@@ -114,63 +114,71 @@ function AddDocumentForm({ isOpen, onClose, Id}) {
                     <option value="other">Other</option>
                 </select>
                 {selectedVehicle === 'other' && (
-            <input type="text" value={otherVehicle} onChange={(event) => setOtherVehicle(event.target.value)} placeholder="Enter other vehicle number" />
+            <input type="text" id="vehicleno" name="vehicleno" value={otherVehicle} onChange={(event) => setOtherVehicle(event.target.value)} placeholder="Enter other vehicle number" />
             )}
         </div>
           <div className="label">
-          <label>
+          <label htmlFor="document">
            Document Name:
             <input
               type="text"
+              id="document"
+              name="document"
               value={documents.documentName}
                   onChange={(e) => handleInput('documentName', e.target.value)} required/>
           </label>
           </div>
           <div className="label">
-          <label>
+          <label htmlFor="reason">
            Reason for Document Issue:
             <input
               type="text"
+              id="reason"
+              name="reason"
               value={documents.reason}
                   onChange={(e) => handleInput('reason', e.target.value)} required/>
           </label>
           </div>
           <div className="label">
-              <label>
+              <label htmlFor="issuedDate">
               Issued Date:
-              <DatePicker selected={issuedDate}  onChange={date => setIssuedDate(date)} formatDate="MM/DD/YYYY" filterDate={date => date.getDate() !== 5} showYearDropdown scrollableMonthYearDropdown className="date" required/>
+              <DatePicker id="issuedDate" name="issuedDate" selected={issuedDate}  onChange={date => setIssuedDate(date)} formatDate="MM/DD/YYYY" filterDate={date => date.getDate() !== 5} showYearDropdown scrollableMonthYearDropdown className="date" required/>
               </label>
             </div>
           <div className="label">
-          <label>
+          <label htmlFor="issuedBy">
             Issued By:
             <input
               type="text"
+              id="issuedBy"
+              name="issuedBy"
               value={documents.issuedBy}
                   onChange={(e) => handleInput('issuedBy', e.target.value)} required/>
           </label>
           </div>
           <div className="label">
-          <label>
+          <label htmlFor="issuedTo">
             Issued To:
             <input
               type="text"
+              id="issuedTo"
+              name="issuedTo"
               value={documents.issuedTo}
                   onChange={(e) => handleInput('issuedTo', e.target.value)} required/>
           </label>
           </div>
           <div className="label">
-          <label>
+          <label htmlFor="receivedDate">
               Received Date:
-              <DatePicker selected={receivedDate}  onChange={date => setReceivedDate(date)} formatDate="MM/DD/YYYY" filterDate={date => date.getDate() !== 5} showYearDropdown scrollableMonthYearDropdown className="date"/>
+              <DatePicker id="receivedDate" name="receivedDate" selected={receivedDate}  onChange={date => setReceivedDate(date)} formatDate="MM/DD/YYYY" filterDate={date => date.getDate() !== 5} showYearDropdown scrollableMonthYearDropdown className="date"/>
           </label>
           </div>
           </fieldset>
           <button className="button-submit" type="submit">Add Issued Document</button>
 
-          <button className="button-reset" onClick={reset}>RESET</button>
+          <button type="button" className="button-reset" onClick={reset}>RESET</button>
         
-        <button className="button-close" onClick={onClose}>Close</button>
+        <button type="button" className="button-close" onClick={onClose}>Close</button>
         </div>
         </form>
     );
@@ -244,70 +252,80 @@ function EditOriginalDocumentsRecords({ onClose, onSubmit, documentDetails }) {
                 <h2>Edit Document Details</h2>
                 <fieldset className="fieldSet">
                     <div className="label">
-                        <label>
+                        <label htmlFor="vehicleno">
                         Vehicle Number:
                         <input
                             type="text"
+                            id="vehicleno"
+                            name="vehicleno"
                             value={vehicleno}
                             onChange={(e) => setVehicleNo(e.target.value)} readOnly/>
                         </label>
                         {errors.vehicleno && <span className="text-danger">{errors.vehicleno}</span>}
                     </div>
                     <div className="label">
-                        <label>
+                        <label htmlFor="document">
                         Document Name:
                         <input
                             type="text"
+                            id="document"
+                            name="document"
                             value={documentName}
                             onChange={(e) => setDocumentName(e.target.value)} readOnly/>
                         </label>
                         {errors.documentName && <span className="text-danger">{errors.documentName}</span>}
                     </div>
                     <div className="label">
-                        <label>
+                        <label htmlFor="reason">
                             Reason:
                         <input
                             type="text"
+                            id="reason"
+                            name="reason"
                             value={reason}
                             onChange={(e) => setReason(e.target.value)} readOnly/>
                         </label>
                     </div>
                     <div className="label">
-                        <label>
+                        <label htmlFor="issuedDate">
                             Issued Date:
-                            <DatePicker selected={issuedDate}  onChange={date => setIssuedDate(date)} formatDate="MM/DD/YYYY" filterDate={date => date.getDate() !== 5} showYearDropdown scrollableMonthYearDropdown className="date" required/>
+                            <DatePicker id="issuedDate" name="issuedDate" selected={issuedDate}  onChange={date => setIssuedDate(date)} formatDate="MM/DD/YYYY" filterDate={date => date.getDate() !== 5} showYearDropdown scrollableMonthYearDropdown className="date" required/>
                         </label>
                         {errors.issuedDate && <span className="text-danger">{errors.issuedDate}</span>}
                     </div>
                     <div className="label">
-                        <label>
+                        <label htmlFor="issuedBy">
                             Issued By:
                         <input
                             type="text"
+                            id="issuedBy"
+                            name="issuedBy"
                             value={issuedBy}
                             onChange={(e) => setIssuedBy(e.target.value)} readOnly/>
                         </label>
                     </div>
                     <div className="label">
-                        <label>
+                        <label htmlFor="issuedTo">
                             Issued To:
                         <input
                             type="text"
+                            id="issuedTo"
+                            name="issuedTo"
                             value={issuedTo}
                             onChange={(e) => setIssuedTo(e.target.value)} readOnly/>
                         </label>
                     </div>
                     <div className="label">
-                        <label>
+                        <label htmlFor="receivedDate">
                             Received Date:
-                            <DatePicker selected={receivedDate}  onChange={date => setReceivedDate(date)} formatDate="MM/DD/YYYY" filterDate={date => date.getDate() !== 5} showYearDropdown scrollableMonthYearDropdown className="date" required/>
+                            <DatePicker id="receivedDate" name="receivedDate" selected={receivedDate}  onChange={date => setReceivedDate(date)} formatDate="MM/DD/YYYY" filterDate={date => date.getDate() !== 5} showYearDropdown scrollableMonthYearDropdown className="date" required/>
                         </label>
                         {errors.receivedDate && <span className="text-danger">{errors.receivedDate}</span>}
                     </div>
                 </fieldset>
-                <button className="button-submit" type="submit">Updated Document Records</button>
+                <button className="button-submit">Updated Document Records</button>
                 
-                <button className="button-cancel" onClick={onClose}>Cancel</button>
+                <button type="button" className="button-cancel" onClick={onClose}>Cancel</button>
             </div>
         </form>
     );
@@ -426,8 +444,8 @@ function OriginalDocumentsRecords() {
             <div className={`security-documents-form ${isAddFormOpen || isChangeDocumentOpen ? 'blur-background' : ''}`}>
                     <h2>Vehicle Security Details</h2>
                     <div className="journey-dropdown">
-                    <label htmlFor="vehicleno" name="vehicleno" >Vehicle Number: </label>
-                        <select value={selectedVehicle} onChange={handleVehicleChange}>
+                    <label htmlFor="vehicleno">Vehicle Number: </label>
+                        <select id="vehicleno" value={selectedVehicle} onChange={handleVehicleChange}>
                         <option value="">Choose Your Vehicle</option>
                         {vehicleno.length > 0 &&(
                             vehicleno.map(number => (
@@ -438,7 +456,7 @@ function OriginalDocumentsRecords() {
                         )}
                         </select>
                     </div>
-                <button className="add" onClick={openAddForm}>Add Issue Original Document</button>
+                <button type="button" className="add" onClick={openAddForm}>Add Issue Original Document</button>
                     <div className="table-container">
                         <table className="table">
                             <thead>
@@ -465,7 +483,7 @@ function OriginalDocumentsRecords() {
                                 <td>{original.issuedTo}</td>
                                 <td>{formatDate(original.receivedDate)}</td>
                                 <td>
-                                <button className="button-edit" onClick={() => {setSelectedDocument(original);
+                                <button type="button" className="button-edit" onClick={() => {setSelectedDocument(original);
                                                                             setChangeDocumentOpen(true);}}>EDIT</button>
                                 </td>
                             </tr>
@@ -474,7 +492,7 @@ function OriginalDocumentsRecords() {
                         </table>
                     </div>
 
-                    <button className="button-back" onClick={() => {Navigate('/vehicles/vehicleSecurity', { state: { username } })}}>BACK</button>
+                    <button type="button" className="button-back" onClick={() => {Navigate('/vehicles/vehicleSecurity', { state: { username } })}}>BACK</button>
 
                 </div>
             </form>

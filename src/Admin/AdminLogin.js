@@ -71,6 +71,7 @@ const PasswordChangePopup = ({ onClose, onSubmit }) => {
                     <input
                         type="text"
                         id="username"
+                        name="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)} autoComplete="off"
                     />
@@ -81,6 +82,7 @@ const PasswordChangePopup = ({ onClose, onSubmit }) => {
                     <input
                         type="password"
                         id="currentPassword"
+                        name="currentPassword"
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)}
                     />
@@ -91,6 +93,7 @@ const PasswordChangePopup = ({ onClose, onSubmit }) => {
                     <input
                         type="password"
                         id="newPassword"
+                        name="newPassword"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                     />
@@ -101,13 +104,14 @@ const PasswordChangePopup = ({ onClose, onSubmit }) => {
                     <input
                         type="password"
                         id="confirmPassword"
+                        name="confirmPassword"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                     {errors.confirmPassword && <span className="text-danger">{errors.confirmPassword}</span>}
                 </div>
                 <button className="button-submit" >Submit</button>
-                <button className="button-cancel" onClick={onClose}>Cancel</button>
+                <button type="button" className="button-cancel" onClick={onClose}>Cancel</button>
             </div>
         </form>
     );
@@ -132,23 +136,7 @@ function AdminLogin(){
         console.log('Validation Errors:', validationErrors);
         setErrors(validationErrors);
         if(!validationErrors.username && !validationErrors.password){
-            // try{
-            //     //const response = await axios.post('https://hunastransportmanagement.000webhostapp.com/admin', details);
-            //     const response = await axios.post('http://localhost:8081/admin', details);
-            //     console.log('Response:', response.data);
-            //     if(response.data.loginStatus === true){
-            //         console.log('Login Success');
-            //         Navigate('/admin/home');
-            //     }
-            //     else{
-            //         // alert(response.data.loginStatus);
-            //         console.log(response.data.loginStatus);
-            //     }
-            // }
-            // catch(err) {
-            //     console.log('**Error:', err);
-            // } 
-
+            
             try{
                 const response = await axios.post('http://localhost:8081/admin', details);
                 console.log('Response:', response.data);
@@ -215,12 +203,12 @@ function AdminLogin(){
                 <h2>Login</h2>
                 <div className="form-group">
                     <label htmlFor="username"><strong>User Name</strong></label>
-                    <input type="text" name="username" onChange={handleInput} value={details.username} autoComplete="off"/>
+                    <input type="text" id="username" name="username" onChange={handleInput} value={details.username} autoComplete="off"/>
                     {error.username && <span className="text-danger">{error.username}</span>}
                 </div>
                 <div className="form-group">
                     <label htmlFor="password"><strong>Password</strong></label>
-                    <input type="password" name="password" onChange={handleInput} value={details.password}/>
+                    <input type="password" id="password" name="password" onChange={handleInput} value={details.password}/>
                     {error.password && <span className="text-danger">{error.password}</span>}
                 </div>
 

@@ -108,9 +108,9 @@ function ViewMyHistory(){
                         </tbody>
                     </table>
                 </div>
-                <button className="button-back" onClick={() => {Navigate('/driver/dashboard', { state: { username } })}}>BACK</button>  
+                <button type="button" className="button-back" onClick={() => {Navigate('/driver/dashboard', { state: { username } })}}>BACK</button>  
 
-                <button className="button-print" onClick={(event) => handlePrint(event)}>PRINT</button>
+                <button type="button" className="button-print" onClick={(event) => handlePrint(event)}>PRINT</button>
             </div>
         </form>
     );

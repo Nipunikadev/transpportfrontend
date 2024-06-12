@@ -138,8 +138,8 @@ function VehicleSecurity() {
           <div className='security-vehicle-form'>
             <h2>Vehicle Security Details</h2>
             <div className="journey-dropdown">
-              <label htmlFor="vehicleno" name="vehicleno" >Vehicle Number: </label>
-                <select value={selectedVehicle} onChange={handleVehicleChange}>
+              <label htmlFor="vehicleno">Vehicle Number: </label>
+                <select id="vehicleno" value={selectedVehicle} onChange={handleVehicleChange}>
                   <option value="">Choose Your Vehicle</option>
                   {vehicleno.length > 0 ? (
                     vehicleno.map((number, index) => (
@@ -155,41 +155,45 @@ function VehicleSecurity() {
                   <option value="other">Other</option>
                 </select>
                 {selectedVehicle === 'other' && (
-                <input type="text" value={otherVehicle} onChange={(event) => setOtherVehicle(event.target.value)} placeholder="Enter other vehicle number" />
+                <input type="text" id="vehicleno" name="vehicleno" value={otherVehicle} onChange={(event) => setOtherVehicle(event.target.value)} placeholder="Enter other vehicle number" />
                 )}
             </div>
             <div className={`form-section ${!selectedVehicle ? 'blur' : ''}`}>
             <div className="label">
-              <label>
+              <label  htmlFor="registrationDate">
               Registration Date:
-              <DatePicker selected={registrationDate}  onChange={date => setRegistrationDate(date)} formatDate="MM/dd/yyyy" showYearDropdown scrollableMonthYearDropdown className="date" maxDate={today} required/>
+              <DatePicker id="registrationDate" name="registrationDate" selected={registrationDate}  onChange={date => setRegistrationDate(date)} formatDate="MM/dd/yyyy" showYearDropdown scrollableMonthYearDropdown className="date" maxDate={today} required/>
               </label>
             </div>
             <div className="label">
-              <label>
+              <label  htmlFor="original">
                 Original Certificate of Registration with:
                 <input
                   type="text"
+                  id="original"
+                  name="original"
                   value={securities.originalOwner}
                   onChange={(e) => handleInput('originalOwner', e.target.value)} required/>
               </label>
-              <button className="submit" type="submit" onClick={() => {Navigate('/vehicles/vehicleSecurity/originalDocumentsRecords')}}>Original Documents Issuing Record</button>
+              <button className="submit" type="button" onClick={() => {Navigate('/vehicles/vehicleSecurity/originalDocumentsRecords', { state: { username } })}}>Original Documents Issuing Record</button>
             </div>
             {taxPayer === 'Yes' && (
             <div className="label">
-              <label>
+              <label  htmlFor="tax">
                 No of Paid TAX Receipts:
                 <input
                   type="text"
+                  id="tax"
+                  name="tax"
                   value={securities.taxNo}
                   onChange={(e) => handleInput('taxNo', e.target.value)} required/>
               </label>
             </div>
              )}
             <div className="key-dropdown">
-              <label>
+              <label  htmlFor="key">
                 Do you have duplicate keys?
-                <select value={vehicleFollowUp} onChange={handleVehicleFollowup}>
+                <select id="key" name="key" value={vehicleFollowUp} onChange={handleVehicleFollowup}>
                   <option value="">Select</option>
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
@@ -205,11 +209,11 @@ function VehicleSecurity() {
               )} */}
             </div>
             </div>
-            <button className="button-submit" type="submit">Add Vehicle Security Details</button>
+            <button className="button-submit">Add Vehicle Security Details</button>
 
-            <button className="button-reset" onClick={reset}>RESET</button>
+            <button type="button" className="button-reset" onClick={reset}>RESET</button>
 
-            <button className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button>
+            <button type="button" className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button>
         
           </div>
         </form>

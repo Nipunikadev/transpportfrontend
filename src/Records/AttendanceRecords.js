@@ -83,7 +83,7 @@ function AttendanceRecords() {
             <h2>Drivers Attendance Records</h2>
                 <div className="journey-dropdown">
                     <label htmlFor="drivername" name="drivername" >Driver Name: </label>
-                        <select value={selectedDriver} onChange={handleDriverChange}>
+                        <select id="drivername" value={selectedDriver} onChange={handleDriverChange}>
                         <option value="">Choose Driver Name</option>
                         {drivername.length > 0 &&(
                             drivername.map((number, index) => (
@@ -130,9 +130,9 @@ function AttendanceRecords() {
                         </tbody>
                     </table>
                 </div>
-                <button className="button-back" onClick={() => {Navigate('/records/historyRecords', { state: { username } })}}>BACK</button>  
+                <button type="button" className="button-back" onClick={() => {Navigate('/records/historyRecords', { state: { username } })}}>BACK</button>  
 
-                <button className="button-print" onClick={(event) => handlePrint(event)}>PRINT</button>
+                <button type="button" className="button-print" onClick={(event) => handlePrint(event)}>PRINT</button>
 
             </div>
         </form>

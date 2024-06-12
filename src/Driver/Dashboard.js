@@ -54,16 +54,16 @@ function Dashboard() {
 
     return(
         <form className='driver-welcome'>
-            <div className="form-inner">
+            <div className="form-driver">
             <div className="logo"></div>
             {
              auth?
              <div className='welcome'>
              <h2> Welcome,{username}</h2>
-             <button className='attendance' onClick={() => {Navigate('/driver/dashboard/attendance', { state: { username } })}}>Attendance</button>
-             <button className='journey' onClick={() => {Navigate('/driver/dashboard/journey', { state: { username } })}}>Journey Module</button>
-             <button className='userhistory' onClick={() => {Navigate('/driver/dashboard/history', { state: { username } })}}>View My History</button>
-            <button className="button-logout" onClick={handleLogout}>Logout</button>  
+             <button type="button" className='attendance' onClick={() => {Navigate('/driver/dashboard/attendance', { state: { username } })}}>Attendance</button>
+             <button type="button" className='journey' onClick={() => {Navigate('/driver/dashboard/journey', { state: { username } })}}>Journey Module</button>
+             <button type="button" className='userhistory' onClick={() => {Navigate('/driver/dashboard/history', { state: { username } })}}>View My History</button>
+            <button type="button" className="button-logout" onClick={handleLogout}>Logout</button>  
             </div>  
             :
             <div>

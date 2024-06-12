@@ -4,9 +4,11 @@ import Start from './Start';
 import AdminLogin from './Admin/AdminLogin';
 import AdminHome from './Admin/AdminHome';
 import Register from './Admin/Register';
+import ViewAdmin from './Admin/ViewAdmin';
 import UpdateDriver from './Admin/UpdateDriver';
 import HistoryRecords from './Records/HistoryRecords';
 import DriverLogin from './Driver/DriverLogin';
+import ViewDriver from './Driver/ViewDriver';
 import Dashboard from './Driver/Dashboard';
 import Attendance from './Driver/Attendance';
 import Journey from './Driver/Journey';
@@ -26,6 +28,7 @@ import FuelUsage from './Vehicles/FuelUsage';
 import VehicleMaintenance from './Vehicles/VehicleMaintenance';
 import UserLogin from './User/UserLogin';
 import UserHome from './User/UserHome';
+import ViewUser from './User/ViewUser';
 
 
 function App() {
@@ -39,9 +42,12 @@ function App() {
       <Route path='/admin' element={<AdminLogin />}></Route>
       <Route path='/admin/home/*' element={<AdminHome/>}> </Route>
       <Route path='/admin/home/register' element={<Register/>}> </Route>
+      <Route path='/admin/home/register/viewAdmin' element={<ViewAdmin/>}></Route>
       <Route path='/admin/home/register/driver' element={<Register/>}> </Route>
       <Route path='/admin/home/register/user' element={<Register/>}> </Route>
+      <Route path='/admin/home/register/user/viewUser' element={<ViewUser/>}> </Route>
       <Route path='/admin/home/register/driver/updateDriver' element={<UpdateDriver/>}> </Route>
+      <Route path='/admin/home/register/driver/viewDriver' element={<ViewDriver/>}> </Route>
       <Route path='/driver' element={<DriverLogin/>}></Route>
       <Route path='/driver/dashboard' element={<Dashboard/>}> </Route>
       <Route path='/driver/dashboard/attendance' element={<Attendance/>}></Route>

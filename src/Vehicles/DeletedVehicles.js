@@ -77,7 +77,7 @@ function DeleteVehicles() {
         <form className="hidden-form">
           <div className="add-vehicle-form">
             <p>No deleted vehicle details available.</p>
-            <button className="button-back" onClick={() => { Navigate("/vehicles/vehicleDetails"); }}>BACK</button>
+            <button type="button" className="button-back" onClick={() => { Navigate("/vehicles/vehicleDetails"); }}>BACK</button>
           </div>
         </form>
       );
@@ -102,12 +102,12 @@ function DeleteVehicles() {
                   <td>{id + 1}</td>
                   <td>{vehicle.vehicleno}</td>
                   <td>{vehicle.vehicletype}</td>
-                  <td><button className="button-edit" onClick={(e) => confirmUndoDelete(vehicle, e)}>UNDO</button></td>
+                  <td><button type="button" className="button-edit" onClick={(e) => confirmUndoDelete(vehicle, e)}>UNDO</button></td>
                 </tr>
               ))}
             </tbody>
             </table>
-            <button className="buttonBack" onClick={() => { Navigate("/vehicles/vehicleDetails", { state: { username } })}}>BACK</button>
+            <button type="button" className="buttonBack" onClick={() => { Navigate("/vehicles/vehicleDetails", { state: { username } })}}>BACK</button>
             </div>
           </div>
     </form>

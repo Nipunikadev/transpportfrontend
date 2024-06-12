@@ -105,8 +105,8 @@ function FuelUsage() {
             <div className='fuel-vehicle-form'>
                 <h2>Fuel Usage</h2>
                 <div className="journey-dropdown">
-                    <label htmlFor="vehicleno" name="vehicleno" >Vehicle Number: </label>
-                        <select value={selectedVehicle} onChange={handleVehicleChange}>
+                    <label htmlFor="vehicleno">Vehicle Number: </label>
+                        <select id="vehicleno" value={selectedVehicle} onChange={handleVehicleChange}>
                         <option value="">Choose Your Vehicle</option>
                         {vehicleno.length > 0 ? (
                             vehicleno.map((number, index) => (
@@ -122,27 +122,29 @@ function FuelUsage() {
                         <option value="other">Other</option>
                         </select>
                         {selectedVehicle === 'other' && (
-                        <input type="text" value={otherVehicle} onChange={(event) => setOtherVehicle(event.target.value)} placeholder="Enter other vehicle number" />
+                        <input id="vehicleno" type="text" value={otherVehicle} onChange={(event) => setOtherVehicle(event.target.value)} placeholder="Enter other vehicle number" />
                         )}
                 </div>
                 <div className={`form-section ${!selectedVehicle ? 'blur' : ''}`}>
                 <div className="label">
-                    <label>
+                    <label htmlFor="fuelDate">
                         Date of Pumped Fuel:
-                        <DatePicker selected={fuelDate}  onChange={date => setFuelDate(date)} formatDate="MM/DD/YYYY" filterDate={date => date.getDate() !== 5} showYearDropdown scrollableMonthYearDropdown className="date"/>
+                        <DatePicker id="fuelDate" selected={fuelDate}  onChange={date => setFuelDate(date)} formatDate="MM/DD/YYYY" filterDate={date => date.getDate() !== 5} showYearDropdown scrollableMonthYearDropdown className="date"/>
                     </label>
                 </div>
                 <div className="label">
-                    <label>
+                    <label htmlFor="fuelType">
                         Fuel Type:
-                        <input type="text" value={fuelType} readOnly />
+                        <input id="fuelType" name="fuelType" type="text" value={fuelType} readOnly />
                     </label>
                 </div>
                 <div className="label">
-                    <label>
+                    <label htmlFor="litters">
                         No of Litters Fuel Pumped:
                         <input
                         type="text"
+                        id="litters"
+                        name="litters"
                         value={fuelPumped === '' ? '' : `${fuelPumped} liters`}
                         onChange={(e) => {
                             const userInput = e.target.value;
@@ -153,16 +155,16 @@ function FuelUsage() {
                     </label>
                 </div>
                 <div className="label">
-                <label>Cost for Fuel Pumped (LKR):
-                    <input type="text" value={cost} onChange={(e) => setCost(e.target.value)} required="required"/>
+                <label htmlFor="fuelCost">Cost for Fuel Pumped (LKR):
+                    <input id="fuelCost" name="fuelCost" type="text" value={cost} onChange={(e) => setCost(e.target.value)} required="required"/>
                  </label>
                 </div>
                 </div>
                 <button className="button-submit" type="submit">Add Fuel Details</button>
 
-                <button className="button-reset" onClick={reset}>RESET</button>
+                <button type="button" className="button-reset" onClick={reset}>RESET</button>
 
-                <button className="back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button>
+                <button type="button" className="back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button>
             </div>
         </form>
     </div>

@@ -154,21 +154,21 @@ function UpdateDriver() {
               return (
               <div key={index}>
               <a href={`http://localhost:8081/image/drivingLicense/${license}`} target="_blank" rel="noopener noreferrer">View PDF {index + 1}</a>
-              <button className="button-remove" onClick={() => handleRemoveDrivingLicense(index)}>Remove</button>
+              <button type="button" className="button-remove" onClick={() => handleRemoveDrivingLicense(index)}>Remove</button>
             </div>
             );
           } else {
             return (
             <div key={index}>
               <img src={`http://localhost:8081/image/drivingLicense/${license}`} alt="Driving License" style={{ width: "500px", height: "500px" }} />
-              <button className="button-remove" onClick={() => handleRemoveDrivingLicense(index)}>Remove</button>
+              <button type="button" className="button-remove" onClick={() => handleRemoveDrivingLicense(index)}>Remove</button>
             </div>
            );
           }
         })}
         <br/>
         <div>
-          <input type="file" onChange={handleDrivingLicenseChange} />
+          <input type="file" id="file" name="file" onChange={handleDrivingLicenseChange} />
         </div>
       </div>
       );
@@ -198,8 +198,8 @@ function UpdateDriver() {
           <div className="edit-driver-form">
               <h2>Edit Driver Details</h2>
               <div className="driver-dropdown">
-                    <label htmlFor="username" name="username" >User Name: </label>
-                        <select value={selectedUserName} onChange={handleVehicleChange}>
+                    <label htmlFor="username">User Name: </label>
+                        <select id="username" value={selectedUserName} onChange={handleVehicleChange}>
                         <option value="">Choose Driver User Name</option>
                         {usernameList.length > 0 &&(
                             usernameList.map(number => (
@@ -211,43 +211,51 @@ function UpdateDriver() {
                         </select>
                 </div>
                   <div className="label">
-                      <label>
+                      <label htmlFor="firstname">
                       First Name:
                       <input
                           type="text"
+                          id="firstname"
+                          name="firstname"
                           value={newFirstName}
                           onChange={(e) => setNewFirstName(e.target.value)} />
                       </label>
                   </div>
                   <div className="label">
-                      <label>
+                      <label htmlFor="lastname">
                       Last Name:
                       <input
                           type="text"
+                          id="lastname"
+                          name="lastname"
                           value={newLastName}
                           onChange={(e) => setNewLastName(e.target.value)} />
                       </label>
                   </div>
                   <div className="label">
-                      <label>
+                      <label htmlFor="nic">
                           NIC Number:
                       <input
                           type="text"
+                          id="nic"
+                          name="nic"
                           value={newNic}
                           onChange={(e) => setNewNIC(e.target.value)} />
                       </label>
                   </div>
                   <div className="label">
-                      <label>
+                      <label htmlFor="contact">
                           Contact Number:
                       <input
                           type="text"
+                          id="contact"
+                          name="contact"
                           value={newContact}
                           onChange={(e) => setNewContact(e.target.value)} />
                       </label>
                   </div>
                   <div className="label">
-                      <label>
+                      <label htmlFor="file">
                           <fieldset style={{width: "800px"}}>
                           Driving License:
                           {renderFile('drivingLicense')}
@@ -255,11 +263,11 @@ function UpdateDriver() {
                       </label>
                   </div>
                   {error && <p className="error-message">{error}</p>}
-              <button className="button-submit" type="submit">Updated Driver Records</button>
+              <button type="submit" className="button-submit">Updated Driver Records</button>
 
-              <button className="button-reset" onClick={reset}>RESET</button>
+              <button type="button" className="button-reset" onClick={reset}>RESET</button>
               
-              <button className="button-cancel" onClick={() => {Navigate("/admin/home/register", { state: { username } })}}>Cancel</button>
+              <button type="button" className="button-cancel" onClick={() => {Navigate("/admin/home/register", { state: { username } })}}>Cancel</button>
           </div>
       </form>
   );

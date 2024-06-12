@@ -139,8 +139,8 @@ const handleImageChange = (e) => {
           <div className='security-vehicle-form'>
             <h2>Vehicle Maintenance</h2>
             <div className="journey-dropdown">
-                <label htmlFor="vehicleno" name="vehicleno" >Vehicle Number: </label>
-                  <select value={selectedVehicle} onChange={handleVehicleChange}>
+                <label htmlFor="vehicleno">Vehicle Number: </label>
+                  <select id="vehicleno" value={selectedVehicle} onChange={handleVehicleChange}>
                     <option value="">Choose Your Vehicle</option>
                     {vehicleno.length > 0 ? (
                         vehicleno.map((number, index) => (
@@ -156,37 +156,37 @@ const handleImageChange = (e) => {
                     <option value="other">Other</option>
                   </select>
                   {selectedVehicle === 'other' && (
-                    <input type="text" value={otherVehicle} onChange={(event) => setOtherVehicle(event.target.value)} placeholder="Enter other vehicle number" />
+                    <input id="vehicleno" name="vehicleno" type="text" value={otherVehicle} onChange={(event) => setOtherVehicle(event.target.value)} placeholder="Enter other vehicle number" />
                   )}
             </div>
             <div className={`form-section ${!selectedVehicle ? 'blur' : ''}`}>
             <div className="label">
-              <label>Repaire or Service Date:
-                <DatePicker selected={selectedDate}  onChange={date => setSelectedDate(date)} formatDate="MM/dd/yyyy"  showYearDropdown scrollableMonthYearDropdown className="date" maxDate={today}/>
+              <label htmlFor="date">Repaire or Service Date:
+                <DatePicker id="date" selected={selectedDate}  onChange={date => setSelectedDate(date)} formatDate="MM/dd/yyyy"  showYearDropdown scrollableMonthYearDropdown className="date" maxDate={today}/>
               </label>
             </div>
             <div className="journey-dropdown">
-              <label>Maintenance Type</label>
-              <select value={vehicleMaintenance} onChange={handleVehicleMaintenance}>
+              <label htmlFor="maintenance">Maintenance Type</label>
+              <select id="maintenance" value={vehicleMaintenance} onChange={handleVehicleMaintenance}>
                 <option value="">Select Maintenance Type</option>
                 <option value="Service">Service</option>
                 <option value="Repair">Repair</option>
                 <option value="other">Other</option>
               </select>
               {vehicleMaintenance === 'Service' && (
-                <input type="text" value={serviceMilage} onChange={(event) => setServiceMilage(event.target.value)} placeholder="Enter Vehicle Milage for Service" />
+                <input id="service" name="maintenance" type="text" value={serviceMilage} onChange={(event) => setServiceMilage(event.target.value)} placeholder="Enter Vehicle Milage for Service" />
               )}
               {vehicleMaintenance === 'Repair' && (
-                <input type="text" value={reason} onChange={(event) => setReason(event.target.value)} placeholder="Enter the reason for Repair" />
+                <input id="repair" type="text" value={reason} onChange={(event) => setReason(event.target.value)} placeholder="Enter the reason for Repair" />
               )}
               {vehicleMaintenance === 'other' && (
-                <input type="text" value={otherVehicleMaintenance} onChange={(event) => setOtherVehicleMaintenance(event.target.value)} placeholder="Enter other Maintenace Type" />
+                <input id="other" type="text" value={otherVehicleMaintenance} onChange={(event) => setOtherVehicleMaintenance(event.target.value)} placeholder="Enter other Maintenace Type" />
               )}
             </div>
             <div className="label">
-              <label htmlFor="image">Bills for Maintenance:
+              <label htmlFor="file">Bills for Maintenance:
               <div className={`drop-zone ${dragging ? 'dragging' : ''}`} onDrop={handleDrop} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
-                <input className="file" type="file" onChange={(e) => handleImageChange(e, 'maintenanceBill')} multiple />
+                <input id="file" className="file" type="file" onChange={(e) => handleImageChange(e, 'maintenanceBill')} multiple />
                 <p onClick={() => document.querySelector('.file').click()}>Drop files here or click to upload</p>
                 {/* Display file names */}
                 {maintenanceBill.length > 0 && (
@@ -202,8 +202,8 @@ const handleImageChange = (e) => {
             </div>
             
             <button className="button-submit" type="submit">Add Vehicle Maintenance Details</button>
-            <button className="button-reset" onClick={reset}>RESET</button>
-            <button className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button>
+            <button type="button" className="button-reset" onClick={reset}>RESET</button>
+            <button type="button" className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } })}}>BACK</button>
           </div>
         </form>
       </div>

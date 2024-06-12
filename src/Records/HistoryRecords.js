@@ -30,12 +30,12 @@ function HistoryRecords (){
             <div className="form-inner">
              <div className='historyRecord'>
              <h2> History Records</h2>
-             <button className='vehicleRecords' onClick={() => {Navigate('/records/vehicleRecords', { state: { username } }) }}>Vehicle Records</button>
-             <button className='tripRecords' onClick={() => {Navigate('/records/tripRecords', { state: { username } }) }}>Trips Records</button>
-             <button className='attendanceRecords' onClick={() => {Navigate('/records/attendanceRecords', { state: { username } }) }}>Attendance Records</button>
-             <button className='fuelRecords' onClick={() => {Navigate('/records/fuelRecords', { state: { username } }) }}>Fuel Records</button>
-             <button className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } }) }}>BACK</button>
-            <button className="button-logout" onClick={() => {Navigate('/admin', { state: { username } }) }}>LOGOUT</button>  
+             <button type="button" className='vehicleRecords' onClick={() => {Navigate('/records/vehicleRecords', { state: { username } }) }}>Vehicle Records</button>
+             <button type="button" className='tripRecords' onClick={() => {Navigate('/records/tripRecords', { state: { username } }) }}>Trips Records</button>
+             <button type="button" className='attendanceRecords' onClick={() => {Navigate('/records/attendanceRecords', { state: { username } }) }}>Attendance Records</button>
+             <button type="button" className='fuelRecords' onClick={() => {Navigate('/records/fuelRecords', { state: { username } }) }}>Fuel Records</button>
+             <button type="button" className="button-back" onClick={() => {Navigate('/admin/home', { state: { username } }) }}>BACK</button>
+            <button type="button" className="button-logout" onClick={() => {Navigate('/admin', { state: { username } }) }}>LOGOUT</button>  
             </div> 
             </div>
         </form>

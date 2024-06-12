@@ -180,48 +180,49 @@ function Register(){
                 {
                 selectedOption === 'Admin' && (
                 <div className="fieldSet">
-                    <h2>Admin Registration
-                    </h2>
+                    <h2>Admin Registration</h2>
+                    <button type="button" className="button-view" onClick={() => {navigate('/admin/home/register/viewAdmin', { state: { username } })}}>View Admin Details</button>
+                    <br/>
                     <fieldset ><h3>Admin Registration Details</h3>
                     <div className="form-group">
-                        <label htmlFor="firstname" name="firstname" >First Name</label>
-                        <input type="text" name="firstname" onChange={handleInput} value={admins.firstname} required="required" autoComplete="off"/>
+                        <label htmlFor="firstname" >First Name</label>
+                        <input type="text" id="firstname" name="firstname" onChange={handleInput} value={admins.firstname} required="required" autoComplete="off"/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="lastname" name="lastname" >Last Name</label>
-                        <input type="text" name="lastname" onChange={handleInput} value={admins.lastname} required="required" autoComplete="off"/>
+                        <label htmlFor="lastname" >Last Name</label>
+                        <input type="text" id="lastname" name="lastname" onChange={handleInput} value={admins.lastname} required="required" autoComplete="off"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="nic">NIC</label>
-                        <input type="text" name="nic"  onChange={handleInput} value={admins.nic} required="required" autoComplete="off"/>
+                        <input type="text" id="nic" name="nic"  onChange={handleInput} value={admins.nic} required="required" autoComplete="off"/>
                         {errors.nic && <span className="text-danger">{errors.nic}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="contact">Mobile Number</label>
-                        <input type="text" name="contact"  onChange={handleInput} value={admins.contact} required="required" autoComplete="off"/>
+                        <input type="text" id="contact" name="contact"  onChange={handleInput} value={admins.contact} required="required" autoComplete="off"/>
                         {errors.contact && <span className="text-danger">{errors.contact}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
-                        <input type="text" name="email"  onChange={handleInput} value={admins.email} required="required" autoComplete="off"/>
+                        <input type="text" id="email" name="email"  onChange={handleInput} value={admins.email} required="required" autoComplete="off"/>
                         {errors.email && <span className="text-danger">{errors.email}</span>}
                     </div>
                     </fieldset>
                     <br/>
                     <fieldset><h3>Create Admin Account Details</h3>
                     <div className="form-group">
-                        <label htmlFor="name" name="username" >User Name</label>
-                        <input type="text" name="username" onChange={handleInput} value={admins.username} required="required" autoComplete="off"/>
+                        <label htmlFor="username">User Name</label>
+                        <input type="text" id="username" name="username" onChange={handleInput} value={admins.username} required="required" autoComplete="off"/>
                         {errors.username && <span className="text-danger">{errors.username}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password"  onChange={handleInput} required="required" value={admins.password}/>
+                        <input type="password" id="password" name="password"  onChange={handleInput} required="required" value={admins.password}/>
                         {errors.password && <span className="text-danger">{errors.password}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="confirmpassword">Confirm Password</label>
-                        <input type="password" name="confirmpassword"  onChange={handleInput} required="required" value={admins.confirmpassword}/>
+                        <input type="password" id="confirmpassword" name="confirmpassword"  onChange={handleInput} required="required" value={admins.confirmpassword}/>
                         {errors.confirmpassword && <span className="text-danger">{errors.confirmpassword}</span>}
                     </div>
                     </fieldset>
@@ -230,43 +231,44 @@ function Register(){
                 {
                 selectedOption === 'User' && (
                 <div className="fieldSet">
-                    <h2>User Registration
-                    </h2>
+                    <h2>User Registration</h2>
+                    <button type="button" className="button-view" onClick={() => {navigate('/admin/home/register/user/viewUser', { state: { username } })}}>View User Details</button>
+                    <br/>
                     <fieldset ><h3>User Registration Details</h3>
                     <div className="form-group">
-                        <label htmlFor="firstname" name="firstname" >First Name</label>
-                        <input type="text" name="firstname" onChange={handleInput2} value={users.firstname} required="required" autoComplete="off"/>
+                        <label htmlFor="firstname">First Name</label>
+                        <input type="text" id="firstname" name="firstname" onChange={handleInput2} value={users.firstname} required="required" autoComplete="off"/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="lastname" name="lastname" >Last Name</label>
-                        <input type="text" name="lastname" onChange={handleInput2} value={users.lastname} required="required" autoComplete="off"/>
+                        <label htmlFor="lastname">Last Name</label>
+                        <input type="text" id="lastname" name="lastname" onChange={handleInput2} value={users.lastname} required="required" autoComplete="off"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="contact">Mobile Number</label>
-                        <input type="text" name="contact"  onChange={handleInput2} value={users.contact} required="required" autoComplete="off"/>
+                        <input type="text" id="contact" name="contact"  onChange={handleInput2} value={users.contact} required="required" autoComplete="off"/>
                         {errors.contact && <span className="text-danger">{errors.contact}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
-                        <input type="text" name="email"  onChange={handleInput2} value={users.email} required="required" autoComplete="off"/>
+                        <input type="text" id="email" name="email"  onChange={handleInput2} value={users.email} required="required" autoComplete="off"/>
                         {errors.email && <span className="text-danger">{errors.email}</span>}
                     </div>
                     </fieldset>
                     <br/>
                     <fieldset><h3>Create User Account Details</h3>
                     <div className="form-group">
-                        <label htmlFor="name" name="username" >User Name</label>
-                        <input type="text" name="username" onChange={handleInput2} value={users.username} required="required" autoComplete="off"/>
+                        <label htmlFor="username">User Name</label>
+                        <input type="text" id="username" name="username" onChange={handleInput2} value={users.username} required="required" autoComplete="off"/>
                         {errors.username && <span className="text-danger">{errors.username}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password"  onChange={handleInput2} value={users.password} required="required" autoComplete="off"/>
+                        <input type="password" id="password" name="password"  onChange={handleInput2} value={users.password} required="required" autoComplete="off"/>
                         {errors.password && <span className="text-danger">{errors.password}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="confirmpassword">Confirm Password</label>
-                        <input type="password" name="confirmpassword"  onChange={handleInput2} value={users.confirmpassword} required="required" autoComplete="off"/>
+                        <input type="password" id="confirmpassword" name="confirmpassword"  onChange={handleInput2} value={users.confirmpassword} required="required" autoComplete="off"/>
                         {errors.confirmpassword && <span className="text-danger">{errors.confirmpassword}</span>}
                     </div>
                     </fieldset>
@@ -276,31 +278,32 @@ function Register(){
                 selectedOption === 'Driver' && ( 
                 <div className="fieldSet">
                     <h2>Driver Registration</h2>
-                    <button className="button-update" onClick={() => {navigate('/admin/home/register/driver/updateDriver', { state: { username } })}}>Update Driver Details</button>
+                    <button type="button" className="button-update" onClick={() => {navigate('/admin/home/register/driver/updateDriver', { state: { username } })}}>Update Driver Details</button>
+                    <button type="button" className="button-view" onClick={() => {navigate('/admin/home/register/driver/viewDriver', { state: { username } })}}>View Driver Details</button>
                     <br/>
                     <fieldset><h3>Driver Registration Details</h3>
                     <div className="form-group">
                         <label htmlFor="firstname" >First Name</label>
-                        <input type="text" name="firstname" onChange={handleInput1} value={drivers.firstname} required="required" autoComplete="off"/>
+                        <input type="text" id="firstname" name="firstname" onChange={handleInput1} value={drivers.firstname} required="required" autoComplete="off"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="lastname" >Last Name</label>
-                        <input type="text" name="lastname" onChange={handleInput1} value={drivers.lastname} required="required" autoComplete="off"/>
+                        <input type="text" id="lastname" name="lastname" onChange={handleInput1} value={drivers.lastname} required="required" autoComplete="off"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="nic">NIC</label>
-                        <input type="text" name="nic"  onChange={handleInput1} value={drivers.nic} required="required" autoComplete="off"/>
+                        <input type="text" id="nic" name="nic"  onChange={handleInput1} value={drivers.nic} required="required" autoComplete="off"/>
                         {errors.nic && <span className="text-danger">{errors.nic}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="contact">Mobile Number</label>
-                        <input type="text" name="contact"  onChange={handleInput1} value={drivers.contact} required="required" autoComplete="off"/>
+                        <input type="text" id="contact" name="contact"  onChange={handleInput1} value={drivers.contact} required="required" autoComplete="off"/>
                         {errors.contact && <span className="text-danger">{errors.contact}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="image">Driving License Image:</label>
                         <div className={`drop-zone ${dragging ? 'dragging' : ''}`} onDrop={handleDrop} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
-                            <input className="file" type="file" onChange={handleImageChange} />
+                            <input className="file" name="image" id="image" type="file" onChange={handleImageChange} />
                             <p onClick={() => document.querySelector('.file').click()}>Drop file here or click to upload</p>
                             {/* Display file name */}
                             {drivingLicense && (
@@ -311,18 +314,18 @@ function Register(){
                     </fieldset>
                     <fieldset><h3>Create Driver Account Details</h3>
                     <div className="form-group">
-                        <label htmlFor="name" name="username" >User Name</label>
-                        <input type="text" name="username" onChange={handleInput1} value={drivers.username} required="required" autoComplete="off"/>
+                        <label htmlFor="username">User Name</label>
+                        <input type="text" id="username" name="username" onChange={handleInput1} value={drivers.username} required="required" autoComplete="off"/>
                         {errors.username && <span className="text-danger">{errors.username}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password"  onChange={handleInput1} value={drivers.password} required="required" autoComplete="off"/>
+                        <input type="password" id="password" name="password"  onChange={handleInput1} value={drivers.password} required="required" autoComplete="off"/>
                         {errors.password && <span className="text-danger">{errors.password}</span>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="confirmpassword">Confirm Password</label>
-                        <input type="password" name="confirmpassword"  onChange={handleInput1} value={drivers.confirmpassword} required="required" autoComplete="off"/>
+                        <input type="password" id="confirmpassword" name="confirmpassword"  onChange={handleInput1} value={drivers.confirmpassword} required="required" autoComplete="off"/>
                         {errors.confirmpassword && <span className="text-danger">{errors.confirmpassword}</span>}
                     </div>
                     </fieldset>
@@ -331,9 +334,9 @@ function Register(){
                 }
                 <button type="submit" className="button-submit">REGISTER</button>
 
-                <button className="button-reset" onClick={reset}>RESET</button>
+                <button type="button" className="button-reset" onClick={reset}>RESET</button>
 
-                <button className="button-back" onClick={() => {navigate('/admin/home', { state: { username } })}}>BACK</button>
+                <button type="button" className="button-back" onClick={() => {navigate('/admin/home', { state: { username } })}}>BACK</button>
             </div>
         </form>
     );

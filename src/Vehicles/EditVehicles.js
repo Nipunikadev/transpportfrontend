@@ -230,14 +230,14 @@ function EditVehicles() {
             return (
               <div key={index}>
                 <a href={`http://localhost:8081/image/${type}/${file}`} target="_blank" rel="noopener noreferrer">View PDF {index + 1}</a>
-                <button className="button-remove" onClick={() => handleRemoveFile(type, index)}>Remove</button>
+                <button type="button" className="button-remove" onClick={() => handleRemoveFile(type, index)}>Remove</button>
               </div>
             );
           } else {
             return (
               <div key={index}>
                 <img src={`http://localhost:8081/image/${type}/${file}`} alt={`${type} ${index + 1}`} style={{ width: "500px", height: "500px" }} />
-                <button className="button-remove" onClick={() => handleRemoveFile(type, index)}>Remove</button>
+                <button type="button" className="button-remove" onClick={() => handleRemoveFile(type, index)}>Remove</button>
               </div>
             );
           }
@@ -258,17 +258,21 @@ function EditVehicles() {
       <div className="edit-vehicle-form">
         <h2>Edit Vehicle Details</h2>
         <div className="editVehicles">
-        <label>
+        <label htmlFor="vehicletype">
           Vehicle Type:
           <input
             type="text"
+            id="vehicletype"
+            name="vehicletype"
             value={updatedVehicleType}
             onChange={(e) => setUpdatedVehicleType(e.target.value)} readOnly/>
         </label>
-        <label>
+        <label htmlFor="vehicleno">
           Vehicle Number:
           <input
             type="text"
+            id="vehicleno"
+            name="vehicleno"
             value={updatedVehicleNumber}
             onChange={(e) => setUpdatedVehicleNumber(e.target.value)} readOnly/>
         </label>
@@ -278,10 +282,12 @@ function EditVehicles() {
           {renderFile('license')}
         </fieldset>
         </label>
-        <label>
+        <label htmlFor="ownership">
           Vehicle Ownership:
           <input
             type="text"
+            id="ownership"
+            name="ownership"
             value={updatedOwnership}
             onChange={(e) => setUpdatedOwnership(e.target.value)}
             />
@@ -298,34 +304,42 @@ function EditVehicles() {
           {renderFile('registrationImage')}
         </fieldset>
         </label>
-        <label>
+        <label htmlFor="fueltype">
           Vehicle Fuel Type:
           <input
             type="text"
+            id="fueltype"
+            name="fueltype"
             value={updatedFuelType}
             onChange={(e) => setUpdatedFuelType(e.target.value)}
             />
         </label>
-        <label>
+        <label htmlFor="company">
           Vehicle Leasing Company:
           <input
             type="text"
+            id="company"
+            name="company"
             value={updatedLeased}
             onChange={(e) => setUpdatedLeased(e.target.value)}
             />
         </label>
-        <label>
+        <label htmlFor="capacity">
           Vehicle Cylinder Capacity:
           <input
             type="text"
+            id="capacity"
+            name="capacity"
             value={updatedCylinderCapacity}
             onChange={(e) => setUpdatedCylinderCapacity(e.target.value)}
             />
         </label>
-        <label>
+        <label htmlFor="insurancecompany">
           Vehicle Insurance Company:
           <input
             type="text"
+            id="insurancecompany"
+            name="insurancecompany"
             value={updatedInsuranceCompany}
             onChange={(e) => setUpdatedInsuranceCompany(e.target.value)}
             />
@@ -336,10 +350,12 @@ function EditVehicles() {
           {renderFile('insuranceCard')}
           </fieldset>
         </label>
-        <label>
+        <label htmlFor="taxPayer">
           Tax Payer:
           <input
             type="text"
+            id="taxPayer"
+            name="taxPayer"
             value={newtaxPayer}
             onChange={(e) => setNewTaxPayer(e.target.value)} readOnly/>
         </label>
@@ -351,8 +367,8 @@ function EditVehicles() {
           </fieldset>
         </label>
          )}
-        <button className="button-submit">UPDATE VEHICLE DETAILS</button>
-        <button className="button-back" onClick={() => {Navigate("/vehicles/vehicleDetails", { state: { username } })}}>
+        <button type="submit" className="button-submit">UPDATE VEHICLE DETAILS</button>
+        <button type="button" className="button-back" onClick={() => {Navigate("/vehicles/vehicleDetails", { state: { username } })}}>
           BACK
         </button>
         </div>

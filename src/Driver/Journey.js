@@ -212,8 +212,8 @@ function Journey() {
             <div className='jouney-driver'>
             <h2> Trip Details</h2>
             <div className="welcome-journey">
-                <label htmlFor="username" name="username" >Driver Name</label>
-                <input type="text" name="username" value={username} readOnly/>
+                <label htmlFor="username">Driver Name</label>
+                <input type="text" id='username' name="username" value={username} readOnly/>
             </div>
             <div className="welcome-journey">
                 <label htmlFor="tripmode"><span className="chekmark">Trip Mode</span>
@@ -230,8 +230,8 @@ function Journey() {
             selectedOption === 'Start' && (
             <div>
                 <div className="journey-dropdown">
-                <label htmlFor="vehicleno" name="vehicleno" >Vehicle Number</label>
-                    <select value={selectedVehicle} onChange={handleVehicleChange}>
+                <label htmlFor="vehiclenoSelect">Vehicle Number</label>
+                    <select id='vehiclenoSelect' value={selectedVehicle} onChange={handleVehicleChange}>
                     <option value="">Choose Your Vehicle</option>
                     {vehicleno.length > 0 ? (
                         vehicleno.map((number, index) => (
@@ -247,16 +247,16 @@ function Journey() {
                     <option value="other">Other</option>
                     </select>
                     {selectedVehicle === 'other' && (
-                    <input type="text" value={otherVehicle} onChange={(event) => setOtherVehicle(event.target.value)} placeholder="Enter other vehicle number" />
+                    <input id='vehiclenoSelect' name='vehiclenoSelect' type="text" value={otherVehicle} onChange={(event) => setOtherVehicle(event.target.value)} placeholder="Enter other vehicle number" />
                     )}
                 </div>
                 <div className="welcome-journey">
-                    <label htmlFor="datetime">Trip Start Date and Time</label>
-                    <DateTimePicker inputProps={{ style: { width: 330 }}} value={selectedDate}  dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)}/>
+                    <label htmlFor="startdatetime">Trip Start Date and Time</label>
+                    <DateTimePicker id="startdatetime" inputProps={{ style: { width: 330 }}} value={selectedDate}  dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)}/>
                 </div>
                 <div className="journey-dropdown">
-                <label htmlFor="location" name="location" >Location</label>
-                    <select value={selectedLocation} onChange={handleLocationChange}>
+                <label htmlFor="locationSelect">Location</label>
+                    <select id='locationSelect' value={selectedLocation} onChange={handleLocationChange}>
                     <option value="">Choose Your Location</option>
                     {location1.length > 0 ? (
                         location1.map(number => (
@@ -272,12 +272,12 @@ function Journey() {
                     <option value="other">Other</option>
                     </select>
                     {selectedLocation === 'other' && (
-                    <input type="text" value={otherLocation} onChange={(event) => setOtherLocation(event.target.value)} placeholder="Enter other location"/>
+                    <input id='locationSelect' name='locationSelect' type="text" value={otherLocation} onChange={(event) => setOtherLocation(event.target.value)} placeholder="Enter other location"/>
                     )}
                 </div>
                 <div className="welcome-journey">
-                    <label htmlFor="meter" name="meter" >Meter Reading</label>
-                    <input type="text" name="meter" value={trips.meter} onChange={handleInput} />
+                    <label htmlFor="meter">Meter Reading</label>
+                    <input type="text" id='meter' name="meter" value={trips.meter} onChange={handleInput} />
                 </div>
             </div>
             )}
@@ -285,20 +285,20 @@ function Journey() {
             selectedOption === 'End' && ( 
             <div>
                 <div className="welcome-journey">
-                    <label htmlFor="vehicleno" name="vehicleno" >Vehicle Number</label>
-                    <input type="text" name="vehicleno" value={startTripDetails.vehicleno} readOnly/>
+                    <label htmlFor="vehicleno">Vehicle Number</label>
+                    <input type="text" id='vehicleno' name="vehicleno" value={startTripDetails.vehicleno} readOnly/>
                 </div>
                 <div className="welcome-journey">
                     <label htmlFor="datetime">Trip End Date and Time</label>
-                    <DateTimePicker inputProps={{ style: { width: 330 }}} selected={selectedDate}  dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)}/>
+                    <DateTimePicker id="datetime" inputProps={{ style: { width: 330 }}} selected={selectedDate}  dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)}/>
                 </div>
                 <div className="welcome-journey">
-                    <label htmlFor="location" name="location" >Location</label>
-                    <input type="text" name="location" value={startTripDetails.location} readOnly/>
+                    <label htmlFor="location">Location</label>
+                    <input type="text" id='location' name="location" value={startTripDetails.location} readOnly/>
                 </div>
                 <div className="welcome-journey">
-                    <label htmlFor="meter" name="meter" >Meter Rading</label>
-                    <input type="text" name="meter" value={trips.meter} onChange={handleInput}/>
+                    <label htmlFor="meter">Meter Rading</label>
+                    <input type="text" id='meter' name="meter" value={trips.meter} onChange={handleInput}/>
                 </div>
             </div>
             )
@@ -306,9 +306,9 @@ function Journey() {
 
             <button type="submit" className="button-submit">SUBMIT</button>
 
-            <button className="button-reset" onClick={reset}>RESET</button>
+            <button type="button" className="button-reset" onClick={reset}>RESET</button>
              
-            <button className="button-back" onClick={() => {Navigate('/driver/dashboard', { state: { username } })}}>BACK</button>  
+            <button type="button" className="button-back" onClick={() => {Navigate('/driver/dashboard', { state: { username } })}}>BACK</button>  
             </div>  
             :
             <div>
