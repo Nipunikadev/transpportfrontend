@@ -23,7 +23,7 @@ const SideBar = ({ username }) => {
           <NavLink to='/vehicles/followupDetails' state={{ username }} className="active-link">FollowUp Details</NavLink>
           
           <div className="navLinkWithSubMenu" onMouseEnter={() => setIsSubMenuOpen(true)} onMouseLeave={() => setIsSubMenuOpen(false)}>
-            <NavLink className="active-link">History Details</NavLink>
+            <span className="active-link">History Details</span>
             {isSubMenuOpen && <SubMenu  username={username}/>}
           </div>  
         </div>

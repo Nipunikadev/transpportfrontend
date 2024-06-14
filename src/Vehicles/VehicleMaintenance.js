@@ -119,8 +119,7 @@ const handleImageChange = (e) => {
     };
   
   
-      const reset =  (e) => {
-        e.preventDefault();
+      const reset =  () => {
         setSelectedDate(null);
         setSelectedVehicle('')
         setVehicleMaintenance('')

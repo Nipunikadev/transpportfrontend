@@ -78,6 +78,7 @@ function FuelUsage() {
         .then(response => {
             if (response.data.loginStatus) {
                 alert('Fuel Details Added Successfully');
+                reset();
             } else {
                 alert('Failed to add the Fuel:', response.data.error);
             }
@@ -88,8 +89,7 @@ function FuelUsage() {
     };
   
     
-    const reset =  (e) => {
-        e.preventDefault();
+    const reset =  () => {
         setFuelDate(null);
         setFuelPumped(0);
         setFuelType('');

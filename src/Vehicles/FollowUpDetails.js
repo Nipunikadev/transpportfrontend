@@ -75,8 +75,8 @@ function FollowUpDetails() {
       const formattedRevenueEndDate = revenueEndDate ? format(revenueEndDate, 'yyyy-MM-dd') : '';
       const formattedInsuranceStartDate = insuranceStartDate ? format(insuranceStartDate, 'yyyy-MM-dd') : '';
       const formattedInsuranceEndDate = insuranceEndDate ? format(insuranceEndDate, 'yyyy-MM-dd') : '';
-      const formattedTaxStartDate = taxStartDate ? format(taxStartDate, 'yyyy-MM-dd') : '';
-      const formattedTaxEndDate = taxEndDate ? format(taxEndDate, 'yyyy-MM-dd') : '';
+      const formattedTaxStartDate = taxStartDate ? format(taxStartDate, 'yyyy-MM-dd') : null;
+      const formattedTaxEndDate = taxEndDate ? format(taxEndDate, 'yyyy-MM-dd') : null;
       
       const vehicleData = {
         vehicleno: selectedVehicle === 'other' ? otherVehicle : selectedVehicle,
@@ -88,7 +88,7 @@ function FollowUpDetails() {
         taxStartDate: formattedTaxStartDate,
         taxEndDate: formattedTaxEndDate
       };
-  
+      
       axios.post('http://localhost:8081/vehicles/followupDetails', vehicleData)
           .then(response => {
               if (response.data.loginStatus) {
