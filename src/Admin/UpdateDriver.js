@@ -123,7 +123,7 @@ function UpdateDriver() {
         .then((res) => {
           console.log('Response from edit Driver:', res.data);
           if (res.data.success) {
-            Navigate("/admin/home/register"); // Redirect to the vehicle maintenance page
+            Navigate("/admin/home/register", { state: { username } }); // Redirect to the vehicle maintenance page
             alert('Driver Details Updated successfully');
           } else {
             console.error('Failed to edit the driver:', res.data.error);

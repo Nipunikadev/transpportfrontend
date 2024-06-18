@@ -205,7 +205,7 @@ function EditVehicles() {
       .then((res) => {
         console.log('Response from editVehicles:', res.data);
         if (res.data.success) {
-          Navigate("/vehicles/vehicleDetails"); // Redirect to the vehicle maintenance page
+          Navigate("/vehicles/vehicleDetails", { state: { username } }); // Redirect to the vehicle maintenance page
           alert('Vehicle Details Updated successfully');
         } else {
           console.error('Failed to edit the vehicle:', res.data.error);
