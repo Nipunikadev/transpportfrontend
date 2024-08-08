@@ -62,7 +62,7 @@ function AttendanceRecords() {
             console.log("Error Add DropDown Details", err);
         });
 
-        axios.post('http://localhost:8081/records/attendanceRecords', {drivername: selectedDriver , checkInDateTime: startDate, checkOutDateTime: endDate})
+        axios.post('http://localhost:8081/records/attendanceRecords', {drivername: selectedDriver , startDate: startDate, endDate: endDate})
         .then(res => {
             if (res.data.success) {
                 console.log("Sucessfully", res.data.attendance);
@@ -76,6 +76,22 @@ function AttendanceRecords() {
         });             
     }, [selectedDriver, startDate, endDate]);
 
+    const calculateTotalDuration = () => {
+        const totalSeconds = attendance.reduce((total, record) => {
+            const parts = record.duration.split(' ');
+            const hours = parseInt(parts[0].replace('h', '')) || 0;
+            const minutes = parseInt(parts[1].replace('m', '')) || 0;
+            const seconds = parseInt(parts[2].replace('s', '')) || 0;
+            return total + (hours * 3600) + (minutes * 60) + seconds;
+        }, 0);
+
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        return `${hours}h ${minutes}m ${seconds}s`;
+    };
+
+    const totalDuration = calculateTotalDuration();
    
     return(
         <form className='attendanceHistory-form'>
@@ -112,6 +128,7 @@ function AttendanceRecords() {
                                 <th>Check Out Date Time</th>
                                 <th>Check In Location</th>
                                 <th>Check Out Location</th>
+                                <th>Working Hours</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -125,8 +142,13 @@ function AttendanceRecords() {
                             <td>{attendance.checkOutDateTime}</td>
                             <td>{attendance.checkInLocation}</td>
                             <td>{attendance.checkOutLocation}</td>
+                            <td>{attendance.duration}</td>
                         </tr>
                         ))}
+                        <tr>
+                                <td colSpan="8" style={{ textAlign: 'right' }}><strong>Total Working Hours:</strong></td>
+                                <td><strong>{totalDuration}</strong></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

@@ -110,7 +110,9 @@ function TripRecords() {
                                 <th>End Trip</th>
                                 <th>Vehicle Number</th>
                                 <th>Start Date Time</th>
+                                <th>Start Current Location</th>
                                 <th>End Date Time</th>
+                                <th>End Current Location</th>
                                 <th>Location</th>
                                 <th>Start Meter</th>
                                 <th>End Meter</th>
@@ -126,7 +128,9 @@ function TripRecords() {
                             <td>{trips.end}</td>
                             <td>{trips.vehicleno}</td>
                             <td>{trips.startDateTime}</td>
+                            <td>{trips.startCurrentLocation}</td>
                             <td>{trips.endDateTime}</td>
+                            <td>{trips.endCurrentLocation}</td>
                             <td>{trips.location}</td>
                             <td>{trips.startmeter}</td>
                             <td>{trips.endmeter}</td>

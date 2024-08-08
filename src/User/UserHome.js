@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import axios from 'axios';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import DateTimePicker from 'react-datetime';
@@ -8,7 +8,7 @@ import 'react-datetime/css/react-datetime.css';
 
 function UserHome() {
 
-    const [ trips, setTrips] = useState({username: "", tripmode:"" , dateTime: "", location: "", reason: ""});
+    const [ trips, setTrips] = useState({username: "", tripmode:"" , dateTime: "", currentLocation:"", location: "", reason: ""});
 
     const Navigate = useNavigate(); 
     const [auth, setAuth] = useState (false)
@@ -25,6 +25,8 @@ function UserHome() {
         location: '',
         reason: '',
     });
+    const [startCurrentLocation, setStartCurrentLocation] = useState('');
+    const [endCurrentLocation, setEndCurrentLocation] = useState('');
 
     useEffect(() => {
 
@@ -44,20 +46,85 @@ function UserHome() {
             setMessage('Error during authentication');
             setAuthChecked(true); // Mark auth check as complete
         });
+        }, []);
 
-            axios.get(`http://localhost:8081/user/home/latest-start-trip/${username}`)
-            .then(response => {
-                if (response.data.LatestStartDetails) {
-                    setStartTripDetails(response.data.LatestStartDetails);
-                    setTripStatus(true);
-                } else {
-                    setTripStatus(false);
+        const getStartTripDetails = useCallback(() => {
+            if (selectedOption === 'End') {
+                axios.get(`http://localhost:8081/user/home/latest-start-trip/${username}`)
+                    .then(response => {
+                        if (response.data.LatestStartDetails) {
+                            setStartTripDetails(response.data.LatestStartDetails);
+                            setTripStatus(true);
+                        } else {
+                            setTripStatus(false);
+                        }
+                    })
+                    .catch(err => {
+                        console.log("Error fetching start trip details", err);
+                    });
+            }
+        }, [selectedOption, username]);
+    
+        useEffect(() => {
+            if (selectedOption) {
+                getStartTripDetails();
+            }
+        }, [selectedOption, getStartTripDetails]);
+
+    const getLocation = useCallback(() => {
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+    
+                    try {
+                        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+                        const data = await response.json();
+                        const locationName = data.display_name;
+                        console.log("Location name:", locationName);
+    
+                        if (selectedOption === 'Start') {
+                            setStartCurrentLocation(locationName);
+                        } else if (selectedOption === 'End') {
+                            setEndCurrentLocation(locationName);
+                        }
+                    } catch (error) {
+                        console.error("Error getting location name:", error);
+                        alert("Failed to convert coordinates to location. Please enter manually.");
+                    }
+                },
+                (error) => {
+                    console.error("Error getting location:", error);
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            alert("User denied the request for Geolocation. Please enter location manually.");
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            alert("Location information is unavailable. Please enter location manually.");
+                            break;
+                        case error.TIMEOUT:
+                            alert("The request to get user location timed out. Please enter location manually.");
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            alert("An unknown error occurred. Please enter location manually.");
+                            break;
+                        default:
+                            alert("Unable to retrieve location. Please enter manually.");
+                    }
                 }
-            })
-            .catch(err => {
-                console.log("Error fetching start trip details", err);
-            });
-    }, [username])
+            );
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }, [selectedOption]);
+
+    useEffect(() => {
+        if (selectedOption === 'Start' || selectedOption === 'End') {
+            getLocation();
+        }
+    }, [getLocation, selectedOption]);
+
 
     useEffect(() => {
         if (authChecked && (!auth || !username)) {
@@ -84,18 +151,6 @@ function UserHome() {
     }
 
     const isChecked = (value) => value === selectedOption;
-
-    // const handleLogout = () => {
-    //         axios.get('http://localhost:8081/logout')
-    //         .then(res => {
-    //             if(res.data.Status === "Success"){
-    //                 Navigate('/')
-    //             }else{
-    //                 alert("Error");
-    //             }
-    //         })
-    //         .catch(err => console.log(err));         
-    // }
     
     const submitHandler = (e) => {
         e.preventDefault();
@@ -130,8 +185,9 @@ function UserHome() {
             username: username,
             tripmode: selectedOption,
             dateTime: formattedDate,
-            location: trips.location,
-            reason: trips.reason,
+            currentLocation: selectedOption === 'Start' ? startCurrentLocation : endCurrentLocation,
+            location: selectedOption === 'Start' ? trips.location : startTripDetails.location,
+            reason: selectedOption === 'Start' ? trips.reason : startTripDetails.reason,
         };
         console.log("Values:", tripData);
 
@@ -157,9 +213,12 @@ function UserHome() {
     }
 
     const reset =  (e) => {
-        setSelectedDate(moment(new Date()));
-        setTrips({ username: "", tripmode: "", dateTime: "", location: "", reason: "" });
-        setSelectedOption('Start');
+        setTrips({ username: "", tripmode: "", dateTime: "", currentLocation: "", location: "", reason: "" });
+        setSelectedDate(moment());
+        setStartCurrentLocation('');
+        setEndCurrentLocation('');
+        setStartTripDetails({});
+        setTripStatus(false);
     }
 
 
@@ -191,16 +250,20 @@ function UserHome() {
             selectedOption === 'Start' && (
             <div>
             <div className="welcome-journey">
-                    <label htmlFor="datetime">Trip Date and Time</label>
-                    <DateTimePicker id="datetime" inputProps={{ style: { width: 330 }}} value={selectedDate}  dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)} required/>
-                </div>
+                <label htmlFor="datetime">Trip Date and Time</label>
+                <DateTimePicker id="datetime" inputProps={{ style: { width: 330 }}} value={selectedDate}  dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)} required/>
+            </div>
+            <div className="welcome-journey">
+                <label htmlFor="startCurrentLocation">Current Location</label>
+                <input type="text" id="startCurrentLocation" name="startCurrentLocation" value={startCurrentLocation} onChange={(e) => setStartCurrentLocation(e.target.value)} />
+            </div>
             <div className="welcome-journey">
                 <label htmlFor="location">Location</label>
-                <input type="text" id="location" name="location" value={trips.location} onChange={handleInput} required/>
+                <input type="text" id="location" name="location" value={trips.location} onChange={handleInput} required autoComplete='off'/>
             </div>
             <div className="welcome-journey">
                 <label htmlFor="reason">Reason</label>
-                <input type="text" id="reason" name="reason" value={trips.reason} onChange={handleInput} required/>
+                <input type="text" id="reason" name="reason" value={trips.reason} onChange={handleInput} required autoComplete='off'/>
             </div>
             </div>
              )}
@@ -210,6 +273,10 @@ function UserHome() {
                 <div className="welcome-journey">
                 <label htmlFor="enddatetime">Trip End Date and Time</label>
                 <DateTimePicker id="enddatetime" inputProps={{ style: { width: 330 }}} value={selectedDate}  dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)}/>
+            </div>
+            <div className="welcome-journey">
+                <label htmlFor="endCurrentLocation">Current Location</label>
+                <input type="text" id="endCurrentLocation" name="endCurrentLocation" value={endCurrentLocation} onChange={(e) => setEndCurrentLocation(e.target.value)} />
             </div>
             <div className="welcome-journey">
                 <label htmlFor="endlocation">Location</label>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useCallback} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useNavigate, useLocation } from "react-router-dom";
@@ -9,7 +9,7 @@ import 'react-datetime/css/react-datetime.css';
 
 function Journey() {
 
-    const [ trips, setTrips] = useState({drivername: "", tripmode: "", vehicleno: "", datetime: "", location: "",  meter:""});
+    const [ trips, setTrips] = useState({drivername: "", tripmode: "", vehicleno: "", datetime: "", currentLocation:"", location: "",  meter:""});
 
     const Navigate = useNavigate(); 
     const [vehicleno, setVehicle] = useState([])
@@ -33,6 +33,9 @@ function Journey() {
         vehicleno: '',
         location: '',
       });
+
+    const [startCurrentLocation, setStartCurrentLocation] = useState('');
+    const [endCurrentLocation, setEndCurrentLocation] = useState('');
 
       useEffect(() => {
         // Check if the user is logged in, if not, redirect to the login page
@@ -111,6 +114,61 @@ function Journey() {
 
     }, [selectedVehicle, username]);
 
+    const getLocation = useCallback(() => {
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+    
+                    try {
+                        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+                        const data = await response.json();
+                        const locationName = data.display_name;
+                        console.log("Location name:", locationName);
+    
+                        if (selectedOption === 'Start') {
+                            setStartCurrentLocation(locationName);
+                        } else if (selectedOption === 'End') {
+                            setEndCurrentLocation(locationName);
+                        }
+                    } catch (error) {
+                        console.error("Error getting location name:", error);
+                        alert("Failed to convert coordinates to location. Please enter manually.");
+                    }
+                },
+                (error) => {
+                    console.error("Error getting location:", error);
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            alert("User denied the request for Geolocation. Please enter location manually.");
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            alert("Location information is unavailable. Please enter location manually.");
+                            break;
+                        case error.TIMEOUT:
+                            alert("The request to get user location timed out. Please enter location manually.");
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            alert("An unknown error occurred. Please enter location manually.");
+                            break;
+                        default:
+                            alert("Unable to retrieve location. Please enter manually.");
+                    }
+                }
+            );
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }, [selectedOption]);
+
+    useEffect(() => {
+        if (selectedOption === 'Start' || selectedOption === 'End') {
+            getLocation();
+        }
+    }, [getLocation, selectedOption]);
+
+
     const onSelect = ({target: {value} }) => {
         setSelectedOption(value);
     }
@@ -138,16 +196,13 @@ function Journey() {
                 isValid = false;
             }
         } else { // For 'End', you might have different validations
-            if (tripStatus) {
-                alert('You must end your current trip before starting a new one.');
-                isValid = false;
-            }else if (!selectedVehicle && !selectedLocation) {
+            if (!tripStatus) {
                 alert('You have to start a new trip.');
                 isValid = false;
-            }else if (!selectedDate ) {
+            } else if (!selectedDate) {
                 alert('Please select a valid date and time for the End Trip.');
                 isValid = false;
-            }else if (!trips.meter ) {
+            } else if (!trips.meter) {
                 alert('Please enter a valid meter value for the End Trip.');
                 isValid = false;
             }
@@ -160,6 +215,7 @@ function Journey() {
                 tripmode: selectedOption,
                 vehicleno: selectedVehicle === 'other' ? otherVehicle : selectedVehicle,
                 datetime: formattedDate,
+                currentLocation: selectedOption === 'Start' ? startCurrentLocation : endCurrentLocation,
                 location: selectedLocation === 'other' ? otherLocation : selectedLocation,
                 meter: trips.meter,
             };
@@ -198,8 +254,10 @@ function Journey() {
             vehicleno: '',
             location: '',
         });
-        setTrips({tripmode: "", vehicleno: "", datetime: "", location: "",  meter:""});
+        setTrips({tripmode: "", vehicleno: "", datetime: "",currentLocation:"", location: "",  meter:""});
         setSelectedOption('Start');
+        setStartCurrentLocation('');
+        setEndCurrentLocation('');
         
     }
 
@@ -254,6 +312,10 @@ function Journey() {
                     <label htmlFor="startdatetime">Trip Start Date and Time</label>
                     <DateTimePicker id="startdatetime" inputProps={{ style: { width: 330 }}} value={selectedDate}  dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)}/>
                 </div>
+                <div className="welcome-journey">
+                <label htmlFor="startCurrentLocation">Current Location</label>
+                <input type="text" id="startCurrentLocation" name="startCurrentLocation" value={startCurrentLocation} onChange={(e) => setStartCurrentLocation(e.target.value)} />
+                </div>
                 <div className="journey-dropdown">
                 <label htmlFor="locationSelect">Location</label>
                     <select id='locationSelect' value={selectedLocation} onChange={handleLocationChange}>
@@ -291,6 +353,10 @@ function Journey() {
                 <div className="welcome-journey">
                     <label htmlFor="datetime">Trip End Date and Time</label>
                     <DateTimePicker id="datetime" inputProps={{ style: { width: 330 }}} selected={selectedDate}  dateFormat="DD-MM-YYYY" timeFormat="hh:mm:ss A" onChange={val => setSelectedDate(val)}/>
+                </div>
+                <div className="welcome-journey">
+                    <label htmlFor="endCurrentLocation">Current Location</label>
+                    <input type="text" id="endCurrentLocation" name="endCurrentLocation" value={endCurrentLocation} onChange={(e) => setEndCurrentLocation(e.target.value)} />
                 </div>
                 <div className="welcome-journey">
                     <label htmlFor="location">Location</label>
